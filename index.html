@@ -295,7 +295,13 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
     } catch (e) {}
     return clone(SEED);
   }
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function profiles() { try { return JSON.parse(localStorage.getItem(KEY + "-profils")) || {}; } catch (e) { return {}; } }
+  function save() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(S));
+      if (S.onboarded && S.code && S.code !== "7K2-QM9") { var P = profiles(); P[S.code] = S; localStorage.setItem(KEY + "-profils", JSON.stringify(P)); }
+    } catch (e) {}
+  }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function $(id) { return document.getElementById(id); }
 
@@ -386,9 +392,10 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
       '<div class="sect"><div class="sect-head"><h3>À revoir en priorité</h3><span>3 thèmes</span></div>' +
       (low.length ? "" : '<p class="note">Rien à afficher pour l’instant. Jouez un premier quiz.</p>') + low.map(function (t) { var p = pct(t.id); return '<button class="row" type="button" data-theme-id="' + t.id + '"><div><div class="name">' + esc(t.name) + '</div></div><div class="pct"><b>' + r(p) + "<small> %</small></b><em class=\"" + level(p) + '">' + levelLabel(p) + '</em></div><div class="bar ' + level(p) + '"><span style="width:' + r(p) + '%"></span></div></button>'; }).join("") + "</div>" +
       '<div class="sect"><div class="sect-head"><h3>Mon identifiant</h3></div><div class="field"><label for="pseudo">Pseudo</label><input id="pseudo" type="text" maxlength="20" autocomplete="off" value="' + esc(S.pseudo) + '"></div>' +
-      '<p class="note">Code personnel : <span class="code">' + esc(S.code) + '</span>. Votre progression est enregistrée sur ce téléphone. Le code servira à la retrouver ailleurs quand la sauvegarde en ligne sera en place.</p>' + '<p class="note">Service : ' + esc(S.service || "non renseigné") + '</p></div>';
+      '<p class="note">Code personnel : <span class="code">' + esc(S.code) + '</span>. Votre progression est enregistrée sur ce téléphone. Le code servira à la retrouver ailleurs quand la sauvegarde en ligne sera en place.</p>' + '<p class="note">Service : ' + esc(S.service || "non renseigné") + '</p><div class="actions"><button class="btn ghost" type="button" id="switch">Changer de profil</button></div></div>';
     $("v-me").innerHTML = h;
     $("pseudo").addEventListener("input", function (e) { S.pseudo = e.target.value.trim() || "Anonyme"; save(); });
+    $("switch").addEventListener("click", function () { save(); S = clone(FRESH); save(); show("welcome"); });
   }
 
   /* ---------- Équipe ---------- */
@@ -492,10 +499,14 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
   /* ---------- Bienvenue ---------- */
   function genCode() { var a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = ""; for (var i = 0; i < 6; i++) { s += a.charAt(Math.floor(Math.random() * a.length)); if (i === 2) s += "-"; } return s; }
   function renderWelcome() {
+    var P = profiles(), ks = Object.keys(P);
+    var plist = ks.length ? '<div class="wform"><h3>Reprendre un profil</h3>' + ks.map(function (k) {
+      return '<button class="row" type="button" data-resume="' + esc(k) + '"><div><div class="name">' + esc(P[k].pseudo) + '</div><div class="meta"><span class="refs">' + esc(P[k].service || "") + '</span></div></div><div class="pct"><b>' + (P[k].points || 0) + '</b><em>points</em></div></button>';
+    }).join("") + '<h3 style="margin-top:28px">Nouveau profil</h3></div>' : "";
     var sv = ["UGA", "UGO", "Médecine", "SMR", "Autre service"].map(function (x) { return "<option>" + x + "</option>"; }).join("");
     $("v-welcome").innerHTML = '<p class="eyebrow">Visite de certification · préparation</p><h1>Objectif<br>CertiF</h1>' +
       '<p class="lede">Des quiz de trois minutes, un thème à la fois, pour arriver prêt le jour de la visite. Créez votre profil pour suivre votre progression.</p>' +
-      '<form id="wf" class="wform"><div class="field"><label for="wp">Choisissez un pseudo</label><input id="wp" maxlength="20" autocomplete="off" required placeholder="Ex. : Cyclope42"></div>' +
+      plist + '<form id="wf" class="wform"><div class="field"><label for="wp">Choisissez un pseudo</label><input id="wp" maxlength="20" autocomplete="off" required placeholder="Ex. : Cyclope42"></div>' +
       '<div class="field"><label for="ws">Votre service</label><select id="ws">' + sv + '</select></div>' +
       '<p class="note">Ni nom ni matricule. Ne saisissez aucune donnée de patient. Votre profil reste enregistré sur ce téléphone.</p>' +
       '<div class="actions"><button class="btn" type="submit">Commencer</button></div></form>' +
@@ -506,6 +517,9 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
       S = clone(FRESH); S.pseudo = p; S.service = $("ws").value; S.code = genCode(); S.onboarded = true; save(); show("play");
     });
     $("demo").addEventListener("click", function () { S = clone(DEMO); save(); show("play"); });
+    Array.prototype.forEach.call($("v-welcome").querySelectorAll("[data-resume]"), function (b) {
+      b.addEventListener("click", function () { var p = profiles()[b.getAttribute("data-resume")]; if (p) { S = clone(p); save(); show("play"); } });
+    });
   }
 
   /* ---------- Navigation ---------- */
@@ -531,7 +545,8 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
     if (id === "hygiene") startQuiz("hygiene");
     else toast("Questions à rédiger pour ce thème, à partir des fiches pédagogiques HAS.");
   });
-  $("reset").addEventListener("click", function () { S = clone(FRESH); save(); quiz = null; show("welcome"); toast("Profil effacé."); });
+  $("reset").addEventListener("click", function () { try { var P = profiles(); delete P[S.code]; localStorage.setItem(KEY + "-profils", JSON.stringify(P)); } catch (e) {}
+    S = clone(FRESH); save(); quiz = null; show("welcome"); toast("Profil effacé."); });
 
   var start = { jouer: "play", score: "me", equipe: "team" }[(location.hash || "").replace("#", "")] || "play";
   show(S.onboarded ? start : "welcome");
