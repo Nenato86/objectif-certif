@@ -1,0 +1,510 @@
+<title>Objectif CertiF</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
+:root {
+  --bg: #F2F5F7;
+  --surface: #FFFFFF;
+  --ink: #0E2233;
+  --ink-2: #4A5D6C;
+  --line: #D5DDE3;
+  --track: #E3E9ED;
+  --accent: #FBC52A;
+  --on-accent: #0E2233;
+  --good: #1B7F4B;
+  --warn: #A85F00;
+  --bad: #B3261E;
+  --good-bg: #E3F3EA;
+  --bad-bg: #FBE6E4;
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", Verdana, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1824; --surface: #112437; --ink: #EAF1F6; --ink-2: #9FB2C2; --line: #223A50; --track: #1B3247;
+    --accent: #FBC52A; --on-accent: #0E2233; --good: #4CC38A; --warn: #F0A93B; --bad: #FF7A70;
+    --good-bg: #12372A; --bad-bg: #3F1D1A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A1824; --surface: #112437; --ink: #EAF1F6; --ink-2: #9FB2C2; --line: #223A50; --track: #1B3247;
+  --accent: #FBC52A; --on-accent: #0E2233; --good: #4CC38A; --warn: #F0A93B; --bad: #FF7A70;
+  --good-bg: #12372A; --bad-bg: #3F1D1A; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.45; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.wrap { width: 100%; max-width: 720px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.band { background: var(--accent); color: var(--on-accent); font-size: 13px; }
+.band .wrap { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; justify-content: space-between; padding-block: 8px; }
+.band b { font-family: var(--f-mono); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
+.linkbtn { background: none; border: 0; padding: 0; text-decoration: underline; color: inherit; font-size: 13px; }
+.app { padding-block: 20px 110px; }
+.eyebrow { font-family: var(--f-mono); font-weight: 500; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin: 0; }
+h1, h2, h3 { font-family: var(--f-display); font-stretch: 75%; font-weight: 800; margin: 0; text-wrap: balance; line-height: 1; }
+h1 { font-size: clamp(54px, 15vw, 88px); text-transform: uppercase; letter-spacing: -.01em; }
+h2 { font-size: 28px; text-transform: uppercase; }
+h3 { font-size: 20px; text-transform: uppercase; letter-spacing: .01em; }
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.head h1 { margin-top: 8px; }
+.lede { margin: 12px 0 0; color: var(--ink-2); max-width: 46ch; }
+.chip { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--line); background: var(--surface); padding: 6px 14px 6px 6px; border-radius: 999px; font-size: 14px; }
+.chip i { font-style: normal; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--bg); font-family: var(--f-display); font-weight: 800; font-size: 14px; }
+.score { display: grid; grid-template-columns: auto 1fr; gap: 20px 28px; align-items: center; margin-top: 24px; padding-block: 20px; border-block: 1px solid var(--line); }
+.big { font-family: var(--f-display); font-stretch: 70%; font-weight: 900; font-size: 84px; line-height: .85; font-variant-numeric: tabular-nums; }
+.big small { font-size: 34px; margin-left: 2px; }
+.cap { margin: 8px 0 0; font-size: 13px; color: var(--ink-2); }
+.chmini { display: grid; gap: 10px; min-width: 0; }
+.chmini div { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; font-size: 14px; }
+.chmini b { font-variant-numeric: tabular-nums; }
+.chmini .bar { grid-column: 1 / -1; }
+.bar { height: 6px; background: var(--track); border-radius: 3px; overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--ink-2); border-radius: 3px; }
+.bar.good > span { background: var(--good); }
+.bar.warn > span { background: var(--warn); }
+.bar.bad > span { background: var(--bad); }
+.defi { margin-top: 24px; background: var(--accent); color: var(--on-accent); padding: 18px; border-radius: 10px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; }
+.defi h2 { font-size: 32px; }
+.defi p { margin: 6px 0 0; font-size: 15px; }
+.btn { border: 2px solid var(--ink); background: var(--ink); color: var(--bg); border-radius: 8px; padding: 12px 22px; font-weight: 700; font-size: 16px; min-height: 48px; }
+.defi .btn { background: var(--on-accent); color: var(--accent); border-color: var(--on-accent); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.sect { margin-top: 32px; }
+.sect-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+.sect-head span { font-family: var(--f-mono); font-weight: 500; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+.note { font-size: 13px; color: var(--ink-2); margin: 10px 0 0; max-width: 62ch; }
+.row { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 14px 4px 14px 0; align-items: start; }
+.row:hover { background: color-mix(in srgb, var(--surface) 70%, transparent); }
+.row .name { font-weight: 700; font-size: 17px; line-height: 1.25; min-width: 0; }
+.row .meta { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; margin-top: 6px; }
+.refs { font-family: var(--f-mono); font-weight: 500; font-size: 12px; color: var(--ink-2); }
+.refs b { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 2px; font-weight: 500; }
+.pill { font-family: var(--f-mono); font-weight: 500; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--ink-2); color: var(--ink-2); white-space: nowrap; }
+.pill.imp { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.pct { text-align: right; min-width: 74px; }
+.pct b { font-family: var(--f-display); font-stretch: 75%; font-weight: 800; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; display: block; }
+.pct b small { font-size: 15px; }
+.pct em { font-style: normal; font-size: 12px; color: var(--ink-2); }
+.pct em.good { color: var(--good); } .pct em.warn { color: var(--warn); } .pct em.bad { color: var(--bad); }
+.row .bar { grid-column: 1 / -1; }
+nav.tabs { position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); z-index: 5; }
+nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
+.tab { background: none; border: 0; padding: 10px 4px 9px; display: grid; justify-items: center; gap: 3px; font-size: 13px; color: var(--ink-2); font-weight: 700; border-top: 3px solid transparent; margin-top: -1px; }
+.tab svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tab[aria-current="page"] { color: var(--ink); border-top-color: var(--accent); }
+.panel { margin-top: 20px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+.stat { border-left: 3px solid var(--accent); padding-left: 10px; min-width: 0; }
+.stat b { display: block; font-family: var(--f-display); font-stretch: 75%; font-weight: 800; font-size: 32px; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 13px; color: var(--ink-2); }
+.field { margin-top: 20px; display: grid; gap: 6px; }
+.field label { font-weight: 700; font-size: 14px; }
+.field input { border: 1px solid var(--ink-2); background: var(--surface); border-radius: 8px; padding: 12px; min-height: 48px; max-width: 320px; }
+.code { font-family: var(--f-mono); font-weight: 500; background: var(--track); padding: 1px 6px; border-radius: 4px; }
+.chart { width: 100%; height: auto; display: block; margin-top: 12px; }
+.chart text { font-family: var(--f-mono); font-size: 10px; fill: var(--ink-2); }
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .target { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 4 3; }
+.chart .area { fill: var(--accent); opacity: .3; }
+.chart .line { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.chart .dot { fill: var(--bg); stroke: var(--ink); stroke-width: 2; }
+.chart .end { fill: var(--ink); stroke: var(--accent); stroke-width: 3; }
+.chart .endlbl { fill: var(--ink); font-size: 12px; font-weight: 500; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 15px; }
+.tbl th { text-align: left; font-family: var(--f-mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); padding: 8px 8px 8px 0; border-bottom: 1px solid var(--ink); }
+.tbl td { padding: 10px 8px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl td.n, .tbl th.n { text-align: right; font-variant-numeric: tabular-nums; padding-right: 0; }
+.scroll { overflow-x: auto; }
+.duel { display: grid; gap: 10px; margin-top: 12px; }
+.duel div { display: grid; grid-template-columns: 90px 1fr 48px; gap: 10px; align-items: center; font-size: 14px; }
+.duel .bar { height: 14px; border-radius: 3px; }
+.duel .bar span { background: var(--accent); border-radius: 0; }
+.duel b { text-align: right; font-variant-numeric: tabular-nums; }
+.room { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-top: 12px; }
+.room .code { font-size: 28px; letter-spacing: .12em; padding: 4px 12px; }
+.quiz { padding-block: 16px 40px; }
+.qtop { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.qtop .linkbtn { font-size: 15px; color: var(--ink); min-height: 44px; }
+.qtop .eyebrow { text-align: right; }
+.segs { display: flex; gap: 6px; margin-top: 8px; }
+.segs i { flex: 1; height: 6px; border-radius: 3px; background: var(--track); }
+.segs i.done { background: var(--ink); }
+.segs i.now { background: var(--accent); }
+.qtheme { margin-top: 24px; }
+.qtext { font-size: 22px; line-height: 1.3; font-weight: 700; margin: 8px 0 0; max-width: 40ch; text-wrap: pretty; }
+.opts { display: grid; gap: 10px; margin-top: 20px; }
+.opt { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; text-align: left; width: 100%; background: var(--surface); border: 2px solid var(--line); border-radius: 8px; padding: 12px 14px; min-height: 56px; font-size: 16px; }
+.opt .l { font-family: var(--f-mono); font-weight: 500; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--ink-2); border-radius: 4px; font-size: 13px; }
+.opt:hover:not(:disabled) { border-color: var(--ink); }
+.opt:disabled { cursor: default; }
+.opt.right { border-color: var(--good); background: var(--good-bg); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.opt .tag { display: block; font-family: var(--f-mono); font-weight: 500; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
+.opt.right .tag { color: var(--good); } .opt.wrong .tag { color: var(--bad); }
+.fb { margin-top: 20px; border-top: 2px solid var(--ink); padding-top: 14px; }
+.fb h3 { font-size: 24px; }
+.fb h3.good { color: var(--good); } .fb h3.bad { color: var(--bad); }
+.fb p { margin: 8px 0 0; max-width: 60ch; }
+.src { font-family: var(--f-mono); font-weight: 500; font-size: 12px; color: var(--ink-2); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.res { margin-top: 20px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.keep { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.keep li { border-left: 3px solid var(--accent); padding-left: 12px; max-width: 60ch; }
+.delta { font-variant-numeric: tabular-nums; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(84px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: 14px; z-index: 20; max-width: calc(100vw - 32px); text-align: center; }
+@media (max-width: 420px) {
+  .score { grid-template-columns: 1fr; }
+  .duel div { grid-template-columns: 70px 1fr 44px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bar > span { transition: width .5s ease; }
+}
+/* Palette plus vive : fond crème, indigo, un accent par chapitre (corail, turquoise, violet). */
+:root { --bg:#FFF7EA; --surface:#FFFFFF; --ink:#1E1B4B; --ink-2:#5E5A85; --line:#EBDDC6; --track:#F1E6D3; --accent:#FFC233; --on-accent:#1E1B4B; --good:#0B8A5F; --warn:#C45F00; --bad:#D1163F; --good-bg:#DDF7EA; --bad-bg:#FFE3E8; --c1:#FF5A6E; --c2:#0B8F88; --c3:#7C5CFA; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#15133A; --surface:#201D55; --ink:#F4F1FF; --ink-2:#B3AEDB; --line:#37336F; --track:#2B2862; --accent:#FFC233; --on-accent:#1E1B4B; --good:#3DDC97; --warn:#FFB020; --bad:#FF6B86; --good-bg:#12403A; --bad-bg:#4A1D33; --c1:#FF7A8C; --c2:#3FD6CC; --c3:#A48DFF; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg:#15133A; --surface:#201D55; --ink:#F4F1FF; --ink-2:#B3AEDB; --line:#37336F; --track:#2B2862; --accent:#FFC233; --on-accent:#1E1B4B; --good:#3DDC97; --warn:#FFB020; --bad:#FF6B86; --good-bg:#12403A; --bad-bg:#4A1D33; --c1:#FF7A8C; --c2:#3FD6CC; --c3:#A48DFF; color-scheme: dark; }
+.band { background:#1E1B4B; color:#FFE9A8; }
+.sect-head { border-bottom-color: var(--c, var(--ink)); }
+.sect-head h3 { color: var(--c, var(--ink)); }
+.sect-head h3::before { content:""; display:inline-block; width:12px; height:12px; border-radius:50%; background:var(--c, var(--ink)); margin-right:8px; }
+.bar { height: 8px; border-radius: 4px; }
+.bar > span { background: var(--c, var(--ink-2)); }
+.bar.good > span { background: var(--good); } .bar.warn > span { background: #FF9F1C; } .bar.bad > span { background: var(--bad); }
+.defi { background: linear-gradient(120deg, #FFC233, #FF9A5A); box-shadow: 0 6px 0 rgba(30,27,75,.18); }
+.big { color: var(--c2); }
+.chip i { background: var(--c3); color: #fff; }
+.stat:nth-child(1) { border-left-color: var(--c1); } .stat:nth-child(2) { border-left-color: var(--c2); } .stat:nth-child(3) { border-left-color: var(--c3); }
+.btn { box-shadow: 0 3px 0 rgba(30,27,75,.25); }
+.tab[aria-current="page"] { color: var(--c3); border-top-color: var(--c3); }
+.opt.right { box-shadow: 0 0 0 2px var(--good) inset; }
+.pill.imp { background: var(--c1); color: #fff; border-color: var(--c1); }
+</style>
+
+<div class="band"><div class="wrap"><span><b>Maquette</b> · scores, classements et participation sont des exemples</span><button class="linkbtn" id="reset" type="button">Remettre l’exemple à zéro</button></div></div>
+
+<main class="app wrap" id="app">
+  <section id="v-play" aria-label="Jouer"></section>
+  <section id="v-me" aria-label="Mon score" hidden></section>
+  <section id="v-team" aria-label="Équipe" hidden></section>
+  <section id="v-quiz" class="quiz" aria-label="Quiz" hidden></section>
+</main>
+
+<nav class="tabs" id="tabs" aria-label="Navigation">
+  <div class="wrap">
+    <button class="tab" data-tab="play" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>Jouer</button>
+    <button class="tab" data-tab="me" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 5-7"/></svg>Mon score</button>
+    <button class="tab" data-tab="team" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18.5 14c1.5.7 2.5 2.3 2.5 5"/></svg>Équipe</button>
+  </div>
+</nav>
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script>
+(function () {
+  var KEY = "objectif-certif-maquette-v1";
+  var CHAPTERS = { 1: "Le patient", 2: "Les équipes de soins", 3: "L’établissement" };
+  var IMPERATIFS_TOTAL = 22;
+
+  /* Thèmes du hub. refs: [critère, impératif 0/1]. tc: traceur ciblé. */
+  var THEMES = [
+    { id: "dignite", ch: 1, name: "Dignité, intimité et confidentialité", refs: [["1.1-01", 1], ["1.1-03", 0]], tc: 0 },
+    { id: "bientraitance", ch: 1, name: "Bientraitance et contention", refs: [["1.1-06", 1], ["1.1-10", 0]], tc: 1 },
+    { id: "douleur", ch: 1, name: "Douleur", refs: [["1.1-05", 1]], tc: 0 },
+    { id: "info", ch: 1, name: "Information, consentement et directives anticipées", refs: [["1.2-02", 0], ["1.3-01", 1], ["1.1-04", 0], ["1.3-11", 0]], tc: 0 },
+    { id: "age", ch: 1, name: "Patient âgé et autonomie", refs: [["1.3-04", 0], ["3.3-05", 1]], tc: 0 },
+    { id: "experience", ch: 1, name: "Expérience du patient et usagers", refs: [["1.4-02", 1], ["1.4-05", 0], ["1.4-06", 0]], tc: 0 },
+    { id: "identito", ch: 2, name: "Identitovigilance", refs: [["2.2-01", 0]], tc: 0 },
+    { id: "medic", ch: 2, name: "Circuit du médicament", refs: [["2.2-02", 1], ["2.2-05", 1], ["2.2-06", 1], ["2.1-04", 0]], tc: 1 },
+    { id: "hygiene", ch: 2, name: "Hygiène et risque infectieux", refs: [["2.2-08", 1], ["2.2-09", 0], ["2.2-10", 0]], tc: 1 },
+    { id: "urgences", ch: 2, name: "Urgences vitales", refs: [["2.2-12", 1]], tc: 0 },
+    { id: "transfusion", ch: 2, name: "Transfusion sanguine", refs: [["2.2-11", 0]], tc: 1 },
+    { id: "sortie", ch: 2, name: "Sortie, nutrition et pertinence des soins", refs: [["2.1-14", 0], ["2.1-06", 0], ["2.4-02", 1]], tc: 0 },
+    { id: "ei", ch: 3, name: "Événements indésirables et culture qualité", refs: [["1.2-07", 1], ["3.1-02", 0]], tc: 1 },
+    { id: "sse", ch: 3, name: "Situations sanitaires exceptionnelles", refs: [["3.1-05", 1]], tc: 0 },
+    { id: "cyber", ch: 3, name: "Cybersécurité et accès au dossier", refs: [["3.1-07", 0], ["3.1-08", 0]], tc: 0 },
+    { id: "equipes", ch: 3, name: "Travail en équipe et vie au travail", refs: [["3.2-11", 0], ["3.2-08", 0], ["3.2-12", 1]], tc: 0 }
+  ];
+  var BYID = {};
+  THEMES.forEach(function (t) { BYID[t.id] = t; });
+
+  /* Quiz jouables dans la maquette. */
+  var QUIZ = {
+    hygiene: {
+      title: "Hygiène des mains",
+      questions: [
+        { theme: "hygiene", q: "La friction hydro-alcoolique est la méthode à privilégier. Dans quelle situation lave-t-on les mains à l’eau et au savon ?",
+          opts: ["Avant un geste aseptique", "Prise en charge d’un patient porteur de Clostridioides difficile ou de la gale", "Après un contact avec l’environnement du patient", "Après le retrait des gants"], ok: 1,
+          why: "La friction est à privilégier partout, sauf pour Clostridium difficile et la gale. Le référentiel attend de l’équipe qu’elle connaisse ces rares indications du lavage à l’eau et au savon.", src: "Mémo CertiF p. 4 · critère 2.2-08" },
+        { theme: "hygiene", q: "Vrai ou faux : la friction est aussi efficace quand je porte une alliance ou une montre.",
+          opts: ["Vrai", "Faux"], ok: 1,
+          why: "Les bijoux diminuent l’efficacité de la friction. Prérequis : aucun bijou aux mains ni aux poignets, pas de montre, manches courtes, ongles courts et sans vernis. Les experts-visiteurs l’observent dans le service.", src: "Mémo CertiF p. 4 · critère 2.2-08 (observation)" },
+        { theme: "hygiene", q: "Que mesure l’ICSHA ?",
+          opts: ["La consommation de solution hydro-alcoolique, indicateur indirect de l’observance de l’hygiène des mains", "Le taux d’infections associées aux soins du service", "Le nombre de lavages de mains au savon", "La satisfaction des patients sur l’hygiène des mains"], ok: 0,
+          why: "C’est un indicateur de qualité et de sécurité des soins (IQSS). Un objectif minimum de consommation est fixé pour chaque activité. Demandez à votre encadrement où consulter le résultat de l’unité.", src: "Mémo CertiF p. 4 · critère 2.2-08" },
+        { theme: "hygiene", q: "Quelles précautions s’appliquent pour tout soin, tout patient et en tout lieu, quel que soit son statut infectieux ?",
+          opts: ["Les précautions complémentaires contact", "Les précautions gouttelettes", "Les précautions standard", "Les précautions air"], ok: 2,
+          why: "Les précautions standard sont le socle. Les précautions complémentaires s’y ajoutent selon le micro-organisme, sur prescription ou protocole, et l’information donnée au patient est tracée dans le dossier.", src: "Mémo CertiF p. 4 · critères 2.2-08 et 2.2-09" }
+      ]
+    },
+    defi: {
+      title: "Défi du jour",
+      questions: [
+        { theme: "medic", q: "Un stylo injecteur d’insuline peut-il servir à plusieurs patients ?",
+          opts: ["Oui, avec une aiguille neuve", "Non, un stylo pour un seul patient"], ok: 1,
+          why: "Un stylo, un patient. Le stylo ouvert porte l’étiquette patient et la date d’ouverture, placées en drapeau sans masquer les informations.", src: "Mémo CertiF p. 26 · critère 2.2-05" },
+        { theme: "douleur", q: "Un patient n’a aucun antalgique. À quelle fréquence minimale évaluer sa douleur ?",
+          opts: ["À l’entrée seulement", "Au moins une fois par 24 heures", "Seulement s’il se plaint", "Une fois par semaine"], ok: 1,
+          why: "L’évaluation est tracée avec une échelle adaptée, même si le patient n’est pas douloureux. Avec un antalgique : avant et après chaque administration. Patient non communicant : ALGO+ ou DOLO+.", src: "Mémo CertiF p. 8 · critère 1.1-05" },
+        { theme: "urgences", q: "Un patient fait un arrêt cardiaque. Quelle est la séquence des premiers gestes ?",
+          opts: ["Masser, attendre l’équipe, défibriller", "Installer en PLS, alerter, défibriller", "Alerter, masser et ventiler, défibriller", "Alerter, installer en PLS, ventiler"], ok: 2,
+          why: "Alerter, masser et ventiler, défibriller. La PLS concerne un patient inconscient dont la poitrine se soulève régulièrement.", src: "Mémo CertiF p. 6 · critère 2.2-12" },
+        { theme: "bientraitance", q: "Un patient âgé agité : on relève les deux barrières de son lit. Que faut-il ?",
+          opts: ["Rien, c’est une mesure de sécurité courante", "Une décision médicale, une analyse bénéfices/risques tracée et une réévaluation régulière", "Le seul accord de la famille", "Une décision de l’infirmier, tracée en fin de poste"], ok: 1,
+          why: "Deux barrières ou quatre demi-barrières relevées constituent une privation de liberté. Au-delà d’une mesure ponctuelle, la contention fait l’objet d’une prescription médicale précisant ses modalités, d’une analyse bénéfices/risques tracée et d’une réévaluation. Le patient ou sa personne de confiance est informé.", src: "Mémo CertiF p. 23 · critère 1.1-10" }
+      ]
+    }
+  };
+
+  var SEED = {
+    pseudo: "Cyclope42", points: 1240, streak: 4,
+    counters: { dignite: [26, 35], bientraitance: [17, 28], douleur: [14, 24], info: [21, 30], age: [19, 29], experience: [12, 25],
+      identito: [30, 37], medic: [34, 54], hygiene: [20, 26], urgences: [11, 20], transfusion: [0, 0], sortie: [18, 26],
+      ei: [16, 27], sse: [8, 18], cyber: [23, 32], equipes: [0, 0] }
+  };
+  var HISTORY = [49, 52, 55, 58, 61];
+  var WEEKS = ["S38", "S39", "S40", "S41", "S42", "S43"];
+
+  var S = load();
+  var tab = "play";
+  var quiz = null;
+
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) { var o = JSON.parse(raw); if (o && o.counters && o.pseudo) return o; }
+    } catch (e) {}
+    return clone(SEED);
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function $(id) { return document.getElementById(id); }
+
+  function pct(id) { var c = S.counters[id]; return c && c[1] ? c[0] / c[1] * 100 : null; }
+  function mean(a) { return a.length ? a.reduce(function (x, y) { return x + y; }, 0) / a.length : null; }
+  function chapterScore(ch) { return mean(THEMES.filter(function (t) { return t.ch === ch; }).map(function (t) { return pct(t.id); }).filter(function (v) { return v !== null; })); }
+  function globalScore() { return mean([1, 2, 3].map(chapterScore).filter(function (v) { return v !== null; })); }
+  function level(v) { return v >= 80 ? "good" : v >= 60 ? "warn" : "bad"; }
+  function levelLabel(v) { return v >= 80 ? "Solide" : v >= 60 ? "À consolider" : "À revoir"; }
+  function r(v) { return Math.round(v); }
+  function answered() { return Object.keys(S.counters).reduce(function (n, k) { return n + S.counters[k][1]; }, 0); }
+  function initials() { var p = (S.pseudo || "?").trim(); return esc((p.charAt(0) || "?").toUpperCase()); }
+
+  var toastTimer;
+  function toast(msg) {
+    var t = $("toast"); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 3200);
+  }
+
+  /* ---------- Jouer ---------- */
+  function row(t) {
+    var p = pct(t.id);
+    var refs = t.refs.map(function (x) { return x[1] ? "<b>" + x[0] + "</b>" : x[0]; }).join(" · ");
+    var hasImp = t.refs.some(function (x) { return x[1]; });
+    var right = p === null
+      ? '<div class="pct"><b>–</b><em>Pas encore joué</em></div>'
+      : '<div class="pct"><b>' + r(p) + "<small> %</small></b><em class=\"" + level(p) + '">' + levelLabel(p) + "</em></div>";
+    return '<button class="row" type="button" data-theme-id="' + t.id + '" aria-label="' + esc(t.name) + (p === null ? ", pas encore joué" : ", " + r(p) + " pour cent") + '">' +
+      '<div><div class="name">' + esc(t.name) + '</div><div class="meta"><span class="refs">' + refs + "</span>" +
+      (hasImp ? '<span class="pill imp">Impératif</span>' : "") + (t.tc ? '<span class="pill">Traceur ciblé</span>' : "") + "</div></div>" + right +
+      '<div class="bar ' + (p === null ? "" : level(p)) + '"><span style="width:' + (p === null ? 0 : r(p)) + '%"></span></div></button>';
+  }
+  function renderPlay() {
+    var g = globalScore();
+    var imp = {}; THEMES.forEach(function (t) { t.refs.forEach(function (x) { if (x[1]) imp[x[0]] = 1; }); });
+    var nImp = Object.keys(imp).length;
+    var chm = [1, 2, 3].map(function (c) {
+      var v = chapterScore(c);
+      return "<div><span>" + CHAPTERS[c] + "</span><b>" + (v === null ? "–" : r(v) + " %") + '</b><div class="bar ' + (v === null ? "" : level(v)) + '"><span style="width:' + (v === null ? 0 : r(v)) + '%"></span></div></div>';
+    }).join("");
+    var h = '<div class="head"><div><p class="eyebrow">Visite de certification · préparation</p><h1>Objectif<br>CertiF</h1></div>' +
+      '<span class="chip"><i aria-hidden="true">' + initials() + "</i>" + esc(S.pseudo) + "</span></div>" +
+      '<p class="lede">Des quiz de trois minutes, un thème à la fois, pour arriver prêt le jour de la visite.</p>' +
+      '<div class="score"><div><div class="big">' + (g === null ? "–" : r(g)) + "<small>%</small></div>" +
+      '<p class="cap">Score global · cible 100 %</p></div><div class="chmini">' + chm + "</div></div>" +
+      '<div class="defi"><div><h2>Défi du jour</h2><p>4 questions · 4 thèmes · 3 minutes</p></div><button class="btn" type="button" id="go-defi">Jouer</button></div>';
+    [1, 2, 3].forEach(function (c) {
+      var v = chapterScore(c);
+      h += '<div class="sect" style="--c:var(--c' + c + ')"><div class="sect-head"><h3>Chapitre ' + c + " · " + CHAPTERS[c] + "</h3><span>" + (v === null ? "–" : r(v) + " %") + "</span></div>" +
+        THEMES.filter(function (t) { return t.ch === c; }).map(row).join("") + "</div>";
+    });
+    h += '<p class="note">' + THEMES.length + " thèmes issus du référentiel HAS 2027. Ils couvrent " + nImp + " des " + IMPERATIFS_TOTAL +
+      " critères impératifs (soulignés ci-dessus). Les autres concernent des secteurs que l’unité n’a pas : bloc, maternité, psychiatrie, mineurs.</p>" +
+      '<p class="note">Dans la maquette, seuls le défi du jour et « Hygiène et risque infectieux » se jouent. Le score d’un thème est le nombre de bonnes réponses divisé par le nombre de réponses, comme dans la cotation de la HAS.</p>';
+    $("v-play").innerHTML = h;
+  }
+
+  /* ---------- Mon score ---------- */
+  function chart(cur) {
+    var vals = HISTORY.concat([r(cur)]);
+    var W = 340, H = 170, L = 40, R = 30, T = 24, B = 26, lo = 40, hi = 100;
+    var x = function (i) { return L + i * (W - L - R) / (vals.length - 1); };
+    var y = function (v) { return T + (hi - v) / (hi - lo) * (H - T - B); };
+    var pts = vals.map(function (v, i) { return x(i).toFixed(1) + "," + y(v).toFixed(1); });
+    var s = '<svg class="chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Évolution du score global sur six semaines, de ' + vals[0] + " à " + vals[vals.length - 1] + ' pour cent">';
+    [50, 75].forEach(function (g) { s += '<line class="grid" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(g) + '" y2="' + y(g) + '"/><text x="' + (L - 6) + '" y="' + (y(g) + 3) + '" text-anchor="end">' + g + "</text>"; });
+    s += '<line class="target" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(100) + '" y2="' + y(100) + '"/><text x="' + (L - 6) + '" y="' + (y(100) + 3) + '" text-anchor="end">100</text>' +
+      '<text x="' + (W - R) + '" y="' + (y(100) - 5) + '" text-anchor="end">cible</text>';
+    s += '<polygon class="area" points="' + pts.join(" ") + " " + x(vals.length - 1).toFixed(1) + "," + y(lo) + " " + L + "," + y(lo) + '"/>';
+    s += '<polyline class="line" points="' + pts.join(" ") + '"/>';
+    vals.forEach(function (v, i) {
+      if (i < vals.length - 1) s += '<circle class="dot" cx="' + x(i).toFixed(1) + '" cy="' + y(v).toFixed(1) + '" r="3.5"/>';
+      s += '<text x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle">' + WEEKS[i] + "</text>";
+    });
+    var li = vals.length - 1;
+    s += '<circle class="end" cx="' + x(li).toFixed(1) + '" cy="' + y(vals[li]).toFixed(1) + '" r="6"/>' +
+      '<text class="endlbl" x="' + x(li).toFixed(1) + '" y="' + (y(vals[li]) - 12).toFixed(1) + '" text-anchor="middle">' + vals[li] + " %</text></svg>";
+    return s;
+  }
+  function renderMe() {
+    var g = globalScore();
+    var low = THEMES.filter(function (t) { return pct(t.id) !== null; }).sort(function (a, b) { return pct(a.id) - pct(b.id); }).slice(0, 3);
+    var h = '<h2>Mon score</h2><p class="lede">Votre progression reste attachée à un pseudo. Aucun nom ni matricule n’est demandé.</p>' +
+      '<div class="stats"><div class="stat"><b>' + S.points.toLocaleString("fr-FR") + "</b><span>points</span></div>" +
+      '<div class="stat"><b>' + answered() + "</b><span>réponses données</span></div>" +
+      '<div class="stat"><b>' + S.streak + "</b><span>jours de suite</span></div></div>" +
+      '<div class="sect"><div class="sect-head"><h3>Évolution du score global</h3><span>6 semaines</span></div>' + chart(g === null ? 0 : g) + "</div>" +
+      '<div class="sect"><div class="sect-head"><h3>À revoir en priorité</h3><span>3 thèmes</span></div>' +
+      low.map(function (t) { var p = pct(t.id); return '<button class="row" type="button" data-theme-id="' + t.id + '"><div><div class="name">' + esc(t.name) + '</div></div><div class="pct"><b>' + r(p) + "<small> %</small></b><em class=\"" + level(p) + '">' + levelLabel(p) + '</em></div><div class="bar ' + level(p) + '"><span style="width:' + r(p) + '%"></span></div></button>'; }).join("") + "</div>" +
+      '<div class="sect"><div class="sect-head"><h3>Mon identifiant</h3></div><div class="field"><label for="pseudo">Pseudo</label><input id="pseudo" type="text" maxlength="20" autocomplete="off" value="' + esc(S.pseudo) + '"></div>' +
+      '<p class="note">Code personnel : <span class="code">7K2-QM9</span> (exemple). Il permet de retrouver votre progression sur un autre téléphone.</p></div>';
+    $("v-me").innerHTML = h;
+    $("pseudo").addEventListener("input", function (e) { S.pseudo = e.target.value.trim() || "Anonyme"; save(); });
+  }
+
+  /* ---------- Équipe ---------- */
+  var MISSED = [
+    ["Réévaluation d’une antibiothérapie : entre quelle heure et quelle heure ?", "Sortie, nutrition et pertinence", "2.4-02", 68],
+    ["Fréquence minimale d’évaluation de la douleur sans antalgique", "Douleur", "1.1-05", 61],
+    ["Que faut-il pour relever deux barrières de lit ?", "Bientraitance et contention", "1.1-10", 57],
+    ["Que mesure l’ICSHA ?", "Hygiène et risque infectieux", "2.2-08", 44],
+    ["Numéro à appeler en cas d’urgence vitale", "Urgences vitales", "2.2-12", 38]
+  ];
+  var SERVICES = [["UGO", 71, 58], ["UGA", 66, 45], ["Médecine 1", 59, 38], ["SMR", 54, 27]];
+  var TEAMTHEMES = [["Situations sanitaires exceptionnelles", 39], ["Expérience du patient et usagers", 44], ["Douleur", 52], ["Urgences vitales", 54], ["Circuit du médicament", 61]];
+  function renderTeam() {
+    var h = '<h2>Équipe</h2><p class="lede">Vue pour les cadres et la direction. Les résultats sont regroupés par service, jamais par personne.</p>' +
+      '<div class="sect"><div class="sect-head"><h3>Participation cette semaine</h3><span>14 sur 31 agents</span></div><div class="bar" style="margin-top:14px"><span style="width:45%"></span></div><p class="note">45 % des agents de l’unité ont joué au moins un quiz.</p></div>' +
+      '<div class="sect"><div class="sect-head"><h3>Thèmes à revoir</h3><span>score du service</span></div>' +
+      TEAMTHEMES.map(function (t) { return '<div class="row" style="cursor:default"><div class="name">' + esc(t[0]) + '</div><div class="pct"><b>' + t[1] + "<small> %</small></b></div><div class=\"bar " + level(t[1]) + '"><span style="width:' + t[1] + '%"></span></div></div>'; }).join("") + "</div>" +
+      '<div class="sect"><div class="sect-head"><h3>Questions les plus ratées</h3><span>% d’erreurs</span></div><div class="scroll"><table class="tbl"><thead><tr><th>Question</th><th class="n">Erreurs</th></tr></thead><tbody>' +
+      MISSED.map(function (m) { return "<tr><td>" + esc(m[0]) + '<br><span class="refs">' + esc(m[1]) + " · " + m[2] + '</span></td><td class="n"><b>' + m[3] + " %</b></td></tr>"; }).join("") + "</tbody></table></div></div>" +
+      '<div class="sect"><div class="sect-head"><h3>Classement des services</h3><span>score · participation</span></div><div class="scroll"><table class="tbl"><thead><tr><th>Service</th><th class="n">Score</th><th class="n">Participation</th></tr></thead><tbody>' +
+      SERVICES.map(function (s) { return "<tr><td><b>" + esc(s[0]) + '</b></td><td class="n">' + s[1] + ' %</td><td class="n">' + s[2] + " %</td></tr>"; }).join("") + "</tbody></table></div></div>" +
+      '<div class="sect"><div class="sect-head"><h3>Défi du point qualité</h3><span>en salle</span></div><div class="room"><div><p class="cap" style="margin:0">Code de la salle, à saisir sur chaque téléphone</p><span class="code">4821</span></div><button class="btn ghost" type="button" id="launch-room">Lancer un défi</button></div>' +
+      '<div class="duel"><div><span>Équipe jour</span><div class="bar"><span style="width:100%"></span></div><b>312</b></div><div><span>Équipe nuit</span><div class="bar"><span style="width:92%"></span></div><b>287</b></div></div>' +
+      '<p class="note">Le classement se joue entre équipes. Il compte la participation et les progrès, pas le niveau de départ.</p></div>';
+    $("v-team").innerHTML = h;
+    var lr = $("launch-room"); if (lr) lr.addEventListener("click", function () { toast("Maquette : le défi en salle sera joué en direct à plusieurs."); });
+  }
+
+  /* ---------- Quiz ---------- */
+  function startQuiz(key) {
+    quiz = { key: key, i: 0, picked: null, ok: 0, log: [] };
+    show("quiz"); renderQuiz(); window.scrollTo(0, 0);
+  }
+  function renderQuiz() {
+    var set = QUIZ[quiz.key], n = set.questions.length, q = set.questions[quiz.i], th = BYID[q.theme];
+    var segs = set.questions.map(function (_, k) { return '<i class="' + (k < quiz.i || (k === quiz.i && quiz.picked !== null) ? "done" : k === quiz.i ? "now" : "") + '"></i>'; }).join("");
+    var h = '<div class="qtop"><button class="linkbtn" type="button" id="quit">‹ Quitter</button><p class="eyebrow">' + esc(set.title) + " · " + (quiz.i + 1) + " / " + n + "</p></div>" +
+      '<div class="segs" aria-hidden="true">' + segs + "</div>" +
+      '<p class="eyebrow qtheme">' + esc(th.name) + "</p><p class=\"qtext\" id=\"qtext\">" + esc(q.q) + "</p><div class=\"opts\" role=\"group\" aria-labelledby=\"qtext\">";
+    q.opts.forEach(function (o, k) {
+      var cls = "opt", tag = "";
+      if (quiz.picked !== null) {
+        if (k === q.ok) { cls += " right"; tag = '<span class="tag">Bonne réponse</span>'; }
+        else if (k === quiz.picked) { cls += " wrong"; tag = '<span class="tag">Votre réponse</span>'; }
+      }
+      h += '<button type="button" class="' + cls + '" data-k="' + k + '"' + (quiz.picked !== null ? " disabled" : "") + '><span class="l">' + "ABCD".charAt(k) + "</span><span>" + esc(o) + tag + "</span></button>";
+    });
+    h += "</div>";
+    if (quiz.picked !== null) {
+      var good = quiz.picked === q.ok, last = quiz.i === n - 1;
+      h += '<div class="fb" role="status"><h3 class="' + (good ? "good" : "bad") + '">' + (good ? "Correct · +10 points" : "Pas tout à fait") + "</h3><p>" + esc(q.why) + '</p><p class="src">' + esc(q.src) + "</p>" +
+        '<div class="actions"><button class="btn" type="button" id="next">' + (last ? "Voir le résultat" : "Question suivante") + "</button></div></div>";
+    }
+    $("v-quiz").innerHTML = h;
+    $("quit").addEventListener("click", function () { quiz = null; show("play"); });
+    Array.prototype.forEach.call($("v-quiz").querySelectorAll(".opt"), function (b) {
+      b.addEventListener("click", function () {
+        var k = +b.getAttribute("data-k"); quiz.picked = k;
+        var ok = k === q.ok; if (ok) quiz.ok++;
+        quiz.log.push({ q: q, ok: ok });
+        renderQuiz();
+        var nx = $("next"); if (nx) nx.focus();
+      });
+    });
+    var nx = $("next");
+    if (nx) nx.addEventListener("click", function () {
+      if (quiz.i < n - 1) { quiz.i++; quiz.picked = null; renderQuiz(); window.scrollTo(0, 0); }
+      else finishQuiz();
+    });
+  }
+  function finishQuiz() {
+    var set = QUIZ[quiz.key], n = set.questions.length, touched = {}, before = {};
+    quiz.log.forEach(function (e) {
+      var id = e.q.theme;
+      if (!(id in before)) before[id] = pct(id);
+      var c = S.counters[id]; c[1] += 1; if (e.ok) c[0] += 1; touched[id] = 1;
+    });
+    var pts = quiz.ok * 10; S.points += pts; save();
+    var missed = quiz.log.filter(function (e) { return !e.ok; });
+    var h = '<div class="qtop"><button class="linkbtn" type="button" id="back">‹ Retour aux thèmes</button><p class="eyebrow">' + esc(set.title) + "</p></div>" +
+      '<div class="res"><div class="big">' + quiz.ok + "<small>/" + n + "</small></div><p class=\"cap\" style=\"margin:0\">" + pts + " points gagnés</p></div>" +
+      '<div class="sect"><div class="sect-head"><h3>Effet sur vos thèmes</h3></div>' +
+      Object.keys(touched).map(function (id) {
+        var a = before[id], b = pct(id);
+        return '<div class="row" style="cursor:default"><div class="name">' + esc(BYID[id].name) + '</div><div class="pct"><b class="delta">' + (a === null ? "" : r(a) + " → ") + r(b) + "<small> %</small></b></div></div>";
+      }).join("") + "</div>" +
+      '<div class="sect"><div class="sect-head"><h3>À retenir</h3></div>' +
+      (missed.length ? '<ul class="keep">' + missed.map(function (e) { return "<li><strong>" + esc(e.q.q) + "</strong><br>" + esc(e.q.why) + '<br><span class="src">' + esc(e.q.src) + "</span></li>"; }).join("") + "</ul>" : '<p class="note" style="font-size:16px;color:var(--ink)">Aucune erreur. Les ' + n + " points sont acquis.</p>") + "</div>" +
+      '<div class="actions"><button class="btn" type="button" id="again">Rejouer</button><button class="btn ghost" type="button" id="back2">Retour aux thèmes</button></div>';
+    var key = quiz.key; quiz = null;
+    $("v-quiz").innerHTML = h;
+    $("back").addEventListener("click", function () { show("play"); });
+    $("back2").addEventListener("click", function () { show("play"); });
+    $("again").addEventListener("click", function () { startQuiz(key); });
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- Navigation ---------- */
+  function show(name) {
+    tab = name;
+    ["play", "me", "team", "quiz"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
+    $("tabs").hidden = name === "quiz";
+    if (name === "play") renderPlay();
+    if (name === "me") renderMe();
+    if (name === "team") renderTeam();
+    Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (b) {
+      if (b.getAttribute("data-tab") === name) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+    });
+    if (name !== "quiz") window.scrollTo(0, 0);
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest ? e.target.closest("[data-tab],[data-theme-id],#go-defi") : null;
+    if (!t) return;
+    if (t.hasAttribute("data-tab")) { show(t.getAttribute("data-tab")); return; }
+    if (t.id === "go-defi") { startQuiz("defi"); return; }
+    var id = t.getAttribute("data-theme-id");
+    if (id === "hygiene") startQuiz("hygiene");
+    else toast("Questions à rédiger pour ce thème, à partir des fiches pédagogiques HAS.");
+  });
+  $("reset").addEventListener("click", function () { S = clone(SEED); save(); quiz = null; show("play"); toast("Exemple remis à zéro."); });
+
+  var start = { jouer: "play", score: "me", equipe: "team" }[(location.hash || "").replace("#", "")] || "play";
+  show(start);
+})();
+</script>
