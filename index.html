@@ -182,15 +182,19 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
 .tab[aria-current="page"] { color: var(--c3); border-top-color: var(--c3); }
 .opt.right { box-shadow: 0 0 0 2px var(--good) inset; }
 .pill.imp { background: var(--c1); color: #fff; border-color: var(--c1); }
+.field select { border: 1px solid var(--ink-2); background: var(--surface); border-radius: 8px; padding: 12px; min-height: 48px; max-width: 320px; }
+.wform { margin-top: 24px; max-width: 420px; }
+#v-welcome { padding-top: 24px; }
 </style>
 
-<div class="band"><div class="wrap"><span><b>Maquette</b> · scores, classements et participation sont des exemples</span><button class="linkbtn" id="reset" type="button">Remettre l’exemple à zéro</button></div></div>
+<div class="band"><div class="wrap"><span><b>Maquette</b> · la vue Équipe affiche des données d’exemple</span><button class="linkbtn" id="reset" type="button">Effacer mon profil</button></div></div>
 
 <main class="app wrap" id="app">
   <section id="v-play" aria-label="Jouer"></section>
   <section id="v-me" aria-label="Mon score" hidden></section>
   <section id="v-team" aria-label="Équipe" hidden></section>
   <section id="v-quiz" class="quiz" aria-label="Quiz" hidden></section>
+  <section id="v-welcome" aria-label="Bienvenue" hidden></section>
 </main>
 
 <nav class="tabs" id="tabs" aria-label="Navigation">
@@ -268,13 +272,15 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
     }
   };
 
-  var SEED = {
-    pseudo: "Cyclope42", points: 1240, streak: 4,
+  var DEMO = {
+    pseudo: "Cyclope42", service: "UGA", code: "7K2-QM9", onboarded: true, hist: [49, 52, 55, 58, 61, 63], points: 1240, streak: 4,
     counters: { dignite: [26, 35], bientraitance: [17, 28], douleur: [14, 24], info: [21, 30], age: [19, 29], experience: [12, 25],
       identito: [30, 37], medic: [34, 54], hygiene: [20, 26], urgences: [11, 20], transfusion: [0, 0], sortie: [18, 26],
       ei: [16, 27], sse: [8, 18], cyber: [23, 32], equipes: [0, 0] }
   };
-  var HISTORY = [49, 52, 55, 58, 61];
+  var FRESH = { pseudo: "", service: "", code: "", onboarded: false, hist: [], points: 0, streak: 0, counters: {} };
+  THEMES.forEach(function (t) { FRESH.counters[t.id] = [0, 0]; });
+  var SEED = FRESH;
   var WEEKS = ["S38", "S39", "S40", "S41", "S42", "S43"];
 
   var S = load();
@@ -285,7 +291,7 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
   function load() {
     try {
       var raw = localStorage.getItem(KEY);
-      if (raw) { var o = JSON.parse(raw); if (o && o.counters && o.pseudo) return o; }
+      if (raw) { var o = JSON.parse(raw); if (o && o.counters && "onboarded" in o) return o; }
     } catch (e) {}
     return clone(SEED);
   }
@@ -349,7 +355,7 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
 
   /* ---------- Mon score ---------- */
   function chart(cur) {
-    var vals = HISTORY.concat([r(cur)]);
+    var vals = (S.hist || []).slice(-8);
     var W = 340, H = 170, L = 40, R = 30, T = 24, B = 26, lo = 40, hi = 100;
     var x = function (i) { return L + i * (W - L - R) / (vals.length - 1); };
     var y = function (v) { return T + (hi - v) / (hi - lo) * (H - T - B); };
@@ -362,7 +368,7 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
     s += '<polyline class="line" points="' + pts.join(" ") + '"/>';
     vals.forEach(function (v, i) {
       if (i < vals.length - 1) s += '<circle class="dot" cx="' + x(i).toFixed(1) + '" cy="' + y(v).toFixed(1) + '" r="3.5"/>';
-      s += '<text x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle">' + WEEKS[i] + "</text>";
+      s += '<text x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle">' + (i + 1) + "</text>";
     });
     var li = vals.length - 1;
     s += '<circle class="end" cx="' + x(li).toFixed(1) + '" cy="' + y(vals[li]).toFixed(1) + '" r="6"/>' +
@@ -376,11 +382,11 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
       '<div class="stats"><div class="stat"><b>' + S.points.toLocaleString("fr-FR") + "</b><span>points</span></div>" +
       '<div class="stat"><b>' + answered() + "</b><span>réponses données</span></div>" +
       '<div class="stat"><b>' + S.streak + "</b><span>jours de suite</span></div></div>" +
-      '<div class="sect"><div class="sect-head"><h3>Évolution du score global</h3><span>6 semaines</span></div>' + chart(g === null ? 0 : g) + "</div>" +
+      '<div class="sect"><div class="sect-head"><h3>Évolution du score global</h3><span>après chaque quiz</span></div>' + ((S.hist || []).length > 1 ? chart(g) : '<p class="note">Jouez au moins deux quiz pour voir votre courbe.</p>') + "</div>" +
       '<div class="sect"><div class="sect-head"><h3>À revoir en priorité</h3><span>3 thèmes</span></div>' +
-      low.map(function (t) { var p = pct(t.id); return '<button class="row" type="button" data-theme-id="' + t.id + '"><div><div class="name">' + esc(t.name) + '</div></div><div class="pct"><b>' + r(p) + "<small> %</small></b><em class=\"" + level(p) + '">' + levelLabel(p) + '</em></div><div class="bar ' + level(p) + '"><span style="width:' + r(p) + '%"></span></div></button>'; }).join("") + "</div>" +
+      (low.length ? "" : '<p class="note">Rien à afficher pour l’instant. Jouez un premier quiz.</p>') + low.map(function (t) { var p = pct(t.id); return '<button class="row" type="button" data-theme-id="' + t.id + '"><div><div class="name">' + esc(t.name) + '</div></div><div class="pct"><b>' + r(p) + "<small> %</small></b><em class=\"" + level(p) + '">' + levelLabel(p) + '</em></div><div class="bar ' + level(p) + '"><span style="width:' + r(p) + '%"></span></div></button>'; }).join("") + "</div>" +
       '<div class="sect"><div class="sect-head"><h3>Mon identifiant</h3></div><div class="field"><label for="pseudo">Pseudo</label><input id="pseudo" type="text" maxlength="20" autocomplete="off" value="' + esc(S.pseudo) + '"></div>' +
-      '<p class="note">Code personnel : <span class="code">7K2-QM9</span> (exemple). Il permet de retrouver votre progression sur un autre téléphone.</p></div>';
+      '<p class="note">Code personnel : <span class="code">' + esc(S.code) + '</span>. Votre progression est enregistrée sur ce téléphone. Le code servira à la retrouver ailleurs quand la sauvegarde en ligne sera en place.</p>' + '<p class="note">Service : ' + esc(S.service || "non renseigné") + '</p></div>';
     $("v-me").innerHTML = h;
     $("pseudo").addEventListener("input", function (e) { S.pseudo = e.target.value.trim() || "Anonyme"; save(); });
   }
@@ -460,7 +466,10 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
       if (!(id in before)) before[id] = pct(id);
       var c = S.counters[id]; c[1] += 1; if (e.ok) c[0] += 1; touched[id] = 1;
     });
-    var pts = quiz.ok * 10; S.points += pts; save();
+    var pts = quiz.ok * 10; S.points += pts; (S.hist = S.hist || []).push(r(globalScore()));
+    var d = new Date(), today = d.toISOString().slice(0, 10), yday = new Date(d.getTime() - 864e5).toISOString().slice(0, 10);
+    if (S.last !== today) { S.streak = S.last === yday ? (S.streak || 0) + 1 : 1; S.last = today; }
+    save();
     var missed = quiz.log.filter(function (e) { return !e.ok; });
     var h = '<div class="qtop"><button class="linkbtn" type="button" id="back">‹ Retour aux thèmes</button><p class="eyebrow">' + esc(set.title) + "</p></div>" +
       '<div class="res"><div class="big">' + quiz.ok + "<small>/" + n + "</small></div><p class=\"cap\" style=\"margin:0\">" + pts + " points gagnés</p></div>" +
@@ -480,11 +489,31 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
     window.scrollTo(0, 0);
   }
 
+  /* ---------- Bienvenue ---------- */
+  function genCode() { var a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = ""; for (var i = 0; i < 6; i++) { s += a.charAt(Math.floor(Math.random() * a.length)); if (i === 2) s += "-"; } return s; }
+  function renderWelcome() {
+    var sv = ["UGA", "UGO", "Médecine", "SMR", "Autre service"].map(function (x) { return "<option>" + x + "</option>"; }).join("");
+    $("v-welcome").innerHTML = '<p class="eyebrow">Visite de certification · préparation</p><h1>Objectif<br>CertiF</h1>' +
+      '<p class="lede">Des quiz de trois minutes, un thème à la fois, pour arriver prêt le jour de la visite. Créez votre profil pour suivre votre progression.</p>' +
+      '<form id="wf" class="wform"><div class="field"><label for="wp">Choisissez un pseudo</label><input id="wp" maxlength="20" autocomplete="off" required placeholder="Ex. : Cyclope42"></div>' +
+      '<div class="field"><label for="ws">Votre service</label><select id="ws">' + sv + '</select></div>' +
+      '<p class="note">Ni nom ni matricule. Ne saisissez aucune donnée de patient. Votre profil reste enregistré sur ce téléphone.</p>' +
+      '<div class="actions"><button class="btn" type="submit">Commencer</button></div></form>' +
+      '<p class="note"><button class="linkbtn" id="demo" type="button" style="color:var(--ink)">Voir la maquette avec des exemples</button></p>';
+    $("wf").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var p = $("wp").value.trim(); if (!p) return;
+      S = clone(FRESH); S.pseudo = p; S.service = $("ws").value; S.code = genCode(); S.onboarded = true; save(); show("play");
+    });
+    $("demo").addEventListener("click", function () { S = clone(DEMO); save(); show("play"); });
+  }
+
   /* ---------- Navigation ---------- */
   function show(name) {
     tab = name;
-    ["play", "me", "team", "quiz"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
-    $("tabs").hidden = name === "quiz";
+    ["play", "me", "team", "quiz", "welcome"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
+    $("tabs").hidden = name === "quiz" || name === "welcome";
+    if (name === "welcome") renderWelcome();
     if (name === "play") renderPlay();
     if (name === "me") renderMe();
     if (name === "team") renderTeam();
@@ -502,9 +531,9 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
     if (id === "hygiene") startQuiz("hygiene");
     else toast("Questions à rédiger pour ce thème, à partir des fiches pédagogiques HAS.");
   });
-  $("reset").addEventListener("click", function () { S = clone(SEED); save(); quiz = null; show("play"); toast("Exemple remis à zéro."); });
+  $("reset").addEventListener("click", function () { S = clone(FRESH); save(); quiz = null; show("welcome"); toast("Profil effacé."); });
 
   var start = { jouer: "play", score: "me", equipe: "team" }[(location.hash || "").replace("#", "")] || "play";
-  show(start);
+  show(S.onboarded ? start : "welcome");
 })();
 </script>
