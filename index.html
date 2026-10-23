@@ -92,7 +92,7 @@ h3 { font-size: 20px; text-transform: uppercase; letter-spacing: .01em; }
 .pct em.good { color: var(--good); } .pct em.warn { color: var(--warn); } .pct em.bad { color: var(--bad); }
 .row .bar { grid-column: 1 / -1; }
 nav.tabs { position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); z-index: 5; }
-nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
+nav.tabs .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
 .tab { background: none; border: 0; padding: 10px 4px 9px; display: grid; justify-items: center; gap: 3px; font-size: 13px; color: var(--ink-2); font-weight: 700; border-top: 3px solid transparent; margin-top: -1px; }
 .tab svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .tab[aria-current="page"] { color: var(--ink); border-top-color: var(--accent); }
@@ -185,12 +185,24 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
 .field select { border: 1px solid var(--ink-2); background: var(--surface); border-radius: 8px; padding: 12px; min-height: 48px; max-width: 320px; }
 .wform { margin-top: 24px; max-width: 420px; }
 #v-welcome { padding-top: 24px; }
+button.chip:hover { border-color: var(--ink); }
+.chip small { color: var(--ink-2); font-size: 12px; text-decoration: underline; }
+.head2 { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.qset { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; width: 100%; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin-top: 8px; min-height: 56px; }
+.qset:hover { border-color: var(--ink); }
+.qset b { font-size: 16px; }
+.qset span { display: block; font-size: 13px; color: var(--ink-2); }
+.qset i { font-style: normal; font-weight: 700; font-size: 13px; background: var(--accent); color: var(--on-accent); padding: 4px 12px; border-radius: 999px; }
+.qth { margin-top: 20px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.qth b { font-size: 17px; }
+.soon { margin: 8px 0 0; font-size: 13px; color: var(--ink-2); }
 </style>
 
 <div class="band"><div class="wrap"><span><b>Maquette</b> · la vue Équipe affiche des données d’exemple</span><button class="linkbtn" id="reset" type="button">Effacer mon profil</button></div></div>
 
 <main class="app wrap" id="app">
   <section id="v-play" aria-label="Jouer"></section>
+  <section id="v-lib" aria-label="Tous les quiz" hidden></section>
   <section id="v-me" aria-label="Mon score" hidden></section>
   <section id="v-team" aria-label="Équipe" hidden></section>
   <section id="v-quiz" class="quiz" aria-label="Quiz" hidden></section>
@@ -200,6 +212,7 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
 <nav class="tabs" id="tabs" aria-label="Navigation">
   <div class="wrap">
     <button class="tab" data-tab="play" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>Jouer</button>
+    <button class="tab" data-tab="lib" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11"/></svg>Quiz</button>
     <button class="tab" data-tab="me" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 5-7"/></svg>Mon score</button>
     <button class="tab" data-tab="team" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18.5 14c1.5.7 2.5 2.3 2.5 5"/></svg>Équipe</button>
   </div>
@@ -237,7 +250,7 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
   /* Quiz jouables dans la maquette. */
   var QUIZ = {
     hygiene: {
-      title: "Hygiène des mains",
+      th: "hygiene", title: "Hygiène des mains",
       questions: [
         { theme: "hygiene", q: "La friction hydro-alcoolique est la méthode à privilégier. Dans quelle situation lave-t-on les mains à l’eau et au savon ?",
           opts: ["Avant un geste aseptique", "Prise en charge d’un patient porteur de Clostridioides difficile ou de la gale", "Après un contact avec l’environnement du patient", "Après le retrait des gants"], ok: 1,
@@ -251,6 +264,94 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
         { theme: "hygiene", q: "Quelles précautions s’appliquent pour tout soin, tout patient et en tout lieu, quel que soit son statut infectieux ?",
           opts: ["Les précautions complémentaires contact", "Les précautions gouttelettes", "Les précautions standard", "Les précautions air"], ok: 2,
           why: "Les précautions standard sont le socle. Les précautions complémentaires s’y ajoutent selon le micro-organisme, sur prescription ou protocole, et l’information donnée au patient est tracée dans le dossier.", src: "Mémo CertiF p. 4 · critères 2.2-08 et 2.2-09" }
+      ]
+    },
+    hygiene2: {
+      th: "hygiene", title: "Excreta, AES et EPI",
+      questions: [
+        { theme: "hygiene", q: "Sans sac de recueil à usage unique, que fait-on d’un bassin plein ?",
+          opts: ["On le rince au lavabo avant le lave-bassin", "On le transporte avec un couvercle et on le dépose plein dans le lave-bassin, sans rinçage", "On le vide dans les toilettes puis on le lave à la main", "On le laisse dans la chambre jusqu’à la fin du tour"], ok: 1,
+          why: "Ni manipulation ni rinçage : risque d’aérosolisation et de contamination de l’environnement.", src: "Fiche HAS IAS p. 2 · critère 2.2-08" },
+        { theme: "hygiene", q: "Que porte-t-on pour gérer des excreta ?",
+          opts: ["Des gants de soins et une protection de la tenue, avec hygiène des mains au retrait des gants", "Rien si les mains sont propres", "Un masque seul", "Des gants, puis friction seulement avant le geste suivant"], ok: 0,
+          why: "Les selles sont le principal réservoir de bactéries résistantes d’origine digestive : gants, protection de la tenue, puis hygiène des mains au retrait des gants.", src: "Fiche HAS IAS p. 2 · critère 2.2-08" },
+        { theme: "hygiene", q: "Après usage d’un objet perforant à usage unique, que faut-il faire ?",
+          opts: ["Recapuchonner l’aiguille avant de la jeter", "Le jeter immédiatement dans un conteneur adapté, au plus près du soin, sans dépose intermédiaire", "Désadapter l’aiguille à la main", "Le poser sur le plateau et le jeter en fin de soin"], ok: 1,
+          why: "Ne pas recapuchonner, plier, casser ni désadapter à la main. Même règle avec du matériel sécurisé.", src: "Fiche HAS IAS p. 4 · critère 2.2-08" },
+        { theme: "hygiene", q: "Où doit se trouver la conduite à tenir en cas d’accident d’exposition au sang ?",
+          opts: ["Chez la cadre de santé uniquement", "Formalisée, actualisée et accessible à tous les intervenants dans les lieux de soins", "Dans le dossier de chaque patient", "Au service de santé au travail uniquement"], ok: 1,
+          why: "Les experts-visiteurs demandent aux professionnels où la trouver et ce qu’il faut faire en cas de piqûre, coupure ou projection.", src: "Fiche HAS IAS p. 4 et 8 · critère 2.2-08" }
+      ]
+    },
+    hygiene3: {
+      th: "hygiene", title: "Précautions complémentaires et dispositifs invasifs",
+      questions: [
+        { theme: "hygiene", q: "Pour quel patient met-on en place des précautions Contact ?",
+          opts: ["Un patient grippé", "Un patient tuberculeux", "Un patient atteint de gale ou de Clostridioides difficile", "Un patient atteint de rougeole"], ok: 2,
+          why: "Les précautions Contact visent les pathologies transmissibles par contact (BMR, C. difficile, gale). Grippe, tuberculose et rougeole relèvent des précautions respiratoires.", src: "Fiche HAS IAS p. 5 · critère 2.2-09" },
+        { theme: "hygiene", q: "Que doit-on tracer dans le dossier d’un patient en précautions complémentaires ?",
+          opts: ["L’information donnée au patient", "Rien, tout se dit à l’oral", "Uniquement la durée de l’isolement", "Uniquement le nom du micro-organisme"], ok: 0,
+          why: "Les précautions font l’objet d’une prescription médicale ou d’un protocole validé, et l’information du patient est tracée.", src: "Fiche HAS IAS p. 5 · critère 2.2-09" },
+        { theme: "hygiene", q: "Quand lève-t-on des précautions complémentaires ?",
+          opts: ["À la sortie du patient", "Dès qu’elles ne sont plus justifiées, après réévaluation", "Toujours après 7 jours", "Seulement si le patient le demande"], ok: 1,
+          why: "Les mesures sont réévaluées et levées dès qu’elles ne sont plus justifiées.", src: "Fiche HAS IAS p. 5 · critère 2.2-09" },
+        { theme: "hygiene", q: "Un patient est porteur d’un dispositif invasif. Que doit-on retrouver dans son dossier ?",
+          opts: ["Le nom du fabricant du dispositif", "La date de pose, la surveillance et la réévaluation de la pertinence du maintien", "Rien si le dispositif est récent", "Seulement la date de retrait"], ok: 1,
+          why: "Cathéters, sondes urinaires et assistance ventilatoire : le maintien est réévalué régulièrement pour limiter un risque infectieux évitable.", src: "Fiche HAS IAS p. 6 · critère 2.2-10" },
+        { theme: "hygiene", q: "Quel est le sur-risque d’infection urinaire chez un patient sondé ?",
+          opts: ["Environ 2 fois plus", "Environ 5 fois plus", "Environ 10 fois plus", "Aucun sur-risque"], ok: 1,
+          why: "Les infections urinaires sont les principales infections associées aux soins en France ; les patients sondés ont 5 fois plus de risque que les non sondés.", src: "Fiche HAS IAS p. 6 · critère 2.2-10" }
+      ]
+    },
+    douleur1: {
+      th: "douleur", title: "Définitions et types de douleur",
+      questions: [
+        { theme: "douleur", q: "Selon l’IASP, à partir de quelle durée une douleur est-elle dite chronique ?",
+          opts: ["Plus d’1 mois", "Plus de 6 semaines", "Plus de 3 mois", "Plus d’1 an"], ok: 2,
+          why: "Une douleur chronique persiste ou se reproduit plus de 3 mois. La douleur aiguë dure en général moins de 6 semaines chez l’adulte.", src: "Fiche HAS Douleur p. 2 · critère 1.1-05" },
+        { theme: "douleur", q: "Une douleur ne répond pas aux traitements habituels bien conduits. Que faire ?",
+          opts: ["Augmenter les doses jusqu’au soulagement", "Contacter une structure spécialisée (CLUD, centre de la douleur)", "Conclure qu’elle est psychogène", "Attendre la fin de l’hospitalisation"], ok: 1,
+          why: "C’est une douleur rebelle. Des solutions existent souvent, avec une prise en charge pluriprofessionnelle. Les professionnels doivent savoir qui contacter.", src: "Fiche HAS Douleur p. 2 et 4 · critères 1.1-05, 2.1-03" },
+        { theme: "douleur", q: "Un patient ne peut pas s’exprimer verbalement. Peut-il ressentir de la douleur ?",
+          opts: ["Non, sans plainte il n’y a pas de douleur", "Oui : l’incapacité à communiquer n’exclut pas la douleur", "Seulement s’il est âgé", "Seulement si un proche le confirme"], ok: 1,
+          why: "La description verbale n’est qu’un des comportements d’expression de la douleur. Les équipes observent aussi les attitudes et signes algiques.", src: "Fiche HAS Douleur p. 2-3 · critère 1.1-05" },
+        { theme: "douleur", q: "Pansements, pose de sonde, mobilisation : que fait-on des situations qui provoquent une douleur liée aux soins ?",
+          opts: ["On les considère comme inévitables", "On les identifie pour mettre en place des protocoles de prévention", "On les traite seulement si le patient le demande", "On les signale uniquement au médecin"], ok: 1,
+          why: "Ces situations sont anticipées, par exemple par une prise d’antalgique avant le soin.", src: "Fiche HAS Douleur p. 2-3 · critère 1.1-05" }
+      ]
+    },
+    douleur2: {
+      th: "douleur", title: "Évaluer la douleur",
+      questions: [
+        { theme: "douleur", q: "Quand évalue-t-on l’intensité de la douleur pour la première fois ?",
+          opts: ["Dès l’arrivée du patient", "Après 24 heures", "À la première plainte", "Avant la sortie"], ok: 0,
+          why: "Dès l’arrivée, avec une échelle validée adaptée à l’âge et à l’état cognitif, et l’évaluation est tracée dans le dossier.", src: "Fiche HAS Douleur p. 3 · critère 1.1-05" },
+        { theme: "douleur", q: "Quel type d’échelle pour un patient qui ne peut pas s’auto-évaluer ?",
+          opts: ["Une échelle visuelle analogique", "Une échelle comportementale (hétéro-évaluation), par exemple Algoplus", "Aucune échelle, le jugement suffit", "Une échelle verbale simple"], ok: 1,
+          why: "L’échelle doit être adaptée à l’âge et à l’état cognitif. Pour un patient non communicant, on observe son comportement.", src: "Fiche HAS Douleur p. 3 · critère 1.1-05" },
+        { theme: "douleur", q: "Au-delà de l’intensité, qu’évalue-t-on aussi ?",
+          opts: ["La fréquence et la chronicité, et on recherche la cause", "Uniquement le moment de la journée", "La satisfaction du patient", "Le coût du traitement"], ok: 0,
+          why: "On recherche aussi la cause (lésionnelle, psychogène…), on informe et on rassure le patient.", src: "Fiche HAS Douleur p. 3 · critère 1.1-05" },
+        { theme: "douleur", q: "Lors de l’examen somatique d’un patient hospitalisé en psychiatrie, que dit le référentiel de la douleur ?",
+          opts: ["Elle est évaluée seulement si le patient est calme", "Une attention particulière lui est portée, quel que soit l’état du patient", "Elle ne concerne pas la psychiatrie", "Elle est évaluée uniquement par le psychiatre"], ok: 1,
+          why: "La douleur est mesurée et tracée lors de l’examen et du suivi somatique.", src: "Fiche HAS Douleur p. 3 et 6 · critère 2.1-12" }
+      ]
+    },
+    douleur3: {
+      th: "douleur", title: "Prendre en charge et réévaluer",
+      questions: [
+        { theme: "douleur", q: "Que doit comporter une prescription conditionnelle d’antalgique ?",
+          opts: ["Une valeur seuil qui déclenche l’administration", "Le nom de l’infirmier qui administrera", "Seulement la dose maximale", "Aucune précision"], ok: 0,
+          why: "Une prescription conditionnelle est à dose variable selon l’évaluation d’un ou plusieurs paramètres. Les experts-visiteurs demandent comment le seuil est mentionné.", src: "Fiche HAS Douleur p. 4 et 6 · critère 2.2-02" },
+        { theme: "douleur", q: "Prescription conditionnelle : le seuil n’est pas atteint, donc pas d’administration. Faut-il tracer la non-administration ?",
+          opts: ["Oui, toujours", "Non : l’évaluation sous le seuil suffit à la justifier"], ok: 1,
+          why: "Il est inutile de tracer la non-administration, mais l’évaluation de la douleur doit être tracée.", src: "Fiche HAS Douleur p. 4 · critère 2.2-02" },
+        { theme: "douleur", q: "La douleur persiste malgré le traitement. Que fait l’équipe ?",
+          opts: ["Elle attend le prochain tour", "Elle réévalue l’intensité, adapte le traitement et réinterroge la cause", "Elle arrête les antalgiques", "Elle considère que le patient exagère"], ok: 1,
+          why: "Les réévaluations sont tracées dans le dossier. L’efficacité des traitements est objectivée par la réévaluation.", src: "Fiche HAS Douleur p. 4 · critère 1.1-05" },
+        { theme: "douleur", q: "Lequel de ces moyens est un traitement non médicamenteux de la douleur cité par la HAS ?",
+          opts: ["Le tramadol", "L’hypnose", "La morphine", "Le paracétamol"], ok: 1,
+          why: "Parmi les exemples : musicothérapie, hypnose, relaxation, cryothérapie, thermothérapie, toucher relationnel, réalité virtuelle. À proposer quand c’est pertinent et possible.", src: "Fiche HAS Douleur p. 4 · critère 1.3-03" }
       ]
     },
     defi: {
@@ -271,6 +372,8 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
       ]
     }
   };
+
+  function setsOf(id) { return Object.keys(QUIZ).filter(function (k) { return QUIZ[k].th === id; }); }
 
   var DEMO = {
     pseudo: "Cyclope42", service: "UGA", code: "7K2-QM9", onboarded: true, hist: [49, 52, 55, 58, 61, 63], points: 1240, streak: 4,
@@ -313,6 +416,8 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
   function levelLabel(v) { return v >= 80 ? "Solide" : v >= 60 ? "À consolider" : "À revoir"; }
   function r(v) { return Math.round(v); }
   function answered() { return Object.keys(S.counters).reduce(function (n, k) { return n + S.counters[k][1]; }, 0); }
+  function chipHtml() { return '<button class="chip" type="button" data-switch aria-label="Profil ' + esc(S.pseudo) + ', changer de profil"><i aria-hidden="true">' + initials() + "</i>" + esc(S.pseudo) + " <small>Changer</small></button>"; }
+  function switchProfile() { save(); S = clone(FRESH); save(); show("welcome"); }
   function initials() { var p = (S.pseudo || "?").trim(); return esc((p.charAt(0) || "?").toUpperCase()); }
 
   var toastTimer;
@@ -343,7 +448,7 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
       return "<div><span>" + CHAPTERS[c] + "</span><b>" + (v === null ? "–" : r(v) + " %") + '</b><div class="bar ' + (v === null ? "" : level(v)) + '"><span style="width:' + (v === null ? 0 : r(v)) + '%"></span></div></div>';
     }).join("");
     var h = '<div class="head"><div><p class="eyebrow">Visite de certification · préparation</p><h1>Objectif<br>CertiF</h1></div>' +
-      '<span class="chip"><i aria-hidden="true">' + initials() + "</i>" + esc(S.pseudo) + "</span></div>" +
+      chipHtml() + "</div>" +
       '<p class="lede">Des quiz de trois minutes, un thème à la fois, pour arriver prêt le jour de la visite.</p>' +
       '<div class="score"><div><div class="big">' + (g === null ? "–" : r(g)) + "<small>%</small></div>" +
       '<p class="cap">Score global · cible 100 %</p></div><div class="chmini">' + chm + "</div></div>" +
@@ -355,8 +460,25 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
     });
     h += '<p class="note">' + THEMES.length + " thèmes issus du référentiel HAS 2027. Ils couvrent " + nImp + " des " + IMPERATIFS_TOTAL +
       " critères impératifs (soulignés ci-dessus). Les autres concernent des secteurs que l’unité n’a pas : bloc, maternité, psychiatrie, mineurs.</p>" +
-      '<p class="note">Dans la maquette, seuls le défi du jour et « Hygiène et risque infectieux » se jouent. Le score d’un thème est le nombre de bonnes réponses divisé par le nombre de réponses, comme dans la cotation de la HAS.</p>';
+      '<p class="note">Les quiz Douleur et Hygiène sont jouables, rassemblés dans l’onglet Quiz. Les autres thèmes arrivent. Le score d’un thème est le nombre de bonnes réponses divisé par le nombre de réponses, comme dans la cotation de la HAS.</p>';
     $("v-play").innerHTML = h;
+  }
+
+  /* ---------- Tous les quiz ---------- */
+  function renderLib() {
+    var h = '<div class="head2"><h2>Tous les quiz</h2>' + chipHtml() + '</div><p class="lede">Choisissez un thème, puis le quiz à jouer. Comptez environ trois minutes par quiz.</p>' +
+      '<button class="qset" type="button" data-quiz="defi"><div><b>Défi du jour</b><span>4 questions · 4 thèmes</span></div><i>Jouer</i></button>';
+    [1, 2, 3].forEach(function (c) {
+      h += '<div class="sect" style="--c:var(--c' + c + ')"><div class="sect-head"><h3>Chapitre ' + c + " · " + CHAPTERS[c] + "</h3></div>";
+      THEMES.filter(function (t) { return t.ch === c; }).forEach(function (t) {
+        var ks = setsOf(t.id), p = pct(t.id);
+        h += '<div class="qth" id="lib-' + t.id + '"><b>' + esc(t.name) + '</b><span class="refs">' + (p === null ? "" : r(p) + " %") + "</span></div>";
+        if (!ks.length) h += '<p class="soon">Quiz à venir.</p>';
+        ks.forEach(function (k) { var q = QUIZ[k]; h += '<button class="qset" type="button" data-quiz="' + k + '"><div><b>' + esc(q.title) + "</b><span>" + q.questions.length + " questions</span></div><i>Jouer</i></button>"; });
+      });
+      h += "</div>";
+    });
+    $("v-lib").innerHTML = h;
   }
 
   /* ---------- Mon score ---------- */
@@ -384,7 +506,7 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
   function renderMe() {
     var g = globalScore();
     var low = THEMES.filter(function (t) { return pct(t.id) !== null; }).sort(function (a, b) { return pct(a.id) - pct(b.id); }).slice(0, 3);
-    var h = '<h2>Mon score</h2><p class="lede">Votre progression reste attachée à un pseudo. Aucun nom ni matricule n’est demandé.</p>' +
+    var h = '<div class="head2"><h2>Mon score</h2>' + chipHtml() + '</div><p class="lede">Votre progression reste attachée à un pseudo. Aucun nom ni matricule n’est demandé.</p>' +
       '<div class="stats"><div class="stat"><b>' + S.points.toLocaleString("fr-FR") + "</b><span>points</span></div>" +
       '<div class="stat"><b>' + answered() + "</b><span>réponses données</span></div>" +
       '<div class="stat"><b>' + S.streak + "</b><span>jours de suite</span></div></div>" +
@@ -525,10 +647,11 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
   /* ---------- Navigation ---------- */
   function show(name) {
     tab = name;
-    ["play", "me", "team", "quiz", "welcome"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
+    ["play", "lib", "me", "team", "quiz", "welcome"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
     $("tabs").hidden = name === "quiz" || name === "welcome";
     if (name === "welcome") renderWelcome();
     if (name === "play") renderPlay();
+    if (name === "lib") renderLib();
     if (name === "me") renderMe();
     if (name === "team") renderTeam();
     Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (b) {
@@ -537,18 +660,21 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
     if (name !== "quiz") window.scrollTo(0, 0);
   }
   document.addEventListener("click", function (e) {
-    var t = e.target.closest ? e.target.closest("[data-tab],[data-theme-id],#go-defi") : null;
+    var t = e.target.closest ? e.target.closest("[data-tab],[data-theme-id],[data-switch],[data-quiz],#go-defi") : null;
     if (!t) return;
+    if (t.hasAttribute("data-switch")) { switchProfile(); return; }
+    if (t.hasAttribute("data-quiz")) { startQuiz(t.getAttribute("data-quiz")); return; }
     if (t.hasAttribute("data-tab")) { show(t.getAttribute("data-tab")); return; }
     if (t.id === "go-defi") { startQuiz("defi"); return; }
-    var id = t.getAttribute("data-theme-id");
-    if (id === "hygiene") startQuiz("hygiene");
-    else toast("Questions à rédiger pour ce thème, à partir des fiches pédagogiques HAS.");
+    var id = t.getAttribute("data-theme-id"), ks = setsOf(id);
+    if (ks.length === 1) startQuiz(ks[0]);
+    else if (ks.length) { show("lib"); var el = $("lib-" + id); if (el) el.scrollIntoView(); }
+    else toast("Quiz à venir pour ce thème.");
   });
   $("reset").addEventListener("click", function () { try { var P = profiles(); delete P[S.code]; localStorage.setItem(KEY + "-profils", JSON.stringify(P)); } catch (e) {}
     S = clone(FRESH); save(); quiz = null; show("welcome"); toast("Profil effacé."); });
 
-  var start = { jouer: "play", score: "me", equipe: "team" }[(location.hash || "").replace("#", "")] || "play";
+  var start = { jouer: "play", quiz: "lib", score: "me", equipe: "team" }[(location.hash || "").replace("#", "")] || "play";
   show(S.onboarded ? start : "welcome");
 })();
 </script>
