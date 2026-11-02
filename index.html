@@ -303,6 +303,112 @@ button.chip:hover { border-color: var(--ink); }
           why: "Les infections urinaires sont les principales infections associées aux soins en France ; les patients sondés ont 5 fois plus de risque que les non sondés.", src: "Fiche HAS IAS p. 6 · critère 2.2-10" }
       ]
     },
+    hygiene4: {
+      th: "hygiene", title: "Les repères IAS",
+      questions: [
+        { theme: "hygiene", q: "Laquelle de ces situations n’est PAS une des 5 indications de l’hygiène des mains ?",
+          opts: ["Après un risque d’exposition à un liquide biologique", "Avant un geste aseptique", "Après un contact avec l’environnement du patient", "Avant de saisir une prescription sur l’ordinateur du poste de soins"], ok: 3,
+          why: "Les 5 indications : avant et après contact avec le patient, avant un geste aseptique, après un risque d’exposition à un liquide biologique, après un contact avec l’environnement du patient.", src: "Fiche HAS IAS pp. 2-3 · critère 2.2-08" },
+        { theme: "hygiene", q: "Où les solutions hydro-alcooliques doivent-elles être disponibles ?",
+          opts: ["Uniquement dans la salle de soins", "Dans les salles de soins, sur les chariots de soins, à la sortie des chambres", "Uniquement à l’entrée du service", "Seulement sur demande à la pharmacie"], ok: 1,
+          why: "Les SHA sont accessibles au plus près du soin. Il faut aussi informer les patients de la nécessité de les utiliser.", src: "Fiche HAS IAS p. 3 · critère 2.2-08" },
+        { theme: "hygiene", q: "Qu’est-ce qu’une infection associée aux soins (IAS) ?",
+          opts: ["Une infection déjà présente à l’arrivée du patient", "Une infection survenant au cours ou au décours d’une prise en charge, ni présente ni en incubation au début", "Une infection transmise uniquement par les soignants", "Une infection contractée uniquement après 48 heures d’hospitalisation"], ok: 1,
+          why: "Elle survient au cours ou au décours d’une prise en charge diagnostique, thérapeutique, palliative, préventive ou éducative. On parle de nosocomiale si elle est contractée en établissement de santé.", src: "Fiche HAS IAS p. 2" }
+      ]
+    },
+    medic1: {
+      th: "medic", title: "Prescription et conciliation",
+      questions: [
+        { theme: "medic", q: "À l’entrée d’un patient, que doit faire le médecin de son traitement habituel ?",
+          opts: ["Le recopier tel quel", "L’analyser systématiquement pour décider de le poursuivre, le modifier ou l’arrêter", "L’ignorer et prescrire un traitement neuf", "Laisser l’infirmier décider"], ok: 1,
+          why: "Le traitement habituel est intégré à la prescription après analyse systématique par le médecin : poursuivre, modifier ou arrêter.", src: "Fiche HAS médicament p. 3 · critère 2.2-02" },
+        { theme: "medic", q: "Une prescription conditionnelle (« si douleur », « si nausées ») doit comporter :",
+          opts: ["Rien de plus, l’infirmier juge", "Une condition de déclenchement explicite (seuil ou signe clinique), un nombre maximal d’administrations par 24 h, un intervalle entre deux prises et une durée maximale", "Seulement le nom du médicament", "L’accord oral de la famille"], ok: 1,
+          why: "La condition est explicite (valeur seuil ou signe clinique) et la prescription précise le maximum par 24 h, l’intervalle entre 2 prises et la durée maximale du traitement.", src: "Fiche HAS médicament p. 3 · critère 2.2-02" },
+        { theme: "medic", q: "Dans quel cas accepte-t-on une prescription orale ?",
+          opts: ["Dès que le médecin est pressé", "Exceptionnellement, en urgence, dans l’attente de l’arrivée imminente du prescripteur", "La nuit, par habitude", "Jamais, même en urgence"], ok: 1,
+          why: "La prescription orale reste exceptionnelle. Elle est écrite et contresignée par le médecin le plus tôt possible.", src: "Fiche HAS médicament p. 3 · critère 2.2-02" },
+        { theme: "medic", q: "Combien de sources d’information faut-il consulter au minimum pour une conciliation des traitements médicamenteux ?",
+          opts: ["Une seule", "Deux", "Trois différentes, dont l’entretien avec le patient ou son entourage", "Cinq"], ok: 2,
+          why: "Au moins trois sources différentes (entretien patient, prescriptions, dossier patient, officine), avec rencontre du patient ou de son entourage et échange médico-pharmaceutique.", src: "Fiche HAS médicament p. 5 · critère 2.1-04" },
+        { theme: "medic", q: "Pour quels patients la conciliation est-elle prioritaire ?",
+          opts: ["Les patients polymédicamentés et les patients âgés, notamment", "Uniquement les patients en chirurgie", "Les patients sans traitement habituel", "Aucun en particulier"], ok: 0,
+          why: "Elle cible les profils les plus à risque : patients polymédicamentés, patients âgés, patients sous chimiothérapie ou dialysés. Le public d’une UGA est donc concerné au premier chef.", src: "Fiche HAS médicament p. 5 · critère 2.1-04" },
+        { theme: "medic", q: "Vrai ou faux : le bilan médicamenteux est une ordonnance.",
+          opts: ["Vrai", "Faux"], ok: 1,
+          why: "Le bilan médicamenteux n’est ni une prescription ni une ordonnance. C’est la liste exhaustive des médicaments pris ou à prendre, y compris l’automédication. Il doit être dans le dossier et intégré à la lettre de liaison.", src: "Fiche HAS médicament p. 5 · critère 2.1-04" }
+      ]
+    },
+    medic2: {
+      th: "medic", title: "Préparer et administrer",
+      questions: [
+        { theme: "medic", q: "Que recouvre la règle des « 5B » ?",
+          opts: ["Le bon médicament, au bon patient, à la bonne dose, par la bonne voie, au bon moment", "Bon médecin, bon service, bon lit, bonne heure, bon stock", "Bonne prescription, bonne pharmacie, bonne armoire, bon chariot, bon pilulier", "Bonne dose, bonne durée, bon prix, bon fabricant, bon emballage"], ok: 0,
+          why: "Les 5B sont la base de la vérification avant administration : concordance entre la prescription, le produit et le patient.", src: "Fiche HAS médicament pp. 1 et 8 · critère 2.2-05" },
+        { theme: "medic", q: "Où et quand prépare-t-on un médicament à administrer ?",
+          opts: ["Dans le couloir, plusieurs heures avant le tour", "Dans une zone de préparation identifiée et indépendante, le plus près possible de l’administration", "Au poste de soins, pour tous les patients d’un coup, en début de poste", "Dans la chambre du patient précédent"], ok: 1,
+          why: "Zone de préparation identifiée, adaptée, indépendante, respectant l’hygiène, et délai de préparation proche de l’administration.", src: "Fiche HAS médicament p. 8 · critère 2.2-05" },
+        { theme: "medic", q: "Pendant la préparation des médicaments, quel est le principal facteur de risque à limiter ?",
+          opts: ["Le bruit des chariots", "Les interruptions de tâches", "La température de la salle", "La couleur des étiquettes"], ok: 1,
+          why: "Les professionnels préparent en évitant les interruptions de tâches. Les situations à risque (injectables, pousse-seringue, PCA, multiplicité des préparations) sont identifiées.", src: "Fiche HAS médicament p. 8 · critère 2.2-05" },
+        { theme: "medic", q: "Quand trace-t-on l’administration d’un médicament ?",
+          opts: ["En fin de poste, de mémoire", "Au moment de la prise, et on trace aussi le motif en cas de non-administration", "Le lendemain matin", "Uniquement en cas de problème"], ok: 1,
+          why: "L’administration, ou le motif de non-administration, est tracée dans le dossier au moment de la prise par les professionnels habilités.", src: "Fiche HAS médicament p. 8 · critère 2.2-05" },
+        { theme: "medic", q: "Un stylo injecteur d’insuline peut-il servir à plusieurs patients ?",
+          opts: ["Oui, avec une aiguille neuve", "Non, un stylo pour un seul patient"], ok: 1,
+          why: "Un stylo, un patient. Le stylo ouvert porte l’étiquette patient et la date d’ouverture.", src: "Mémo CertiF p. 26 · critère 2.2-05" },
+        { theme: "medic", q: "Qui est informé du traitement prescrit ?",
+          opts: ["Personne, le patient n’a pas besoin de savoir", "Le patient, tout au long de sa prise en charge, y compris de la nécessité de signaler tout effet indésirable", "Seulement la famille", "Seulement le médecin traitant à la sortie"], ok: 1,
+          why: "Le patient est informé de ses traitements et, en prévision de sa sortie, de la nécessité de signaler tout effet indésirable.", src: "Fiche HAS médicament pp. 3 et 8 · critères 1.2-02, 2.2-02" }
+      ]
+    },
+    medic3: {
+      th: "medic", title: "Stockage et erreurs médicamenteuses",
+      questions: [
+        { theme: "medic", q: "Comment les médicaments sont-ils stockés dans l’unité de soins ?",
+          opts: ["Sur le chariot, porte ouverte", "Dans une armoire fermée à clé ou par un code, au minimum dans une zone non accessible au patient et au public", "Dans les tiroirs de la table de chevet", "Dans le bureau du cadre"], ok: 1,
+          why: "Le stockage est sécurisé : armoire fermée à clé ou par un code, ou au minimum zone fermée non accessible au patient (salle de soins, local pharmacie…).", src: "Fiche HAS médicament p. 8 · critère 2.2-04" },
+        { theme: "medic", q: "Que peut-on ranger dans le réfrigérateur réservé aux médicaments ?",
+          opts: ["Les médicaments et les boissons du service", "Exclusivement des produits pharmaceutiques : ni boissons, ni aliments", "Les médicaments et les repas des soignants", "Les médicaments et les échantillons de laboratoire"], ok: 1,
+          why: "Les équipements de stockage à froid sont exclusivement affectés aux produits pharmaceutiques, avec contrôle de température et système de secours en cas de panne.", src: "Fiche HAS médicament pp. 7-8 · critère 2.2-04" },
+        { theme: "medic", q: "Que fait-on des médicaments périmés ?",
+          opts: ["On les jette dans la poubelle du service", "Ils sont retirés et remis à la pharmacie à usage intérieur pour destruction", "On les garde en réserve", "On les donne au patient à la sortie"], ok: 1,
+          why: "Le retrait des périmés est effectif et ils sont remis à la PUI pour destruction.", src: "Fiche HAS médicament p. 8 · critère 2.2-04" },
+        { theme: "medic", q: "Quelle règle s’applique au rangement des médicaments dans les bacs et tiroirs ?",
+          opts: ["On peut déconditionner pour gagner de la place", "Pas de déconditionnement, contenant identifié par molécule et par dosage, pas de mélange", "On mélange les dosages d’un même médicament", "On range par ordre d’arrivée"], ok: 1,
+          why: "Les erreurs de rangement alimentent les « erreurs de médicament ». Pas de déconditionnement, identification par molécule et par dosage, pas de mélange.", src: "Fiche HAS médicament p. 8 · critère 2.2-04" },
+        { theme: "medic", q: "À quelle étape du circuit surviennent le plus souvent les erreurs médicamenteuses déclarées ?",
+          opts: ["À la prescription", "À la dispensation", "À l’administration", "Au stockage"], ok: 2,
+          why: "65 % surviennent lors de l’administration, 28 % lors de la prescription et 7 % lors de la dispensation. C’est l’étape qui cumule les risques des étapes précédentes.", src: "Fiche HAS médicament p. 10 · critère 2.2-06" },
+        { theme: "medic", q: "Quels sont les 3 types d’erreurs déclarées les plus fréquents ?",
+          opts: ["Erreurs de dose, de médicament, de patient", "Erreurs d’horaire, de couleur, de poids", "Erreurs de pharmacie, de livraison, de facturation", "Erreurs de langue, de lecture, d’écriture"], ok: 0,
+          why: "Erreurs de dose (41 %, souvent un surdosage), de médicament (31 %) et de patient (14 %, identitovigilance). Elles représentent 86 % des erreurs déclarées.", src: "Fiche HAS médicament p. 10 · critère 2.2-06" },
+        { theme: "medic", q: "Que doit connaître chaque professionnel de son service sur les médicaments à risque ?",
+          opts: ["Rien, c’est l’affaire de la pharmacie", "La liste des médicaments à risque de l’unité, établie collégialement, et les moyens de maîtrise associés", "Uniquement les noms des chimiothérapies", "Seulement les dosages"], ok: 1,
+          why: "La liste des médicaments à risque est adaptée à chaque domaine d’activité et connue des professionnels, qui doivent aussi être formés à la prévention du risque médicamenteux.", src: "Fiche HAS médicament p. 10 · critère 2.2-06" }
+      ]
+    },
+    atb1: {
+      th: "sortie", title: "Bon usage des antibiotiques",
+      questions: [
+        { theme: "sortie", q: "Entre quelles heures de traitement la pertinence d’un antibiotique doit-elle être réévaluée et tracée ?",
+          opts: ["Entre la 6e et la 12e heure", "Entre la 24e et la 72e heure", "Après 10 jours", "Seulement à la sortie du patient"], ok: 1,
+          why: "La réévaluation entre la 24e et la 72e heure, tracée dans le dossier, permet de prolonger, d’arrêter ou d’adapter selon les résultats bactériologiques.", src: "Fiche HAS médicament p. 4 · critère 2.4-02" },
+        { theme: "sortie", q: "À partir de quelle durée une prolongation d’antibiotique doit-elle être justifiée dans le dossier ?",
+          opts: ["Au-delà de 3 jours", "Au-delà de 7 jours", "Au-delà de 21 jours", "Jamais besoin de justifier"], ok: 1,
+          why: "Toute prescription d’antibiotique, ou sa prolongation au-delà de 7 jours, est justifiée dans le dossier.", src: "Fiche HAS médicament p. 4 · critère 2.4-02" },
+        { theme: "sortie", q: "Que doit-on retrouver dans le dossier lors de la prescription d’un antibiotique ?",
+          opts: ["Rien de particulier", "L’indication, justifiée par écrit", "Le prix du traitement", "Le nom du fabricant"], ok: 1,
+          why: "L’indication est justifiée dans le dossier lors de l’initiation et de la réévaluation, avec si possible une alerte informatique pour la réévaluation.", src: "Fiche HAS médicament pp. 4 et 13 · critère 2.4-02" },
+        { theme: "sortie", q: "Quel est le rôle du référent en antibiothérapie ?",
+          opts: ["Il prescrit tous les antibiotiques de l’établissement", "Il coordonne le programme de bon usage, avec la pharmacie et la microbiologie, et peut être sollicité par les prescripteurs", "Il remplace le pharmacien", "Il ne s’occupe que des urgences"], ok: 1,
+          why: "Désigné par les représentants légaux, avec un temps dédié, il s’appuie sur des correspondants en antibiothérapie dans les services. Demandez qui est le vôtre.", src: "Fiche HAS médicament p. 4 · critère 2.4-02" },
+        { theme: "sortie", q: "Pourquoi réévaluer systématiquement un antibiotique ?",
+          opts: ["Pour réduire le nombre de prescriptions écrites", "Pour limiter l’antibiorésistance, qui est une priorité", "Pour faire plaisir à la pharmacie", "Parce que l’antibiotique perd son efficacité en 48 h"], ok: 1,
+          why: "Les infections impliquent de plus en plus de bactéries devenues résistantes. La réévaluation limite l’exposition inutile et préserve l’efficacité des antibiotiques.", src: "Fiche HAS médicament p. 4 · critère 2.4-02" }
+      ]
+    },
     douleur1: {
       th: "douleur", title: "Définitions et types de douleur",
       questions: [
@@ -474,7 +580,7 @@ button.chip:hover { border-color: var(--ink); }
         var ks = setsOf(t.id), p = pct(t.id);
         h += '<div class="qth" id="lib-' + t.id + '"><b>' + esc(t.name) + '</b><span class="refs">' + (p === null ? "" : r(p) + " %") + "</span></div>";
         if (!ks.length) h += '<p class="soon">Quiz à venir.</p>';
-        ks.forEach(function (k) { var q = QUIZ[k]; h += '<button class="qset" type="button" data-quiz="' + k + '"><div><b>' + esc(q.title) + "</b><span>" + q.questions.length + " questions</span></div><i>Jouer</i></button>"; });
+        if (ks.length) { var np = poolOf(t.id).length; h += '<button class="qset" type="button" data-quiz="t:' + t.id + '"><div><b>Quiz de ' + Math.min(PICK, np) + ' questions</b><span>Tirées au hasard parmi ' + np + ' · différentes à chaque fois</span></div><i>Jouer</i></button>'; }
       });
       h += "</div>";
     });
@@ -547,14 +653,28 @@ button.chip:hover { border-color: var(--ink); }
   }
 
   /* ---------- Quiz ---------- */
+  function mixQs(list) {
+    return list.map(function (q) {
+      if (q.opts.length < 3) return q;
+      var idx = q.opts.map(function (_, i) { return i; }).sort(function () { return Math.random() - 0.5; });
+      return { theme: q.theme, q: q.q, opts: idx.map(function (i) { return q.opts[i]; }), ok: idx.indexOf(q.ok), why: q.why, src: q.src };
+    });
+  }
+  var PICK = 5;
+  function poolOf(id) { var a = []; setsOf(id).forEach(function (k) { a = a.concat(QUIZ[k].questions); }); return a; }
   function startQuiz(key) {
-    quiz = { key: key, i: 0, picked: null, ok: 0, log: [] };
+    var list, title;
+    if (key.indexOf("t:") === 0) {
+      var id = key.slice(2), pool = poolOf(id).slice().sort(function () { return Math.random() - 0.5; });
+      list = pool.slice(0, PICK); title = BYID[id].name;
+    } else { list = QUIZ[key].questions; title = QUIZ[key].title; }
+    quiz = { key: key, title: title, i: 0, picked: null, ok: 0, log: [], qs: mixQs(list) };
     show("quiz"); renderQuiz(); window.scrollTo(0, 0);
   }
   function renderQuiz() {
-    var set = QUIZ[quiz.key], n = set.questions.length, q = set.questions[quiz.i], th = BYID[q.theme];
-    var segs = set.questions.map(function (_, k) { return '<i class="' + (k < quiz.i || (k === quiz.i && quiz.picked !== null) ? "done" : k === quiz.i ? "now" : "") + '"></i>'; }).join("");
-    var h = '<div class="qtop"><button class="linkbtn" type="button" id="quit">‹ Quitter</button><p class="eyebrow">' + esc(set.title) + " · " + (quiz.i + 1) + " / " + n + "</p></div>" +
+    var set = QUIZ[quiz.key], n = quiz.qs.length, q = quiz.qs[quiz.i], th = BYID[q.theme];
+    var segs = quiz.qs.map(function (_, k) { return '<i class="' + (k < quiz.i || (k === quiz.i && quiz.picked !== null) ? "done" : k === quiz.i ? "now" : "") + '"></i>'; }).join("");
+    var h = '<div class="qtop"><button class="linkbtn" type="button" id="quit">‹ Quitter</button><p class="eyebrow">' + esc(quiz.title) + " · " + (quiz.i + 1) + " / " + n + "</p></div>" +
       '<div class="segs" aria-hidden="true">' + segs + "</div>" +
       '<p class="eyebrow qtheme">' + esc(th.name) + "</p><p class=\"qtext\" id=\"qtext\">" + esc(q.q) + "</p><div class=\"opts\" role=\"group\" aria-labelledby=\"qtext\">";
     q.opts.forEach(function (o, k) {
@@ -589,7 +709,7 @@ button.chip:hover { border-color: var(--ink); }
     });
   }
   function finishQuiz() {
-    var set = QUIZ[quiz.key], n = set.questions.length, touched = {}, before = {};
+    var set = QUIZ[quiz.key], n = quiz.qs.length, touched = {}, before = {};
     quiz.log.forEach(function (e) {
       var id = e.q.theme;
       if (!(id in before)) before[id] = pct(id);
@@ -600,7 +720,7 @@ button.chip:hover { border-color: var(--ink); }
     if (S.last !== today) { S.streak = S.last === yday ? (S.streak || 0) + 1 : 1; S.last = today; }
     save();
     var missed = quiz.log.filter(function (e) { return !e.ok; });
-    var h = '<div class="qtop"><button class="linkbtn" type="button" id="back">‹ Retour aux thèmes</button><p class="eyebrow">' + esc(set.title) + "</p></div>" +
+    var h = '<div class="qtop"><button class="linkbtn" type="button" id="back">‹ Retour aux thèmes</button><p class="eyebrow">' + esc(quiz.title) + "</p></div>" +
       '<div class="res"><div class="big">' + quiz.ok + "<small>/" + n + "</small></div><p class=\"cap\" style=\"margin:0\">" + pts + " points gagnés</p></div>" +
       '<div class="sect"><div class="sect-head"><h3>Effet sur vos thèmes</h3></div>' +
       Object.keys(touched).map(function (id) {
@@ -667,8 +787,7 @@ button.chip:hover { border-color: var(--ink); }
     if (t.hasAttribute("data-tab")) { show(t.getAttribute("data-tab")); return; }
     if (t.id === "go-defi") { startQuiz("defi"); return; }
     var id = t.getAttribute("data-theme-id"), ks = setsOf(id);
-    if (ks.length === 1) startQuiz(ks[0]);
-    else if (ks.length) { show("lib"); var el = $("lib-" + id); if (el) el.scrollIntoView(); }
+    if (ks.length) startQuiz("t:" + id);
     else toast("Quiz à venir pour ce thème.");
   });
   $("reset").addEventListener("click", function () { try { var P = profiles(); delete P[S.code]; localStorage.setItem(KEY + "-profils", JSON.stringify(P)); } catch (e) {}
