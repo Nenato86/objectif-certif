@@ -901,23 +901,6 @@ button.chip:hover { border-color: var(--ink); }
           why: "Parmi les exemples : musicothérapie, hypnose, relaxation, cryothérapie, thermothérapie, toucher relationnel, réalité virtuelle. À proposer quand c’est pertinent et possible.", src: "Fiche HAS Douleur p. 4 · critère 1.3-03" }
       ]
     },
-    defi: {
-      title: "Défi du jour",
-      questions: [
-        { theme: "medic", q: "Un stylo injecteur d’insuline peut-il servir à plusieurs patients ?",
-          opts: ["Oui, avec une aiguille neuve", "Non, un stylo pour un seul patient"], ok: 1,
-          why: "Un stylo, un patient. Le stylo ouvert porte l’étiquette patient et la date d’ouverture, placées en drapeau sans masquer les informations.", src: "Mémo CertiF p. 26 · critère 2.2-05" },
-        { theme: "douleur", q: "Un patient n’a aucun antalgique. À quelle fréquence minimale évaluer sa douleur ?",
-          opts: ["À l’entrée seulement", "Au moins une fois par 24 heures", "Seulement s’il se plaint", "Une fois par semaine"], ok: 1,
-          why: "L’évaluation est tracée avec une échelle adaptée, même si le patient n’est pas douloureux. Avec un antalgique : avant et après chaque administration. Patient non communicant : ALGO+ ou DOLO+.", src: "Mémo CertiF p. 8 · critère 1.1-05" },
-        { theme: "urgences", q: "Un patient fait un arrêt cardiaque. Quelle est la séquence des premiers gestes ?",
-          opts: ["Masser, attendre l’équipe, défibriller", "Installer en PLS, alerter, défibriller", "Alerter, masser et ventiler, défibriller", "Alerter, installer en PLS, ventiler"], ok: 2,
-          why: "Alerter, masser et ventiler, défibriller. La PLS concerne un patient inconscient dont la poitrine se soulève régulièrement.", src: "Mémo CertiF p. 6 · critère 2.2-12" },
-        { theme: "bientraitance", q: "Un patient âgé agité : on relève les deux barrières de son lit. Que faut-il ?",
-          opts: ["Rien, c’est une mesure de sécurité courante", "Une décision médicale, une analyse bénéfices/risques tracée et une réévaluation régulière", "Le seul accord de la famille", "Une décision de l’infirmier, tracée en fin de poste"], ok: 1,
-          why: "Deux barrières ou quatre demi-barrières relevées constituent une privation de liberté. Au-delà d’une mesure ponctuelle, la contention fait l’objet d’une prescription médicale précisant ses modalités, d’une analyse bénéfices/risques tracée et d’une réévaluation. Le patient ou sa personne de confiance est informé.", src: "Mémo CertiF p. 23 · critère 1.1-10" }
-      ]
-    },
     identito1: {
       th: "identito", title: "Vérifier l’identité du patient",
       questions: [
@@ -1658,12 +1641,39 @@ button.chip:hover { border-color: var(--ink); }
   }
   var PICK = 5;
   function poolOf(id) { var a = []; setsOf(id).forEach(function (k) { a = a.concat(QUIZ[k].questions); }); return a; }
+  /* ---------- Défi du jour ----------
+     Tout est calculé à partir de la date et de la banque de questions : rien à mettre à jour quand on ajoute des questions ou des thèmes.
+     - DEFI_START : jour n° 0, identique pour tout le monde (les 4 questions sont les mêmes pour tous, le même jour).
+     - DEFI_THEMES : nombre de thèmes (= de questions) par jour.
+     - Chaque thème sort une fois par « tour ». L'ordre des thèmes est mélangé à chaque tour.
+     - Au tour n, un thème propose sa n-ième question, dans un ordre mélangé qui change quand toutes ont été vues. */
+  var DEFI_START = Date.UTC(2026, 10, 1), DEFI_THEMES = 4;
+  function hash(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function shuffled(arr, seed, keyOf) {
+    return arr.map(function (x) { return [hash(seed + "|" + keyOf(x)), keyOf(x), x]; })
+      .sort(function (a, b) { return a[0] - b[0] || (a[1] < b[1] ? -1 : 1); })
+      .map(function (e) { return e[2]; });
+  }
+  function dailyDefi(date) {
+    var d = date || new Date();
+    var day = Math.round((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - DEFI_START) / 864e5);
+    var ids = THEMES.filter(function (t) { return poolOf(t.id).length; }).map(function (t) { return t.id; });
+    var N = ids.length, per = Math.min(DEFI_THEMES, N), out = [];
+    for (var k = 0; k < per; k++) {
+      var slot = day * per + k, cycle = Math.floor(slot / N), pos = slot - cycle * N;
+      var id = shuffled(ids, "tour" + cycle, function (x) { return x; })[pos];
+      var pool = poolOf(id), round = Math.floor(cycle / pool.length), n = cycle - round * pool.length;
+      out.push(shuffled(pool, id + "|" + round, function (q) { return q.q; })[n]);
+    }
+    return out;
+  }
   function startQuiz(key) {
     var list, title;
     if (key.indexOf("t:") === 0) {
       var id = key.slice(2), pool = poolOf(id).slice().sort(function () { return Math.random() - 0.5; });
       list = pool.slice(0, PICK); title = BYID[id].name;
-    } else { list = QUIZ[key].questions; title = QUIZ[key].title; }
+    } else if (key === "defi") { list = dailyDefi(); title = "Défi du jour"; }
+    else { list = QUIZ[key].questions; title = QUIZ[key].title; }
     quiz = { key: key, title: title, i: 0, picked: null, ok: 0, log: [], qs: mixQs(list) };
     show("quiz"); renderQuiz(); window.scrollTo(0, 0);
   }
