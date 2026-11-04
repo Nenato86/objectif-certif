@@ -39,9 +39,6 @@ button, input { font: inherit; color: inherit; }
 button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 .wrap { width: 100%; max-width: 720px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.band { background: var(--accent); color: var(--on-accent); font-size: 13px; }
-.band .wrap { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; justify-content: space-between; padding-block: 8px; }
-.band b { font-family: var(--f-mono); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
 .linkbtn { background: none; border: 0; padding: 0; text-decoration: underline; color: inherit; font-size: 13px; }
 .app { padding-block: 20px 110px; }
 .eyebrow { font-family: var(--f-mono); font-weight: 500; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin: 0; }
@@ -167,7 +164,6 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
 :root { --bg:#FFF7EA; --surface:#FFFFFF; --ink:#1E1B4B; --ink-2:#5E5A85; --line:#EBDDC6; --track:#F1E6D3; --accent:#FFC233; --on-accent:#1E1B4B; --good:#0B8A5F; --warn:#C45F00; --bad:#D1163F; --good-bg:#DDF7EA; --bad-bg:#FFE3E8; --c1:#FF5A6E; --c2:#0B8F88; --c3:#7C5CFA; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#15133A; --surface:#201D55; --ink:#F4F1FF; --ink-2:#B3AEDB; --line:#37336F; --track:#2B2862; --accent:#FFC233; --on-accent:#1E1B4B; --good:#3DDC97; --warn:#FFB020; --bad:#FF6B86; --good-bg:#12403A; --bad-bg:#4A1D33; --c1:#FF7A8C; --c2:#3FD6CC; --c3:#A48DFF; color-scheme: dark; } }
 :root[data-theme="dark"] { --bg:#15133A; --surface:#201D55; --ink:#F4F1FF; --ink-2:#B3AEDB; --line:#37336F; --track:#2B2862; --accent:#FFC233; --on-accent:#1E1B4B; --good:#3DDC97; --warn:#FFB020; --bad:#FF6B86; --good-bg:#12403A; --bad-bg:#4A1D33; --c1:#FF7A8C; --c2:#3FD6CC; --c3:#A48DFF; color-scheme: dark; }
-.band { background:#1E1B4B; color:#FFE9A8; }
 .sect-head { border-bottom-color: var(--c, var(--ink)); }
 .sect-head h3 { color: var(--c, var(--ink)); }
 .sect-head h3::before { content:""; display:inline-block; width:12px; height:12px; border-radius:50%; background:var(--c, var(--ink)); margin-right:8px; }
@@ -196,9 +192,11 @@ button.chip:hover { border-color: var(--ink); }
 .qth { margin-top: 20px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 .qth b { font-size: 17px; }
 .soon { margin: 8px 0 0; font-size: 13px; color: var(--ink-2); }
+.soon-banner { margin: 0 0 18px; padding: 14px 16px; border-radius: 10px; background: var(--accent); color: var(--on-accent); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; border-left: 8px solid var(--on-accent); }
+.soon-banner b { font-family: var(--f-mono); font-weight: 500; font-size: 16px; letter-spacing: .1em; text-transform: uppercase; }
+.soon-banner span { font-size: 15px; }
 </style>
 
-<div class="band"><div class="wrap"><span><b>Maquette</b> · la vue Équipe affiche des données d’exemple</span><button class="linkbtn" id="reset" type="button">Effacer mon profil</button></div></div>
 
 <main class="app wrap" id="app">
   <section id="v-play" aria-label="Jouer"></section>
@@ -247,7 +245,7 @@ button.chip:hover { border-color: var(--ink); }
   var BYID = {};
   THEMES.forEach(function (t) { BYID[t.id] = t; });
 
-  /* Quiz jouables dans la maquette. */
+  /* Quiz jouables. */
   var QUIZ = {
     hygiene: {
       th: "hygiene", title: "Hygiène des mains",
@@ -1460,12 +1458,6 @@ button.chip:hover { border-color: var(--ink); }
 
   function setsOf(id) { return Object.keys(QUIZ).filter(function (k) { return QUIZ[k].th === id; }); }
 
-  var DEMO = {
-    pseudo: "Cyclope42", service: "UGA", code: "7K2-QM9", onboarded: true, hist: [49, 52, 55, 58, 61, 63], points: 1240, streak: 4,
-    counters: { dignite: [26, 35], bientraitance: [17, 28], douleur: [14, 24], info: [21, 30], age: [19, 29], experience: [12, 25],
-      identito: [30, 37], medic: [34, 54], hygiene: [20, 26], urgences: [11, 20], transfusion: [0, 0], sortie: [18, 26],
-      ei: [16, 27], sse: [8, 18], cyber: [23, 32], equipes: [0, 0] }
-  };
   var FRESH = { pseudo: "", service: "", code: "", onboarded: false, hist: [], points: 0, streak: 0, counters: {} };
   THEMES.forEach(function (t) { FRESH.counters[t.id] = [0, 0]; });
   var SEED = FRESH;
@@ -1606,29 +1598,18 @@ button.chip:hover { border-color: var(--ink); }
   }
 
   /* ---------- Équipe ---------- */
-  var MISSED = [
-    ["Réévaluation d’une antibiothérapie : entre quelle heure et quelle heure ?", "Sortie, nutrition et pertinence", "2.4-02", 68],
-    ["Fréquence minimale d’évaluation de la douleur sans antalgique", "Douleur", "1.1-05", 61],
-    ["Que faut-il pour relever deux barrières de lit ?", "Bientraitance et contention", "1.1-10", 57],
-    ["Que mesure l’ICSHA ?", "Hygiène et risque infectieux", "2.2-08", 44],
-    ["Numéro à appeler en cas d’urgence vitale", "Urgences vitales", "2.2-12", 38]
-  ];
-  var SERVICES = [["UGO", 71, 58], ["UGA", 66, 45], ["Médecine 1", 59, 38], ["SMR", 54, 27]];
-  var TEAMTHEMES = [["Situations sanitaires exceptionnelles", 39], ["Expérience du patient et usagers", 44], ["Douleur", 52], ["Urgences vitales", 54], ["Circuit du médicament", 61]];
   function renderTeam() {
-    var h = '<h2>Équipe</h2><p class="lede">Vue pour les cadres et la direction. Les résultats sont regroupés par service, jamais par personne.</p>' +
-      '<div class="sect"><div class="sect-head"><h3>Participation cette semaine</h3><span>14 sur 31 agents</span></div><div class="bar" style="margin-top:14px"><span style="width:45%"></span></div><p class="note">45 % des agents de l’unité ont joué au moins un quiz.</p></div>' +
-      '<div class="sect"><div class="sect-head"><h3>Thèmes à revoir</h3><span>score du service</span></div>' +
-      TEAMTHEMES.map(function (t) { return '<div class="row" style="cursor:default"><div class="name">' + esc(t[0]) + '</div><div class="pct"><b>' + t[1] + "<small> %</small></b></div><div class=\"bar " + level(t[1]) + '"><span style="width:' + t[1] + '%"></span></div></div>'; }).join("") + "</div>" +
-      '<div class="sect"><div class="sect-head"><h3>Questions les plus ratées</h3><span>% d’erreurs</span></div><div class="scroll"><table class="tbl"><thead><tr><th>Question</th><th class="n">Erreurs</th></tr></thead><tbody>' +
-      MISSED.map(function (m) { return "<tr><td>" + esc(m[0]) + '<br><span class="refs">' + esc(m[1]) + " · " + m[2] + '</span></td><td class="n"><b>' + m[3] + " %</b></td></tr>"; }).join("") + "</tbody></table></div></div>" +
-      '<div class="sect"><div class="sect-head"><h3>Classement des services</h3><span>score · participation</span></div><div class="scroll"><table class="tbl"><thead><tr><th>Service</th><th class="n">Score</th><th class="n">Participation</th></tr></thead><tbody>' +
-      SERVICES.map(function (s) { return "<tr><td><b>" + esc(s[0]) + '</b></td><td class="n">' + s[1] + ' %</td><td class="n">' + s[2] + " %</td></tr>"; }).join("") + "</tbody></table></div></div>" +
-      '<div class="sect"><div class="sect-head"><h3>Défi du point qualité</h3><span>en salle</span></div><div class="room"><div><p class="cap" style="margin:0">Code de la salle, à saisir sur chaque téléphone</p><span class="code">4821</span></div><button class="btn ghost" type="button" id="launch-room">Lancer un défi</button></div>' +
-      '<div class="duel"><div><span>Équipe jour</span><div class="bar"><span style="width:100%"></span></div><b>312</b></div><div><span>Équipe nuit</span><div class="bar"><span style="width:92%"></span></div><b>287</b></div></div>' +
-      '<p class="note">Le classement se joue entre équipes. Il compte la participation et les progrès, pas le niveau de départ.</p></div>';
+    var plan = [
+      ["Participation", "Part des agents du service ayant joué au moins un quiz dans la semaine."],
+      ["Thèmes à revoir", "Les thèmes où le score du service est le plus bas."],
+      ["Questions les plus ratées", "Les questions qui posent le plus de difficultés, pour préparer les points qualité."],
+      ["Classement des services", "Score et participation de chaque service."],
+      ["Défi du point qualité", "Un défi en direct sur les téléphones, joué par équipes en réunion de service."]
+    ];
+    var h = '<div class="soon-banner" role="status"><b>À venir</b><span>Cette vue est en cours de développement. Elle ne contient pas encore de résultats.</span></div>' +
+      '<h2>Équipe</h2><p class="lede">Vue pour les cadres et la direction. Les résultats seront regroupés par service, jamais par personne.</p>' +
+      plan.map(function (x) { return '<div class="sect"><div class="sect-head"><h3>' + esc(x[0]) + '</h3><span>à venir</span></div><p class="note">' + esc(x[1]) + "</p></div>"; }).join("");
     $("v-team").innerHTML = h;
-    var lr = $("launch-room"); if (lr) lr.addEventListener("click", function () { toast("Maquette : le défi en salle sera joué en direct à plusieurs."); });
   }
 
   /* ---------- Quiz ---------- */
@@ -1758,13 +1739,12 @@ button.chip:hover { border-color: var(--ink); }
       '<div class="field"><label for="ws">Votre service</label><select id="ws">' + sv + '</select></div>' +
       '<p class="note">Ni nom ni matricule. Ne saisissez aucune donnée de patient. Votre profil reste enregistré sur ce téléphone.</p>' +
       '<div class="actions"><button class="btn" type="submit">Commencer</button></div></form>' +
-      '<p class="note"><button class="linkbtn" id="demo" type="button" style="color:var(--ink)">Voir la maquette avec des exemples</button></p>';
+
     $("wf").addEventListener("submit", function (e) {
       e.preventDefault();
       var p = $("wp").value.trim(); if (!p) return;
       S = clone(FRESH); S.pseudo = p; S.service = $("ws").value; S.code = genCode(); S.onboarded = true; save(); show("play");
     });
-    $("demo").addEventListener("click", function () { S = clone(DEMO); save(); show("play"); });
     Array.prototype.forEach.call($("v-welcome").querySelectorAll("[data-resume]"), function (b) {
       b.addEventListener("click", function () { var p = profiles()[b.getAttribute("data-resume")]; if (p) { S = clone(p); save(); show("play"); } });
     });
@@ -1796,8 +1776,6 @@ button.chip:hover { border-color: var(--ink); }
     if (ks.length) startQuiz("t:" + id);
     else toast("Quiz à venir pour ce thème.");
   });
-  $("reset").addEventListener("click", function () { try { var P = profiles(); delete P[S.code]; localStorage.setItem(KEY + "-profils", JSON.stringify(P)); } catch (e) {}
-    S = clone(FRESH); save(); quiz = null; show("welcome"); toast("Profil effacé."); });
 
   var start = { jouer: "play", quiz: "lib", score: "me", equipe: "team" }[(location.hash || "").replace("#", "")] || "play";
   show(S.onboarded ? start : "welcome");
