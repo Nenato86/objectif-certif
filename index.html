@@ -1497,6 +1497,116 @@ button.chip:hover { border-color: var(--ink); }
           opts: ["Une erreur de facturation sans conséquence", "L’attribution d’un même IPP à deux personnes différentes : on peut décider au regard des données de santé d’une autre personne", "Une même personne sous deux IPP : un dossier incomplet", "Un patient qui refuse son bracelet"], ok: 1,
           why: "Origines possibles : erreur d’identification primaire (erreur de saisie à l’admission, fiche pompier erronée) ou secondaire (mauvais choix de l’IPP à la création de la venue).", src: "Quiz identitovigilance DIM (22 mai 2025) · Q15" }
       ]
+    },
+    sse2: {
+      th: "sse", title: "Canicule, grand froid et plan bleu",
+      questions: [
+        { theme: "sse", q: "Sur quoi s’appuie le plan canicule de l’hôpital ?",
+          opts: ["Sur le nombre de climatiseurs disponibles", "Sur la vigilance météorologique de Météo-France et la surveillance sanitaire pilotée par l’ARS", "Uniquement sur la température relevée dans le service", "Sur les décisions du service des urgences seul"], ok: 1,
+          why: "Le plan s’appuie sur deux sources : la vigilance Météo-France et la surveillance sanitaire de l’ARS (urgences, hospitalisations, mortalité).", src: "Plan interne canicule (HSV-PB-PRO-0481) · Contexte" },
+        { theme: "sse", q: "Combien de niveaux de vigilance météorologique canicule distingue-t-on, et quels sont-ils ?",
+          opts: ["Trois : bleu, orange, rouge", "Cinq : du niveau 1 au niveau 5", "Quatre : vert, jaune, orange, rouge", "Deux : normal et alerte"], ok: 2,
+          why: "Vert = veille saisonnière ; jaune = pic de chaleur ; orange = canicule ; rouge = canicule extrême.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Contexte" },
+        { theme: "sse", q: "Que signifie la vigilance verte en matière de canicule ?",
+          opts: ["Qu’aucune action n’est nécessaire", "Que le plan blanc est déclenché", "Que les activités programmées sont suspendues", "Une période de préparation : vérification des équipements, stocks, organisations et sensibilisation des professionnels"], ok: 3,
+          why: "La veille saisonnière sert à garantir la capacité de réponse avant l’épisode de chaleur.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Contexte" },
+        { theme: "sse", q: "Vigilance jaune (pic de chaleur) : que renforce-t-on ?",
+          opts: ["La surveillance des patients et résidents les plus vulnérables, avec préparation des ressources en cas d’aggravation", "Uniquement la communication aux familles", "La déprogrammation de toutes les activités", "Rien, c’est un simple avis météo"], ok: 0,
+          why: "Le jaune renforce la vigilance et la surveillance des personnes vulnérables ; à ce niveau, le plan bleu est déclenché.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Contexte" },
+        { theme: "sse", q: "Quel niveau de vigilance peut conduire à l’activation du Plan Blanc ?",
+          opts: ["Aucun : canicule et plan blanc sont sans lien", "Le rouge : canicule extrême (intense et durable)", "Le vert", "Le jaune"], ok: 1,
+          why: "Le rouge correspond à une gestion de crise institutionnelle pouvant conduire à l’activation du Plan Blanc.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Contexte" },
+        { theme: "sse", q: "Quels patients sont particulièrement à risque en cas de forte chaleur ?",
+          opts: ["Les patients jeunes et autonomes", "Aucun patient en particulier", "Les personnes les plus vulnérables, comme les personnes âgées : le service doit les identifier", "Uniquement les patients de réanimation"], ok: 2,
+          why: "Les cadres de santé identifient les personnes à risque dans les services de soins ; c’est une action de veille.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Niveau 1" },
+        { theme: "sse", q: "Pendant la veille saisonnière, qu’attend-on des équipes de soins ?",
+          opts: ["Qu’elles attendent la vigilance orange pour s’informer", "Qu’elles ne changent rien aux pratiques", "Qu’elles appellent la direction à chaque degré gagné", "Qu’elles soient resensibilisées et appliquent les protocoles de prise en charge en cas de chaleur"], ok: 3,
+          why: "Les protocoles de prise en charge en cas de chaleur sont rappelés au personnel dès le niveau de veille.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Niveau 1" },
+        { theme: "sse", q: "En cas de pic de chaleur, que fait-on des événements indésirables liés à la chaleur ?",
+          opts: ["Ils sont déclarés : la DGRQS en assure le suivi et les transmet aux directions des soins", "Ils ne sont pas déclarés", "Ils sont réservés au médecin du travail", "Ils sont traités uniquement par la pharmacie"], ok: 0,
+          why: "Déclarer reste la règle : le suivi des événements indésirables liés à la chaleur fait partie du niveau 2.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Niveau 2" },
+        { theme: "sse", q: "Comment le personnel est-il informé du passage en niveau canicule ?",
+          opts: ["Il n’y a aucune information officielle", "Par une note de service diffusée par mail à tous (Everyone)", "Par un affichage en salle de pause uniquement", "Par un appel de chaque cadre à chaque agent"], ok: 1,
+          why: "La note de service est diffusée par le secrétariat de la DGRQS.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Niveaux 2 et 3" },
+        { theme: "sse", q: "En alerte canicule (niveau 3), que peut autoriser la DRH ?",
+          opts: ["La suppression des transmissions", "L’arrêt des soins non urgents par chaque agent", "L’adaptation des tenues professionnelles, de l’organisation et des horaires de travail", "La fermeture définitive des services"], ok: 2,
+          why: "Les adaptations de tenues, de locaux (pièces rafraîchies) et d’horaires sont autorisées en niveau 3.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Niveau 3" },
+        { theme: "sse", q: "En alerte canicule, que fait-on pour les personnes à risque ?",
+          opts: ["On les laisse dans leur chambre quelle que soit la température", "On les transfère systématiquement aux urgences", "On ouvre toutes les fenêtres en plein après-midi", "On les accueille dans des pièces climatisées ou rafraîchies, avec une pièce par bâtiment pour se rafraîchir"], ok: 3,
+          why: "Un dispositif de rafraîchissement est mis en place par bâtiment, pour les professionnels et pour installer les patients selon leurs possibilités.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Niveau 3" },
+        { theme: "sse", q: "En alerte canicule, que fait-on pour gérer l’occupation des lits ?",
+          opts: ["On accélère les sorties et on prévoit des lits supplémentaires si nécessaire", "On bloque toutes les sorties", "On ferme des unités sans en informer", "On refuse tous les nouveaux patients"], ok: 0,
+          why: "Les chefs de service et cadres accélèrent les sorties ; la cellule de crise peut ouvrir des lits ou différer les activités non urgentes.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Niveau 3" },
+        { theme: "sse", q: "Qui peut décider de différer des activités programmées non urgentes pendant une canicule ?",
+          opts: ["La pharmacie seule", "La cellule de crise (directeur de garde, direction)", "Chaque agent selon sa charge de travail", "Le patient"], ok: 1,
+          why: "La décision est prise par la direction/cellule de crise, puis diffusée par note de service.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Niveau 3" },
+        { theme: "sse", q: "Quelle documentation sur le médicament est diffusée pendant une vague de chaleur ?",
+          opts: ["Aucune", "Une liste de médicaments interdits dans tout l’hôpital", "Une fiche sur le bon usage des médicaments en cas de chaleur", "Un nouveau livret thérapeutique complet"], ok: 2,
+          why: "Certains traitements exposent à un risque en cas de chaleur : la fiche de bon usage est transmise à partir du niveau 3.", src: "Plan interne canicule (HSV-PB-PRO-0481) · Niveau 3" },
+        { theme: "sse", q: "Depuis quand les plans canicule existent-ils en France ?",
+          opts: ["Depuis 1990", "Depuis 2015", "Depuis la crise Covid", "Depuis 2004, après l’épisode de canicule de 2003"], ok: 3,
+          why: "Le plan canicule a été mis en place en 2004 et il est révisé chaque année.", src: "Plan bleu canicule EHPAD 2026 · Introduction" },
+        { theme: "sse", q: "À qui s’adresse le plan bleu canicule ?",
+          opts: ["Aux établissements médico-sociaux, ici les EHPAD de l’hôpital", "Aux seuls services de chirurgie", "Aux seuls services techniques", "Aux établissements privés uniquement"], ok: 0,
+          why: "Le plan bleu est intégré au plan canicule de l’hôpital et bénéficie de ses moyens.", src: "Plan bleu canicule EHPAD 2026 · Introduction" },
+        { theme: "sse", q: "Sur quelle période le plan canicule est-il opérationnel ?",
+          opts: ["Uniquement en juillet et août", "Du 1er juin au 15 septembre", "Toute l’année sans changement", "Du 1er novembre au 31 mars"], ok: 1,
+          why: "Le plan canicule est opérationnel du 1er juin au 15 septembre.", src: "Plan bleu canicule EHPAD 2026 · Introduction" },
+        { theme: "sse", q: "Que doit-on faire des protocoles d’hydratation en EHPAD ?",
+          opts: ["Les réserver aux patients alités", "Les confier aux familles", "Les appliquer toute l’année, pas seulement pendant la canicule", "Les appliquer uniquement en juillet"], ok: 2,
+          why: "Des protocoles médicaux d’hydratation sont établis dans le service et appliqués toute l’année.", src: "Plan bleu canicule EHPAD 2026 · Fiches actions" },
+        { theme: "sse", q: "Quand le plan bleu doit-il être présenté aux équipes de l’EHPAD ?",
+          opts: ["Après la première canicule", "Une fois tous les cinq ans", "Jamais, il est réservé aux cadres", "Avant l’été"], ok: 3,
+          why: "Il doit être présenté à l’ensemble des équipes avant l’été et disponible dans les infirmeries, au secrétariat et dans la GED.", src: "Plan bleu canicule EHPAD 2026 · Diffusion de l’information" },
+        { theme: "sse", q: "À la fin d’une alerte canicule, que fait la direction avec la cellule de crise ?",
+          opts: ["Elle lève la cellule et établit un bilan écrit présenté au personnel", "Elle détruit les documents", "Elle ne fait aucun bilan", "Elle informe uniquement l’ARS"], ok: 0,
+          why: "Le bilan écrit et circonstancié est ensuite présenté et commenté à l’ensemble du personnel : c’est une démarche d’amélioration.", src: "Plan bleu canicule EHPAD 2026 · Levée de la cellule" },
+        { theme: "sse", q: "Combien de temps dure une vague de froid, au sens du plan grand froid ?",
+          opts: ["Elle n’a pas de durée définie", "Au moins deux jours", "Une seule nuit", "Au moins deux semaines"], ok: 1,
+          why: "Une vague de froid est caractérisée par sa persistance (au moins deux jours), son intensité et son étendue géographique.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §3" },
+        { theme: "sse", q: "À partir de quel niveau de vigilance Météo-France déclenche-t-on le plan grand froid ?",
+          opts: ["Seulement le rouge", "Dès une température inférieure à 10 °C", "Orange ou rouge", "Dès la veille saisonnière"], ok: 2,
+          why: "Le plan est déclenché lorsque les bulletins annoncent une alerte orange ou rouge.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §4" },
+        { theme: "sse", q: "Quelle est la période de veille saisonnière « froid » ?",
+          opts: ["Du 1er juin au 15 septembre", "Du 1er janvier au 28 février", "Toute l’année", "Du 1er novembre au 31 mars"], ok: 3,
+          why: "Veille saisonnière : surveillance régulière et sensibilisation durant l’hiver.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §3" },
+        { theme: "sse", q: "En vigilance froid, que caractérise le niveau orange ?",
+          opts: ["Un grand froid intense et durable", "Un simple pic de froid", "Un froid extrême avec mobilisation maximale", "Une veille sans danger"], ok: 0,
+          why: "Jaune : pic de froid ; orange : grand froid intense et durable ; rouge : froid extrême.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §3" },
+        { theme: "sse", q: "Qui coordonne les actions pendant l’alerte grand froid ?",
+          opts: ["L’infirmier de nuit", "Une cellule de crise pilotée par le directeur de garde", "Chaque agent de son côté", "Le service de sécurité seul"], ok: 1,
+          why: "Elle réunit l’encadrement de pôles, la GAP et les services techniques.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §6" },
+        { theme: "sse", q: "Que demande-t-on aux services dès le début d’une alerte grand froid pour le linge ?",
+          opts: ["Ne plus utiliser de linge", "Stocker un maximum de linge dans les chambres", "Limiter à la stricte nécessité les réfections de lits", "Changer le linge deux fois plus souvent"], ok: 2,
+          why: "L’objectif est d’anticiper les difficultés de livraison de la blanchisserie.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §6" },
+        { theme: "sse", q: "Pourquoi planifie-t-on un effectif minimum par pôle en cas de neige ?",
+          opts: ["Pour réduire les effectifs de façon définitive", "Pour supprimer les congés", "Pour fermer les services", "Pour anticiper les difficultés de transport des agents, en privilégiant les professionnels proches de l’établissement"], ok: 3,
+          why: "Le plan adapte les plannings de tous les secteurs en privilégiant la présence des professionnels proches.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §6" },
+        { theme: "sse", q: "Comment le personnel qui ne peut pas rentrer chez lui peut-il être pris en charge ?",
+          opts: ["Des zones d’hébergement sont prévues, avec couchage fourni, et des repas sont organisés", "Il dort dans sa voiture", "Il est renvoyé chez lui quoi qu’il arrive", "Aucune solution n’est prévue"], ok: 0,
+          why: "Un stock de draps, couvertures et kits de toilette est constitué, et le nombre de personnes hébergées est transmis à la cuisine avant 18 h.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §5-6" },
+        { theme: "sse", q: "Pourquoi le nombre de personnes hébergées est-il transmis à la cuisine avant 18 h ?",
+          opts: ["Il n’y a aucune raison", "Pour livrer les repas dans les services", "Pour établir un classement", "Pour facturer les agents"], ok: 1,
+          why: "Les repas des personnels hébergés doivent être livrés dans les services.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §6" },
+        { theme: "sse", q: "Les professionnels qui restent sur l’établissement doivent-ils respecter un repos avant de reprendre ?",
+          opts: ["Seulement les cadres", "Seulement en journée", "Oui : le plan distingue ceux en poste 12 h après leur fin de service et ceux qui ne reprennent pas", "Non, jamais"], ok: 2,
+          why: "Les cadres identifient les professionnels hébergés selon qu’ils reprennent leur service 12 h après leur fin de service ou non.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §6" },
+        { theme: "sse", q: "Quel rôle ont les assistantes sociales pendant le grand froid ?",
+          opts: ["Gérer le déneigement", "Prescrire le chauffage", "Aucun rôle", "Faire le lien avec le SAMU social pour les sorties des personnes sans abri"], ok: 3,
+          why: "Le plan demande d’être attentif aux conditions de sortie des personnes sans abri.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §6" },
+        { theme: "sse", q: "Comment est assurée la continuité de l’alimentation électrique en cas de coupure ?",
+          opts: ["Par des groupes électrogènes vérifiés chaque mois", "Par des bougies", "Par l’arrêt des services", "Par des batteries personnelles"], ok: 0,
+          why: "Chaque groupe électrogène est vérifié une fois par mois.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §6" },
+        { theme: "sse", q: "Pendant le grand froid, que fait-on si un service est trop froid ?",
+          opts: ["On déplace tous les patients", "On alerte les services techniques, qui répondent aux baisses de température non compensées par la chaufferie", "On attend la fin de l’alerte", "On utilise des chauffages d’appoint personnels"], ok: 1,
+          why: "Les services techniques répondent aux demandes ponctuelles pour garder des températures convenables.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §6" },
+        { theme: "sse", q: "Pendant le grand froid, pourquoi peut-on déprogrammer des interventions non urgentes ?",
+          opts: ["Pour réduire les coûts", "Par choix du patient", "Pour libérer des salles de bloc et des lits afin de faire face à l’afflux de traumatologie", "Pour fermer les blocs"], ok: 2,
+          why: "On libère 2 ou 3 salles pour l’orthopédie et les lits chirurgicaux deviennent polyvalents.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §6" },
+        { theme: "sse", q: "Quel plan régional de gestion de la neige et du verglas est activé du 15 novembre au 15 mars ?",
+          opts: ["Le plan Orsec nucléaire", "Le plan Vigipirate", "Le plan blanc", "Le Plan Neige et Verglas d’Île-de-France (niveau 1)"], ok: 3,
+          why: "Le niveau 1 du PNVIF est activé chaque hiver.", src: "Plan grand froid (HSV-QGDR-PRO-0390) §4" }
+      ]
     }
   };
 
@@ -1773,9 +1883,11 @@ button.chip:hover { border-color: var(--ink); }
   function genCode() { var a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = ""; for (var i = 0; i < 6; i++) { s += a.charAt(Math.floor(Math.random() * a.length)); if (i === 2) s += "-"; } return s; }
   function renderWelcome() {
     var P = profiles(), ks = Object.keys(P);
+    var seen = {}, dups = 0;
+    ks.forEach(function (k) { var n = (P[k].pseudo || "").toLowerCase(); if (seen[n]) dups++; seen[n] = 1; });
     var plist = ks.length ? '<div class="wform"><h3>Reprendre un profil</h3>' + ks.map(function (k) {
-      return '<button class="row" type="button" data-resume="' + esc(k) + '"><div><div class="name">' + esc(P[k].pseudo) + '</div><div class="meta"><span class="refs">' + esc(P[k].service || "") + '</span></div></div><div class="pct"><b>' + (P[k].points || 0) + '</b><em>points</em></div></button>';
-    }).join("") + '<h3 style="margin-top:28px">Nouveau profil</h3></div>' : "";
+      return '<div style="display:flex;gap:8px;align-items:stretch"><div style="flex:1;min-width:0"><button class="row" type="button" data-resume="' + esc(k) + '"><div><div class="name">' + esc(P[k].pseudo) + '</div><div class="meta"><span class="refs">' + esc(P[k].service || "") + '</span></div></div><div class="pct"><b>' + (P[k].points || 0) + '</b><em>points</em></div></button></div><button class="btn ghost" type="button" data-del="' + esc(k) + '" aria-label="Supprimer le profil ' + esc(P[k].pseudo) + '" style="flex:none;padding:0 14px">Supprimer</button></div>';
+    }).join("") + (dups ? '<button class="btn ghost" type="button" id="wdup" style="margin-top:10px">Supprimer les doublons (' + dups + ')</button>' : "") + '<h3 style="margin-top:28px">Nouveau profil</h3></div>' : "";
     var sv = ["UGA", "UGO", "Médecine", "SMR", "Autre service"].map(function (x) { return "<option>" + x + "</option>"; }).join("");
     $("v-welcome").innerHTML = '<p class="eyebrow">Visite de certification · préparation</p><h1>Objectif<br>CertiF</h1>' +
       '<p class="lede">Des quiz de trois minutes, un thème à la fois, pour arriver prêt le jour de la visite. Créez votre profil pour suivre votre progression.</p>' +
@@ -1794,6 +1906,21 @@ button.chip:hover { border-color: var(--ink); }
     });
     Array.prototype.forEach.call($("v-welcome").querySelectorAll("[data-resume]"), function (b) {
       b.addEventListener("click", function () { var p = profiles()[b.getAttribute("data-resume")]; if (p) { S = clone(p); save(); show("play"); } });
+    });
+    function putProfiles(P) { try { localStorage.setItem(KEY + "-profils", JSON.stringify(P)); } catch (e) {} }
+    Array.prototype.forEach.call($("v-welcome").querySelectorAll("[data-del]"), function (b) {
+      b.addEventListener("click", function () {
+        if (!b.getAttribute("data-sure")) { b.setAttribute("data-sure", "1"); b.textContent = "Confirmer ?"; setTimeout(function () { b.removeAttribute("data-sure"); b.textContent = "Supprimer"; }, 4000); return; }
+        var P2 = profiles(); delete P2[b.getAttribute("data-del")]; putProfiles(P2); renderWelcome(); toast("Profil supprimé");
+      });
+    });
+    var wd = $("wdup");
+    if (wd) wd.addEventListener("click", function () {
+      if (!wd.getAttribute("data-sure")) { wd.setAttribute("data-sure", "1"); wd.textContent = "Confirmer : garder le meilleur score de chaque pseudo"; return; }
+      var P2 = profiles(), best = {};
+      Object.keys(P2).forEach(function (k) { var n = (P2[k].pseudo || "").toLowerCase(); if (!best[n] || (P2[k].points || 0) > (P2[best[n]].points || 0)) best[n] = k; });
+      var keep = {}; Object.keys(best).forEach(function (n) { keep[best[n]] = P2[best[n]]; });
+      putProfiles(keep); renderWelcome(); toast("Doublons supprimés");
     });
   }
 
