@@ -213,7 +213,7 @@ body.light-ui .award-card,body.light-ui .award-summary{background:#fff;color:#17
 @media(max-width:520px){.award-grid{grid-template-columns:1fr}.award-summary{max-width:none}}
 body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#d3dfec;--track:#dfe7f0;--accent:#e6ad45;--on-accent:#172b45;--good:#25845e;--warn:#a56a18;--bad:#b84a45;background:#eef3f9;color:#172b45}body.light-ui .shell{background:#edf3fa}body.light-ui .sidebar{background:#fff;border-color:#d5e0ed}body.light-ui .brand,body.light-ui .side-nav .tab{color:#172b45}body.light-ui .side-nav .tab{color:#34506d}body.light-ui .side-nav .tab:hover,body.light-ui .side-nav .tab[aria-current=page]{background:#e8f1fb;color:#164d83}body.light-ui .side-profile,body.light-ui .dash-card,body.light-ui .theme-card,body.light-ui .theme-trophy,body.light-ui .tip-card,body.light-ui .weekly-card{background:#fff;color:#172b45;border-color:#d3dfec}body.light-ui .dash-head h1,body.light-ui .dash-value,body.light-ui .dash-section-title h2,body.light-ui .theme-card b,body.light-ui .theme-trophy b,body.light-ui .tip-card strong{color:#172b45}body.light-ui .dash-label,body.light-ui .dash-sub,body.light-ui .dash-head p,body.light-ui .theme-card small{color:#5e7187}body.light-ui .challenge-card{background:linear-gradient(120deg,#e9e1fb,#dce8fb);color:#172b45}body.light-ui .challenge-card h2,body.light-ui .challenge-card p{color:#172b45}
 @media(max-width:1100px){.shell{grid-template-columns:235px minmax(0,1fr)}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-row{grid-template-columns:1fr}.right-stack{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:720px){.shell{display:block}.sidebar{display:none}.app{padding:20px 14px 92px}.mobile-tabs{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;bottom:0;left:0;right:0;background:#081c35;border-top:1px solid #294563;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:20}.mobile-tabs .tab{border:0;background:transparent;color:#b9cbe0;display:grid;justify-items:center;gap:2px;font-size:10px;padding:5px}.mobile-tabs .tab span{font-size:20px}.mobile-tabs .tab[aria-current=page]{color:#ffd16e}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.dash-card{padding:13px}.dash-value{font-size:24px}.progress-ring{width:78px;height:78px}.progress-ring strong{font-size:21px}.dash-row{display:block}.right-stack{display:grid;grid-template-columns:1fr;margin-top:12px}.theme-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.dash-footer{grid-template-columns:1fr}.challenge-card{min-height:190px;padding:16px}.challenge-art{font-size:48px}#v-play .dash-head h1{font-size:26px}#v-play .dash-user{display:none}}
+@media(max-width:720px){.shell{display:block}.sidebar{display:none}.app{padding:20px 14px 92px}.mobile-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;bottom:0;left:0;right:0;background:#081c35;border-top:1px solid #294563;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:20}.mobile-tabs .tab{border:0;background:transparent;color:#b9cbe0;display:grid;justify-items:center;gap:2px;font-size:10px;padding:5px}.mobile-tabs .tab span{font-size:20px}.mobile-tabs .tab[aria-current=page]{color:#ffd16e}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.dash-card{padding:13px}.dash-value{font-size:24px}.progress-ring{width:78px;height:78px}.progress-ring strong{font-size:21px}.dash-row{display:block}.right-stack{display:grid;grid-template-columns:1fr;margin-top:12px}.theme-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.dash-footer{grid-template-columns:1fr}.challenge-card{min-height:190px;padding:16px}.challenge-art{font-size:48px}#v-play .dash-head h1{font-size:26px}#v-play .dash-user{display:none}}
 @media(max-width:390px){.badge-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-strip{grid-template-columns:repeat(4,minmax(0,1fr))}.theme-trophy{padding:8px 4px}}
 
 </style>
@@ -248,6 +248,7 @@ body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#
 <nav class="mobile-tabs" id="tabs" aria-label="Navigation mobile">
   <button class="tab" data-tab="play"><span>⌂</span>Accueil</button>
   <button class="tab" data-tab="lib"><span>▣</span>Formations</button>
+  <button class="tab" data-tab="badges"><span>♜</span>Trophées</button>
   <button class="tab" data-tab="me"><span>▥</span>Résultats</button>
   <button class="tab" data-tab="team"><span>♧</span>Équipe</button>
 </nav>
@@ -1658,12 +1659,34 @@ body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#
   var quiz = null;
 
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function normalizeProfile(o) {
+    o = o && typeof o === "object" ? o : clone(SEED);
+    o.hist = Array.isArray(o.hist) ? o.hist : [];
+    o.points = Number(o.points) || 0;
+    o.streak = Number(o.streak) || 0;
+    o.counters = o.counters && typeof o.counters === "object" ? o.counters : {};
+    o.correctDistinct = o.correctDistinct && typeof o.correctDistinct === "object" ? o.correctDistinct : {};
+    o.badges = o.badges && typeof o.badges === "object" ? o.badges : {};
+    o.sessionsCompleted = Number(o.sessionsCompleted) || o.hist.length || 0;
+    o.discoveredThemes = o.discoveredThemes && typeof o.discoveredThemes === "object" ? o.discoveredThemes : {};
+    o.consecutiveCorrect = Number(o.consecutiveCorrect) || 0;
+    o.themeLastScore = o.themeLastScore && typeof o.themeLastScore === "object" ? o.themeLastScore : {};
+    THEMES.forEach(function (t) {
+      var c = o.counters[t.id];
+      if (!Array.isArray(c)) o.counters[t.id] = [0, 0];
+      else o.counters[t.id] = [Number(c[0]) || 0, Number(c[1]) || 0];
+    });
+    return o;
+  }
   function load() {
     try {
       var raw = localStorage.getItem(KEY);
-      if (raw) { var o = JSON.parse(raw); if (o && o.counters && "onboarded" in o) { o.correctDistinct = o.correctDistinct || {}; o.badges = o.badges || {}; o.sessionsCompleted = o.sessionsCompleted || (o.hist || []).length || 0; o.discoveredThemes = o.discoveredThemes || {}; o.consecutiveCorrect = o.consecutiveCorrect || 0; o.themeLastScore = o.themeLastScore || {}; THEMES.forEach(function(t){ if(!o.counters[t.id]) o.counters[t.id]=[0,0]; }); return o; } }
+      if (raw) {
+        var o = JSON.parse(raw);
+        if (o && typeof o === "object" && "onboarded" in o) return normalizeProfile(o);
+      }
     } catch (e) {}
-    return clone(SEED);
+    return normalizeProfile(clone(SEED));
   }
   function profiles() { try { return JSON.parse(localStorage.getItem(KEY + "-profils")) || {}; } catch (e) { return {}; } }
   function save() {
@@ -1716,6 +1739,26 @@ body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#
   function themeIcon(id) { return ({dignite:"♡",bientraitance:"✋",douleur:"♥",info:"▤",age:"♿",experience:"☻",identito:"◎",medic:"✚",hygiene:"✧",urgences:"⚠",transfusion:"♢",sortie:"⇢",ei:"⚑",sse:"☀",cyber:"⌘",equipes:"♧"})[id] || "✦"; }
   function badgeEarn(id) { if (!S.badges[id]) S.badges[id] = new Date().toISOString(); }
   function badgeHas(id) { return !!(S.badges && S.badges[id]); }
+  function badgeDisplay(id) {
+    var m = /^theme_(.+)_(25|50|75|100)$/.exec(id);
+    if (m && BYID[m[1]]) {
+      var metal = {"25":"Bronze","50":"Argent","75":"Or","100":"Platine"}[m[2]];
+      return {title: BYID[m[1]].name, level: metal, icon: themeIcon(m[1])};
+    }
+    m = /^global_(25|50|75|100)$/.exec(id);
+    if (m) return {title: "Maîtrise globale", level: ({"25":"Apprenti","50":"Confirmé","75":"Senior","100":"Transcendant"}[m[1]]), icon: "✦"};
+    var names = {
+      first_quiz:["Premier pas","Progression","➤"], explorer_4:["Explorateur","Progression","⌖"],
+      explorer_8:["Aventurier","Progression","⚑"], explorer_16:["Voyageur","Progression","🌍"],
+      sessions_10:["Assidu","Progression","▣"], sessions_25:["Persévérant","Progression","🏆"],
+      perfect_quiz:["Sans faute","Performance","◎"], streak_10:["Série gagnante","Performance","🔥"],
+      improvement_30:["Remontée fantastique","Performance","↗"], phoenix:["Phénix","Performance","♨"],
+      expert_8:["Perfectionniste","Performance","◆"], cartographer:["Cartographe","Exception","⌖"],
+      absolute:["Collectionneur absolu","Exception","♛"]
+    };
+    var v = names[id];
+    return v ? {title:v[0], level:v[1], icon:v[2]} : {title:"Trophée",level:"Obtenu",icon:"✦"};
+  }
   function evaluateBadges(beforeTheme, sessionThemeScores, wasPerfect) {
     var totalIds = []; THEMES.forEach(function(t){totalIds=totalIds.concat(distinctPool(t.id));});
     totalIds = totalIds.filter(function(k,i){return totalIds.indexOf(k)===i;});
@@ -1728,7 +1771,12 @@ body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#
     [10,25].forEach(function(v){if((S.sessionsCompleted||0)>=v)badgeEarn('sessions_'+v);});
     if(wasPerfect) badgeEarn('perfect_quiz');
     if((S.consecutiveCorrect||0)>=10) badgeEarn('streak_10');
-    Object.keys(sessionThemeScores).forEach(function(id){var prev=S.themeLastScore[id],now=sessionThemeScores[id];if(prev!==undefined&&now-prev>=30)badgeEarn('improvement_30');if((beforeTheme[id]===null?0:beforeTheme[id])<50&&pct(id)>=100)badgeEarn('phoenix');S.themeLastScore[id]=now;});
+    Object.keys(sessionThemeScores).forEach(function(id){
+      var before = beforeTheme[id], after = pct(id);
+      if (before !== null && before !== undefined && after !== null && after - before >= 30) badgeEarn('improvement_30');
+      if (before !== null && before !== undefined && before < 50 && after >= 100) badgeEarn('phoenix');
+      S.themeLastScore[id] = after;
+    });
     if(THEMES.filter(function(t){return pct(t.id)>=75;}).length>=8)badgeEarn('expert_8');
     if(THEMES.every(function(t){return pct(t.id)>=25;}))badgeEarn('cartographer');
     if(THEMES.every(function(t){return pct(t.id)>=100;}))badgeEarn('absolute');
@@ -1739,8 +1787,12 @@ body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#
     var mastered = THEMES.filter(function(t){return trophyLevel(pct(t.id)) >= 3;}).length;
     var themeRows = THEMES.slice(0,6).map(function(t){var p=pct(t.id),v=p===null?0:r(p);return '<button class="theme-card" type="button" data-theme-id="'+t.id+'"><span class="theme-icon">'+themeIcon(t.id)+'</span><b>'+esc(t.name)+'</b><small>'+(p===null?'Pas encore évalué':v+' % de bonnes réponses')+'</small><div class="bar"><span style="width:'+v+'%"></span></div></button>';}).join("");
     var badgeCards = THEMES.map(function(t){var p=pct(t.id),n=trophyLevel(p);return '<div class="theme-trophy" title="'+esc(t.name)+' : '+(p===null?'pas encore évalué':r(p)+' %')+'"><span class="ticon theme-emblem '+trophyClass(n)+'">'+themeIcon(t.id)+'</span><b>'+esc(t.name)+'</b><span class="trophy '+trophyClass(n)+'">'+(n===0?'♧':'🏆')+'</span><small style="display:block;color:#9fb5ce;font-size:9px;margin-top:3px">'+trophyName(n)+'</small></div>';}).join("");
-    var recent = THEMES.filter(function(t){return trophyLevel(pct(t.id))>0;}).sort(function(a,b){return trophyLevel(pct(b.id))-trophyLevel(pct(a.id));}).slice(0,4);
-    var recentBadges = recent.length ? recent.map(function(t){var n=trophyLevel(pct(t.id));return '<div class="badge-mini"><div class="badge-medal">'+themeIcon(t.id)+'</div><small>'+esc(t.name)+'</small><small>'+trophyName(n)+'</small></div>';}).join("") : '<p class="empty-dash">Tes premiers trophées apparaîtront ici après tes quiz.</p>';
+    var recent = Object.keys(S.badges || {}).map(function(id){return {id:id, date:Date.parse(S.badges[id]) || 0};})
+      .sort(function(a,b){return b.date-a.date;}).slice(0,4);
+    var recentBadges = recent.length ? recent.map(function(item){
+      var info = badgeDisplay(item.id);
+      return '<div class="badge-mini"><div class="badge-medal">'+info.icon+'</div><small>'+esc(info.title)+'</small><small>'+esc(info.level)+'</small></div>';
+    }).join("") : '<p class="empty-dash">Tes premiers trophées apparaîtront ici après tes quiz.</p>';
     var chm=[1,2,3].map(function(c){var v=chapterScore(c);return '<div class="badge-line"><span>✦</span><span>'+esc(CHAPTERS[c])+'<div class="bar"><span style="width:'+(v===null?0:r(v))+'%"></span></div></span><b>'+(v===null?'–':r(v)+'%')+'</b></div>';}).join('');
     var pctText=g===null?'–':r(g)+'%';
     var h='<div class="dash-head"><div><p class="dash-label">Plateforme de formation · préparation certification</p><h1>Bonjour, '+esc(S.pseudo||'Infirmier(e)')+' ! 👋</h1><p>Prêt(e) à relever de nouveaux défis et à progresser ?</p></div><button class="dash-user" data-tab="me"><span class="avatar">♙</span><span><b>'+esc(S.pseudo||'Profil')+'</b><br><small>Profil actif · Niveau '+lvl+'</small></span></button></div>'+
@@ -1987,11 +2039,11 @@ body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#
       var p = $("wp").value.trim(); if (!p) return;
       var P = profiles(), want = p.toLowerCase(), best = null;
       Object.keys(P).forEach(function (k) { if ((P[k].pseudo || "").toLowerCase() === want && (!best || (P[k].points || 0) > (best.points || 0))) best = P[k]; });
-      if (best) { S = clone(best); save(); show("play"); toast("Profil retrouvé : " + S.pseudo); return; }
+      if (best) { S = normalizeProfile(clone(best)); save(); show("play"); toast("Profil retrouvé : " + S.pseudo); return; }
       S = clone(FRESH); S.pseudo = p; S.service = $("ws").value; S.code = genCode(); S.onboarded = true; save(); show("play");
     });
     Array.prototype.forEach.call($("v-welcome").querySelectorAll("[data-resume]"), function (b) {
-      b.addEventListener("click", function () { var p = profiles()[b.getAttribute("data-resume")]; if (p) { S = clone(p); save(); show("play"); } });
+      b.addEventListener("click", function () { var p = profiles()[b.getAttribute("data-resume")]; if (p) { S = normalizeProfile(clone(p)); save(); show("play"); } });
     });
     function putProfiles(P) { try { localStorage.setItem(KEY + "-profils", JSON.stringify(P)); } catch (e) {} }
     Array.prototype.forEach.call($("v-welcome").querySelectorAll("[data-del]"), function (b) {
