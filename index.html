@@ -1,9 +1,4 @@
-<!doctype html>
-<html lang="fr">
-<head>
 <title>Objectif CertiF</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
@@ -201,138 +196,53 @@ button.chip:hover { border-color: var(--ink); }
 .soon-banner b { font-family: var(--f-mono); font-weight: 500; font-size: 16px; letter-spacing: .1em; text-transform: uppercase; }
 .soon-banner span { font-size: 15px; }
 
-/* ===== Refonte Objectif CertiF : dashboard professionnel + gaming modéré ===== */
-:root {
-  --bg:#eef2f7; --surface:#ffffff; --ink:#172844; --ink-2:#65748b;
-  --line:#dce4ef; --track:#e8edf5; --accent:#f4b942; --on-accent:#172844;
-  --good:#16845c; --warn:#b7791f; --bad:#c64b58;
-  --good-bg:#e2f5eb; --bad-bg:#fff0f0;
-  --c1:#3979c9; --c2:#1caa83; --c3:#8065ce;
-  --f-display: "Archivo", "Segoe UI", Arial, sans-serif;
-  --f-body: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
-}
-:root[data-theme="dark"] { --bg:#0c1728; --surface:#14243a; --ink:#edf4ff; --ink-2:#a5b5ca; --line:#2a3d56; --track:#263951; --accent:#f4bd4f; --on-accent:#172844; --good:#50c995; --warn:#f0b34f; --bad:#ff7b86; --good-bg:#173c35; --bad-bg:#482b36; --c1:#71a8f2; --c2:#4bc7a3; --c3:#b09af5; color-scheme:dark; }
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1728;--surface:#14243a;--ink:#edf4ff;--ink-2:#a5b5ca;--line:#2a3d56;--track:#263951;--accent:#f4bd4f;--on-accent:#172844;--good:#50c995;--warn:#f0b34f;--bad:#ff7b86;--good-bg:#173c35;--bad-bg:#482b36;--c1:#71a8f2;--c2:#4bc7a3;--c3:#b09af5;color-scheme:dark}}
-body { margin:0; background:var(--bg); font-size:15px; }
-.app.wrap { max-width:1500px; width:auto; margin:0 28px 0 258px; padding:30px 24px 100px; }
-nav.tabs { position:fixed; inset:0 auto 0 0; width:230px; border:0; border-right:1px solid #263b56; background:linear-gradient(180deg,#10243d,#0b1a2d); padding:22px 14px; z-index:10; overflow-y:auto; }
-nav.tabs:before { content:"◈  OBJECTIF\A     CERTIF"; white-space:pre; display:block; color:#fff; font:900 23px/1.12 var(--f-display); letter-spacing:-.6px; padding:8px 12px 28px; }
-nav.tabs:after { content:"CENTRE D’ENTRAÎNEMENT  ·  HAS"; display:block; color:#9db0c8; font:10px var(--f-body); letter-spacing:.12em; padding:16px 12px; }
-nav.tabs .wrap { width:100%; max-width:none; padding:0; display:grid; grid-template-columns:1fr; gap:6px; }
-.tab { color:#b9c8da; border:0; border-radius:12px; margin:0; padding:13px 14px; display:flex; align-items:center; justify-content:flex-start; gap:13px; text-align:left; font-size:14px; transition:background .2s,color .2s,transform .2s; }
-.tab svg { flex:0 0 21px; width:21px; height:21px; }
-.tab:hover { background:#203a59; color:#fff; }
-.tab[aria-current="page"] { color:#fff; background:#24476d; border:1px solid #42668e; box-shadow:inset 3px 0 #f4bd4f; }
-.head { align-items:center; background:linear-gradient(115deg,#10243e 0%,#193a60 60%,#244c72 100%); color:#fff; border-radius:22px; padding:30px 34px; min-height:230px; position:relative; overflow:hidden; box-shadow:0 14px 32px #152c481c; }
-.head:after { content:"✦"; position:absolute; right:30%; top:16px; color:#f4bd4f; opacity:.6; font-size:18px; text-shadow:45px 35px #fff,100px 90px #f4bd4f; pointer-events:none; }
-.head .eyebrow { color:#b9cce2; letter-spacing:.15em; }
-.head h1 { font-size:clamp(36px,5vw,58px); line-height:1; letter-spacing:-.04em; text-transform:none; margin-top:12px; }
-.head h1 br { display:none; }
-.head .chip { position:relative; z-index:1; background:#ffffff12; color:#fff; border-color:#ffffff35; }
-.head .chip i { background:#f4bd4f; color:#172844; }
-.head .chip small { color:#d7e3f1; }
-.lede { margin:14px 0 0; max-width:65ch; font-size:16px; }
-#v-play > .lede { margin: -1px 0 18px 8px; color:var(--ink-2); }
-.score { margin:0; padding:22px 26px; border:1px solid var(--line); border-radius:18px; background:var(--surface); grid-template-columns:minmax(180px,.8fr) minmax(280px,1.2fr); gap:24px; box-shadow:0 8px 24px #152c4808; }
-.big { color:var(--c1); font-size:66px; }
-.score .cap { font-size:14px; }
-.chmini { gap:12px; }
-.chmini div { font-size:13px; }
-.bar { height:9px; border-radius:20px; background:var(--track); }
-.bar>span { border-radius:20px; }
-.defi { margin-top:18px; padding:22px 26px; border-radius:18px; color:#fff; background:linear-gradient(110deg,#183a60,#285b83); box-shadow:0 10px 22px #183a6020; border:1px solid #315d86; }
-.defi h2 { font-size:25px; text-transform:none; }
-.defi p { color:#d4e2f1; }
-.btn { border:1px solid #203e61; background:#18395e; color:#fff; border-radius:11px; min-height:46px; box-shadow:0 4px 0 #102640; transition:transform .15s,box-shadow .15s; }
-.btn:hover { transform:translateY(-2px); box-shadow:0 6px 0 #102640; }
-.btn:active { transform:translateY(1px); box-shadow:0 2px 0 #102640; }
-.defi .btn { background:#f4bd4f; color:#172844; border-color:#f4bd4f; box-shadow:0 4px 0 #bd8428; }
-.btn.ghost { background:transparent; color:var(--ink); border-color:var(--line); box-shadow:none; }
-.sect { margin-top:28px; }
-.sect-head { border:0; padding:0 2px 12px; align-items:center; }
-.sect-head h3 { font-size:19px; text-transform:none; color:var(--ink); }
-.sect-head h3:before { width:9px; height:22px; border-radius:5px; vertical-align:-5px; }
-.sect-head span { font-size:12px; }
-.row { border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:15px 17px; margin-top:8px; grid-template-columns:1fr auto; box-shadow:0 3px 12px #152c4806; transition:transform .18s,border-color .18s,box-shadow .18s; }
-.row:hover { background:var(--surface); border-color:#9eb4ce; transform:translateY(-2px); box-shadow:0 8px 18px #152c4810; }
-.row .name { font-size:15px; }
-.pct b { font-size:26px; }
-.pill { border-radius:999px; padding:3px 9px; }
-.pill.imp { background:#fff0ce; color:#86540c; border-color:#f5d18c; }
-nav.tabs .tab[aria-current="page"] svg { color:#f4bd4f; }
-.head2 { margin-bottom:8px; }
-.head2 h2 { text-transform:none; font-size:30px; }
-.qset { border-radius:13px; padding:15px 17px; border-color:var(--line); box-shadow:0 3px 12px #152c4807; }
-.qset:hover { border-color:#8aa9cc; transform:translateY(-1px); }
-.qset i { border-radius:999px; background:#e9f0fb; color:#244c78; }
-.stats { gap:14px; }
-.stat { border:1px solid var(--line); border-left:4px solid var(--c1); background:var(--surface); border-radius:14px; padding:18px; box-shadow:0 4px 16px #152c4808; }
-.stat:nth-child(2){border-left-color:var(--c2)} .stat:nth-child(3){border-left-color:var(--c3)}
-.stat b { font-size:34px; }
-.chart { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px; }
-.tbl { background:var(--surface); border-radius:12px; }
-.quiz { max-width:900px; margin:0 auto; padding:22px 0 50px; }
-.qtop { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 16px; }
-.segs { gap:7px; margin-top:14px; }
-.segs i { border-radius:20px; height:7px; }
-.qtheme { margin-top:28px; }
-.qtext { font-size:clamp(22px,3vw,29px); }
-.opt { border-radius:13px; padding:15px 17px; transition:border-color .15s,background .15s,transform .15s; }
-.opt:hover:not(:disabled) { transform:translateX(3px); }
-.opt .l { border-radius:9px; }
-.fb { background:var(--surface); border:1px solid var(--line); border-top:4px solid var(--good); border-radius:15px; padding:18px; }
-.fb h3 { text-transform:none; }
-.res { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:24px; }
-.field input,.field select { border-radius:11px; }
-.toast { border-radius:999px; box-shadow:0 8px 24px #0003; }
-.soon-banner { border-radius:14px; }
-@media(max-width:850px){
- .app.wrap { margin:0; padding:20px 18px 100px; }
- nav.tabs { inset:auto 0 0; width:auto; height:auto; padding:0; border-right:0; border-top:1px solid var(--line); background:var(--surface); }
- nav.tabs:before,nav.tabs:after { display:none; }
- nav.tabs .wrap { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
- .tab { color:var(--ink-2); padding:9px 3px 8px; display:grid; justify-items:center; justify-content:center; gap:3px; font-size:11px; border-radius:0; }
- .tab[aria-current="page"] { color:var(--ink); background:transparent; border:0; border-top:3px solid var(--accent); box-shadow:none; }
- .tab svg { width:20px;height:20px; }
- .head { padding:24px; min-height:190px; }
-}
-@media(max-width:560px){
- .app.wrap { padding:14px 12px 92px; }
- .head { padding:21px 18px; border-radius:17px; }
- .head h1 { font-size:40px; }
- .head .chip { font-size:12px; }
- .score { grid-template-columns:1fr; padding:18px; gap:16px; }
- .big { font-size:58px; }
- .defi { padding:18px; }
- .defi h2 { font-size:22px; }
- .stats { grid-template-columns:1fr 1fr; }
- .stats .stat:last-child { grid-column:1/-1; }
- .row { padding:13px; }
- .qtext { font-size:21px; }
- .opt { grid-template-columns:28px 1fr; padding:12px; }
-}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+/* ===== Objectif CertiF : interface plateforme de formation / gaming modéré ===== */
+:root{--bg:#07172d;--surface:#102744;--ink:#edf4ff;--ink-2:#a9bfd4;--line:#294563;--track:#344b68;--accent:#f3b847;--on-accent:#07172d;--good:#45bd91;--warn:#e6ad45;--bad:#ed786f;--good-bg:#123b35;--bad-bg:#492b34;--navy:#071a33;--navy2:#102b4d;--blue:#2878c8;--cyan:#69c8ef;--gold:#f3b847;--purple:#7650bd;--mint:#45bd91;--panel:#102744;--panel-line:#294563;}
+body{margin:0;background:#07172d;color:#edf4ff;font-family:Inter,"Segoe UI",Arial,sans-serif;}
+.shell{min-height:100vh;display:grid;grid-template-columns:280px minmax(0,1fr);background:radial-gradient(ellipse at 75% 0%,#102b4b 0,#07172d 48%,#06152a 100%);}
+.sidebar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 16px 16px;background:linear-gradient(180deg,#06162d,#081d38);border-right:1px solid #203b5c;z-index:10;}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px 24px;border-bottom:1px solid #203b5c;color:#fff}.brand-mark{width:52px;height:58px;display:grid;place-items:center;border:3px solid var(--gold);clip-path:polygon(50% 0,95% 18%,90% 75%,50% 100%,10% 75%,5% 18%);font-size:27px;color:var(--gold);font-weight:900}.brand strong{font-size:21px;line-height:.95;letter-spacing:.04em}.brand strong span{font-size:29px}.brand small{display:block;margin-top:8px;font-size:9px;line-height:1.45;letter-spacing:.1em;color:#b8c9dc;text-align:center}
+.side-nav{display:grid;gap:5px;margin-top:18px}.side-nav .tab{display:flex;align-items:center;gap:14px;min-height:48px;padding:9px 13px;border:1px solid transparent;border-radius:10px;background:transparent;color:#dce8f7;text-align:left;font-size:14px;font-weight:600}.side-nav .tab span{width:24px;text-align:center;font-size:22px;color:#a9bfd9}.side-nav .tab:hover,.side-nav .tab[aria-current=page]{background:linear-gradient(90deg,#15365d,#102845);border-color:#365779;color:#ffd16e}.side-nav .tab[aria-current=page]{box-shadow:inset 3px 0 var(--gold)}.side-profile{margin-top:auto;padding:14px;background:#102744;border:1px solid #294563;border-radius:12px;color:#fff}.side-profile b{display:block;font-size:14px}.side-profile small{color:#b7c9df}.side-profile .mini-track{height:7px;background:#344b68;border-radius:9px;margin:10px 0 5px;overflow:hidden}.side-profile .mini-track i{display:block;height:100%;background:linear-gradient(90deg,#e8a93d,#f7ca6b);border-radius:9px}.theme-toggle{margin-top:12px;padding:12px;border:1px solid #294563;border-radius:10px;background:transparent;color:#dce8f7;text-align:left}.app{width:100%;max-width:none;margin:0;padding:30px clamp(20px,2.2vw,42px) 40px;min-width:0}.mobile-tabs{display:none}
+#v-play .dash-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}#v-play .dash-head h1{font-size:clamp(27px,3vw,38px);text-transform:none;letter-spacing:-.03em;margin:0;color:#fff}#v-play .dash-head p{margin:8px 0 0;color:#b9cbe0}#v-play .dash-user{border:1px solid #294563;background:#102744;border-radius:14px;padding:10px 15px;color:#fff;display:flex;gap:10px;align-items:center}#v-play .dash-user .avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#244d78;font-size:20px}
+.dash-stats{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:13px;margin-bottom:15px}.dash-card{background:linear-gradient(145deg,rgba(18,43,74,.98),rgba(9,29,54,.98));border:1px solid #294563;border-radius:15px;padding:18px;min-width:0;box-shadow:0 8px 24px #020b1833}.dash-label{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#b9cbe0;font-weight:700}.dash-value{font-size:30px;font-weight:800;color:#fff;margin-top:9px}.dash-value em{font-size:14px;font-style:normal;color:var(--gold)}.dash-sub{font-size:12px;color:#9fb5ce;margin-top:7px}.progress-ring{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gold) 0 var(--progress),#3b5d83 var(--progress) 82%,#55aee0 82% 100%);position:relative;flex-shrink:0}.progress-ring:before{content:"";position:absolute;inset:8px;border-radius:50%;background:#102744}.progress-ring strong{z-index:1;font-size:27px;color:#fff}.progress-flex{display:flex;align-items:center;gap:16px;margin-top:14px}.xp-icon,.metric-icon{font-size:39px;color:var(--gold)}.fire{font-size:38px}.dash-row{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(310px,1fr);gap:14px;margin-bottom:14px}.challenge-card{background:radial-gradient(circle at 82% 50%,#38236d 0,#161b48 35%,#111f42 100%);border:1px solid #51407f;border-radius:16px;padding:21px;display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:215px}.challenge-card h2{font-size:24px;text-transform:none;color:#fff;margin:8px 0}.challenge-card p{color:#cbd7ed;margin:6px 0}.challenge-art{font-size:70px;filter:drop-shadow(0 8px 12px #02081788)}.challenge-btn{background:linear-gradient(100deg,#6336b5,#42258c);border:1px solid #805bd0;color:#fff;border-radius:10px;padding:12px 22px;font-weight:800;margin-top:13px}.level-pill{display:inline-block;background:#3c2c75;color:#d7c7ff;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.dash-section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:20px 0 11px}.dash-section-title h2{font-size:17px;text-transform:uppercase;color:#eaf3ff}.dash-section-title a{color:#70cfff;font-size:13px;text-decoration:none}.theme-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.theme-card{background:linear-gradient(145deg,#17395f,#102743);border:1px solid #2d4e70;border-radius:13px;padding:14px;color:#fff;text-align:left;min-width:0;transition:transform .18s,border-color .18s}.theme-card:hover{transform:translateY(-2px);border-color:#6ab9e8}.theme-card .theme-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#20528b;font-size:22px;margin-bottom:9px}.theme-card b{display:block;font-size:13px;line-height:1.3}.theme-card small{display:block;color:#a9bfd9;margin-top:6px}.theme-card .bar{height:6px;background:#3a526f;margin-top:10px}.theme-card .bar span{background:linear-gradient(90deg,#4ba6e5,#58c5a1)}.right-stack{display:grid;gap:13px;align-content:start}.badge-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.badge-mini{text-align:center;min-width:0}.badge-medal{width:54px;height:58px;margin:0 auto 5px;display:grid;place-items:center;clip-path:polygon(50% 0,92% 17%,86% 75%,50% 100%,14% 75%,8% 17%);background:linear-gradient(145deg,#d99b39,#7a4b13);color:#fff;font-size:24px;text-shadow:0 2px 3px #43280d}.badge-mini small{display:block;color:#c5d5e8;font-size:10px;line-height:1.2}.badge-list{display:grid;gap:10px}.badge-line{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:9px;font-size:12px;color:#e5effc}.badge-line .bar{height:8px;background:#344d6b}.badge-line .bar span{background:linear-gradient(90deg,#38b88d,#57d5a7)}.badge-gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.theme-trophy{background:#0d2440;border:1px solid #294563;border-radius:11px;padding:10px 6px;text-align:center;min-width:0}.theme-trophy .ticon{font-size:24px;display:grid;place-items:center;width:42px;height:42px;margin:0 auto 6px;border-radius:12px;background:#183657;color:#9fb5ce}.theme-emblem.bronze{color:#e4a06a;background:#55371f}.theme-emblem.silver{color:#d1dbe7;background:#3a4b5e}.theme-emblem.gold{color:#ffd05c;background:#604915}.theme-emblem.platinum{color:#9bd9ff;background:#234d77;box-shadow:0 0 12px #56a9ed44}.theme-trophy b{display:block;font-size:10px;line-height:1.25;color:#eaf3ff;min-height:27px}.trophy{display:inline-grid;place-items:center;width:27px;height:27px;border-radius:50%;font-size:14px;margin-top:7px;border:1px solid currentColor}.trophy.locked{color:#60748b;opacity:.55}.trophy.bronze{color:#d9945a;background:#59361f}.trophy.silver{color:#c5d5e7;background:#39495b}.trophy.gold{color:#ffd05c;background:#624915}.trophy.platinum{color:#8ed0ff;background:#244d79;box-shadow:0 0 10px #56a9ed55}.dash-footer{display:grid;grid-template-columns:1.5fr 1fr;gap:13px;margin-top:14px}.tip-card,.weekly-card{border:1px solid #31577b;background:#102a49;border-radius:13px;padding:15px;display:flex;align-items:center;gap:12px;color:#dce9f8}.tip-card strong{color:#fff}.weekly-card{justify-content:space-between}.weekly-card b{color:#6fcfff}.empty-dash{color:#9fb5ce;font-size:12px;margin-top:8px}
+body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#d3dfec;--track:#dfe7f0;--accent:#e6ad45;--on-accent:#172b45;--good:#25845e;--warn:#a56a18;--bad:#b84a45;background:#eef3f9;color:#172b45}body.light-ui .shell{background:#edf3fa}body.light-ui .sidebar{background:#fff;border-color:#d5e0ed}body.light-ui .brand,body.light-ui .side-nav .tab{color:#172b45}body.light-ui .side-nav .tab{color:#34506d}body.light-ui .side-nav .tab:hover,body.light-ui .side-nav .tab[aria-current=page]{background:#e8f1fb;color:#164d83}body.light-ui .side-profile,body.light-ui .dash-card,body.light-ui .theme-card,body.light-ui .theme-trophy,body.light-ui .tip-card,body.light-ui .weekly-card{background:#fff;color:#172b45;border-color:#d3dfec}body.light-ui .dash-head h1,body.light-ui .dash-value,body.light-ui .dash-section-title h2,body.light-ui .theme-card b,body.light-ui .theme-trophy b,body.light-ui .tip-card strong{color:#172b45}body.light-ui .dash-label,body.light-ui .dash-sub,body.light-ui .dash-head p,body.light-ui .theme-card small{color:#5e7187}body.light-ui .challenge-card{background:linear-gradient(120deg,#e9e1fb,#dce8fb);color:#172b45}body.light-ui .challenge-card h2,body.light-ui .challenge-card p{color:#172b45}
+@media(max-width:1100px){.shell{grid-template-columns:235px minmax(0,1fr)}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-row{grid-template-columns:1fr}.right-stack{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:720px){.shell{display:block}.sidebar{display:none}.app{padding:20px 14px 92px}.mobile-tabs{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;bottom:0;left:0;right:0;background:#081c35;border-top:1px solid #294563;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:20}.mobile-tabs .tab{border:0;background:transparent;color:#b9cbe0;display:grid;justify-items:center;gap:2px;font-size:10px;padding:5px}.mobile-tabs .tab span{font-size:20px}.mobile-tabs .tab[aria-current=page]{color:#ffd16e}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.dash-card{padding:13px}.dash-value{font-size:24px}.progress-ring{width:78px;height:78px}.progress-ring strong{font-size:21px}.dash-row{display:block}.right-stack{display:grid;grid-template-columns:1fr;margin-top:12px}.theme-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.dash-footer{grid-template-columns:1fr}.challenge-card{min-height:190px;padding:16px}.challenge-art{font-size:48px}#v-play .dash-head h1{font-size:26px}#v-play .dash-user{display:none}}
+@media(max-width:390px){.badge-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-strip{grid-template-columns:repeat(4,minmax(0,1fr))}.theme-trophy{padding:8px 4px}}
 
 </style>
-</head>
-<body>
 
-<main class="app wrap" id="app">
-  <section id="v-play" aria-label="Jouer"></section>
-  <section id="v-lib" aria-label="Tous les quiz" hidden></section>
-  <section id="v-me" aria-label="Mon score" hidden></section>
-  <section id="v-team" aria-label="Équipe" hidden></section>
-  <section id="v-quiz" class="quiz" aria-label="Quiz" hidden></section>
-  <section id="v-welcome" aria-label="Bienvenue" hidden></section>
-</main>
 
-<nav class="tabs" id="tabs" aria-label="Navigation">
-  <div class="wrap">
-    <button class="tab" data-tab="play" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>Jouer</button>
-    <button class="tab" data-tab="lib" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11"/></svg>Quiz</button>
-    <button class="tab" data-tab="me" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 5-7"/></svg>Mon score</button>
-    <button class="tab" data-tab="team" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18.5 14c1.5.7 2.5 2.3 2.5 5"/></svg>Équipe</button>
-  </div>
+<div class="shell" id="shell">
+  <aside class="sidebar" id="sidebar" aria-label="Navigation principale">
+    <div class="brand"><div class="brand-mark">✚</div><div><strong>OBJECTIF<br><span>CERTiF</span></strong><small>PLATEFORME DE FORMATION<br>UGA</small></div></div>
+    <nav class="side-nav">
+      <button class="tab" data-tab="play"><span>⌂</span>Tableau de bord</button>
+      <button class="tab" data-tab="lib"><span>▣</span>Mes formations</button>
+      <button class="tab" data-action="challenge"><span>◎</span>Défis du jour</button>
+      <button class="tab" data-tab="me"><span>▥</span>Mes résultats</button>
+      <button class="tab" data-tab="lib"><span>⟳</span>Révisions</button>
+      <button class="tab" data-action="badges"><span>♜</span>Badges & récompenses</button>
+      <button class="tab" data-tab="team"><span>♧</span>Espace équipe</button>
+      <button class="tab" data-tab="me"><span>♙</span>Profil</button>
+    </nav>
+    <div class="side-profile" id="side-profile"></div>
+    <button class="theme-toggle" id="theme-toggle" type="button">☼ <span>Changer de thème</span></button>
+  </aside>
+  <main class="app" id="app">
+    <section id="v-play" aria-label="Tableau de bord"></section>
+    <section id="v-lib" aria-label="Mes formations" hidden></section>
+    <section id="v-me" aria-label="Mes résultats" hidden></section>
+    <section id="v-team" aria-label="Équipe" hidden></section>
+    <section id="v-quiz" class="quiz" aria-label="Quiz" hidden></section>
+    <section id="v-welcome" aria-label="Bienvenue" hidden></section>
+  </main>
+</div>
+<nav class="mobile-tabs" id="tabs" aria-label="Navigation mobile">
+  <button class="tab" data-tab="play"><span>⌂</span>Accueil</button>
+  <button class="tab" data-tab="lib"><span>▣</span>Formations</button>
+  <button class="tab" data-tab="me"><span>▥</span>Résultats</button>
+  <button class="tab" data-tab="team"><span>♧</span>Équipe</button>
 </nav>
 <div id="toast" class="toast" role="status" hidden></div>
 
@@ -1789,32 +1699,35 @@ nav.tabs .tab[aria-current="page"] svg { color:#f4bd4f; }
       (hasImp ? '<span class="pill imp">Impératif</span>' : "") + (t.tc ? '<span class="pill">Traceur ciblé</span>' : "") + "</div></div>" + right +
       '<div class="bar ' + (p === null ? "" : level(p)) + '"><span style="width:' + (p === null ? 0 : r(p)) + '%"></span></div></button>';
   }
+  function trophyLevel(p) { return p === null ? 0 : p >= 100 ? 4 : p >= 75 ? 3 : p >= 50 ? 2 : p >= 25 ? 1 : 0; }
+  function trophyName(n) { return ["À obtenir", "Bronze", "Argent", "Or", "Platine"][n]; }
+  function trophyClass(n) { return ["locked", "bronze", "silver", "gold", "platinum"][n]; }
+  function themeIcon(id) { return ({dignite:"♡",bientraitance:"✋",douleur:"♥",info:"▤",age:"♿",experience:"☻",identito:"◎",medic:"✚",hygiene:"✧",urgences:"⚠",transfusion:"♢",sortie:"⇢",ei:"⚑",sse:"☀",cyber:"⌘",equipes:"♧"})[id] || "✦"; }
+  function xpLevel(points) { return Math.floor((points || 0) / 1000) + 1; }
   function renderPlay() {
-    var g = globalScore();
-    var imp = {}; THEMES.forEach(function (t) { t.refs.forEach(function (x) { if (x[1]) imp[x[0]] = 1; }); });
-    var nImp = Object.keys(imp).length;
-    var chm = [1, 2, 3].map(function (c) {
-      var v = chapterScore(c);
-      return "<div><span>" + CHAPTERS[c] + "</span><b>" + (v === null ? "–" : r(v) + " %") + '</b><div class="bar ' + (v === null ? "" : level(v)) + '"><span style="width:' + (v === null ? 0 : r(v)) + '%"></span></div></div>';
-    }).join("");
-    var xp = Math.max(0, S.points || 0), lvl = Math.floor(xp / 250) + 1, xpIn = xp % 250;
-    var streak = Math.max(0, S.streak || 0);
-    var h = '<div class="head"><div><p class="eyebrow">Centre d’entraînement · certification HAS</p><h1>Bienvenue' + (S.pseudo ? ', ' + esc(S.pseudo) : '') + ' !</h1><p style="color:#d4e2f1;margin:10px 0 0;max-width:48ch">Chaque question te rapproche d’une meilleure maîtrise des bonnes pratiques.</p></div>' +
-      chipHtml() + "</div>" +
-      '<p class="lede">Choisis un thème, relève un défi et fais progresser tes connaissances à ton rythme.</p>' +
-      '<div class="stats" style="margin:18px 0"><div class="stat"><b>★ ' + xp.toLocaleString("fr-FR") + '</b><span>XP cumulés</span></div><div class="stat"><b>◆ ' + lvl + '</b><span>Niveau actuel</span></div><div class="stat"><b>🔥 ' + streak + '</b><span>Jours de pratique consécutifs</span></div></div>' +
-      '<div class="score"><div><div class="big">' + (g === null ? "–" : r(g)) + "<small>%</small></div>" +
-      '<p class="cap">Score global · objectif de progression</p><div class="bar" style="margin-top:14px"><span style="width:' + xpIn / 250 * 100 + '%;background:var(--accent)"></span></div><p class="cap">Niveau ' + lvl + ' · ' + xpIn + ' / 250 XP vers le prochain niveau</p></div><div class="chmini">' + chm + "</div></div>" +
-      '<div class="defi"><div><p class="eyebrow" style="color:#d4e2f1">Mission quotidienne</p><h2>Défi du jour</h2><p>4 questions · 4 thèmes · environ 3 minutes</p></div><button class="btn" type="button" id="go-defi">Relever le défi&nbsp; →</button></div>';
-    [1, 2, 3].forEach(function (c) {
-      var v = chapterScore(c);
-      h += '<div class="sect" style="--c:var(--c' + c + ')"><div class="sect-head"><h3>Chapitre ' + c + " · " + CHAPTERS[c] + "</h3><span>" + (v === null ? "–" : r(v) + " %") + "</span></div>" +
-        THEMES.filter(function (t) { return t.ch === c; }).map(row).join("") + "</div>";
-    });
-    h += '<p class="note">' + THEMES.length + " thèmes issus du référentiel HAS 2027. Ils couvrent " + nImp + " des " + IMPERATIFS_TOTAL +
-      " critères impératifs (soulignés ci-dessus). Les autres concernent des secteurs que l’unité n’a pas : bloc, maternité, psychiatrie, mineurs.</p>" +
-      '<p class="note">Les quiz Douleur et Hygiène sont jouables, rassemblés dans l’onglet Quiz. Les autres thèmes arrivent. Le score d’un thème est le nombre de bonnes réponses divisé par le nombre de réponses, comme dans la cotation de la HAS.</p>';
-    $("v-play").innerHTML = h;
+    var g = globalScore(), points = S.points || 0, lvl = xpLevel(points), within = points % 1000, done = (S.hist || []).length;
+    var mastered = THEMES.filter(function(t){return trophyLevel(pct(t.id)) >= 3;}).length;
+    var themeRows = THEMES.slice(0,6).map(function(t){var p=pct(t.id),v=p===null?0:r(p);return '<button class="theme-card" type="button" data-theme-id="'+t.id+'"><span class="theme-icon">'+themeIcon(t.id)+'</span><b>'+esc(t.name)+'</b><small>'+(p===null?'Pas encore évalué':v+' % de bonnes réponses')+'</small><div class="bar"><span style="width:'+v+'%"></span></div></button>';}).join("");
+    var badgeCards = THEMES.map(function(t){var p=pct(t.id),n=trophyLevel(p);return '<div class="theme-trophy" title="'+esc(t.name)+' : '+(p===null?'pas encore évalué':r(p)+' %')+'"><span class="ticon theme-emblem '+trophyClass(n)+'">'+themeIcon(t.id)+'</span><b>'+esc(t.name)+'</b><span class="trophy '+trophyClass(n)+'">'+(n===0?'♧':'🏆')+'</span><small style="display:block;color:#9fb5ce;font-size:9px;margin-top:3px">'+trophyName(n)+'</small></div>';}).join("");
+    var recent = THEMES.filter(function(t){return trophyLevel(pct(t.id))>0;}).sort(function(a,b){return trophyLevel(pct(b.id))-trophyLevel(pct(a.id));}).slice(0,4);
+    var recentBadges = recent.length ? recent.map(function(t){var n=trophyLevel(pct(t.id));return '<div class="badge-mini"><div class="badge-medal">'+themeIcon(t.id)+'</div><small>'+esc(t.name)+'</small><small>'+trophyName(n)+'</small></div>';}).join("") : '<p class="empty-dash">Tes premiers trophées apparaîtront ici après tes quiz.</p>';
+    var chm=[1,2,3].map(function(c){var v=chapterScore(c);return '<div class="badge-line"><span>✦</span><span>'+esc(CHAPTERS[c])+'<div class="bar"><span style="width:'+(v===null?0:r(v))+'%"></span></div></span><b>'+(v===null?'–':r(v)+'%')+'</b></div>';}).join('');
+    var pctText=g===null?'–':r(g)+'%';
+    var h='<div class="dash-head"><div><p class="dash-label">Plateforme de formation · préparation certification</p><h1>Bonjour, '+esc(S.pseudo||'Infirmier(e)')+' ! 👋</h1><p>Prêt(e) à relever de nouveaux défis et à progresser ?</p></div><button class="dash-user" data-tab="me"><span class="avatar">♙</span><span><b>'+esc(S.pseudo||'Profil')+'</b><br><small>Profil actif · Niveau '+lvl+'</small></span></button></div>'+
+      '<div class="dash-stats">'+
+      '<div class="dash-card"><div class="dash-label">Progression globale</div><div class="progress-flex"><div class="progress-ring" style="--progress:'+(g===null?0:r(g))+'%"><strong>'+pctText+'</strong></div><div><b style="color:#68c9f3">'+(g===null?'À découvrir':'Continue ainsi !')+'</b><div class="dash-sub">Maîtrise des thèmes évalués</div><button class="linkbtn" data-tab="me" style="color:#71cfff;margin-top:9px">Voir mes résultats →</button></div></div></div>'+
+      '<div class="dash-card"><div class="dash-label">XP totaux</div><div class="progress-flex"><span class="xp-icon">⬡</span><div><div class="dash-value">'+points.toLocaleString('fr-FR')+' <em>XP</em></div><div class="dash-sub">Niveau '+lvl+' · '+within+' / 1 000 XP</div></div></div><div class="bar" style="margin-top:15px;height:8px"><span style="width:'+(within/10)+'%;background:linear-gradient(90deg,#e8a93d,#f7ca6b)"></span></div></div>'+
+      '<div class="dash-card"><div class="dash-label">Série en cours</div><div class="progress-flex"><span class="fire">🔥</span><div><div class="dash-value">'+(S.streak||0)+' <em>jours</em></div><div class="dash-sub">Régularité d’entraînement</div></div></div><div class="dash-sub">Chaque session compte.</div></div>'+
+      '<div class="dash-card"><div class="dash-label">Quiz réalisés</div><div class="progress-flex"><span class="metric-icon">▣</span><div><div class="dash-value">'+done+'</div><div class="dash-sub">Sessions terminées</div></div></div><div class="dash-sub">'+answered()+' réponses enregistrées</div></div></div>'+
+      '<div class="dash-row"><div><div class="challenge-card"><div><span class="level-pill">Défi du jour</span><h2>Prêt(e) pour le challenge ?</h2><p>4 questions · 4 thèmes · environ 3 minutes</p><p style="color:#e7c8ff">✦ Des XP à gagner en progressant !</p><button class="challenge-btn" id="go-defi" type="button">Commencer le défi　›</button></div><div class="challenge-art">🏆</div></div>'+
+      '<div class="dash-section-title"><h2>Reprendre ma formation</h2><a href="#" data-tab="lib">Toutes les formations →</a></div><div class="theme-cards">'+themeRows+'</div></div>'+
+      '<div class="right-stack"><div class="dash-card"><div class="dash-section-title" style="margin-top:0"><h2>Mes derniers badges</h2><a href="#badges" data-action="badges">Voir le système</a></div><div class="badge-strip">'+recentBadges+'</div></div>'+
+      '<div class="dash-card"><div class="dash-section-title" style="margin-top:0"><h2>Maîtrise par chapitre</h2><a href="#" data-tab="me">Détails</a></div><div class="badge-list">'+chm+'</div></div>'+
+      '<div class="dash-card"><div class="dash-section-title" style="margin-top:0"><h2>Niveau actuel</h2></div><div class="progress-flex"><span class="xp-icon">🏅</span><div><div class="dash-value" style="font-size:22px">Niveau '+lvl+'</div><div class="dash-sub">Apprenant en progression</div></div></div><div class="bar" style="height:8px;margin-top:12px"><span style="width:'+(within/10)+'%;background:linear-gradient(90deg,#e8a93d,#f7ca6b)"></span></div><div class="dash-sub">Encore '+(1000-within)+' XP pour le niveau suivant</div></div></div></div>'+
+      '<div class="dash-section-title" id="badge-system"><h2>Badges de maîtrise des 16 thèmes</h2><a href="#" data-action="badges">Système Bronze · Argent · Or · Platine</a></div><div class="dash-card"><p class="dash-sub" style="margin:0 0 13px">Chaque thème possède son propre emblème, décliné en quatre niveaux selon le taux de bonnes réponses : Bronze dès 25 %, Argent dès 50 %, Or dès 75 %, Platine à 100 %.</p><div class="badge-gallery">'+badgeCards+'</div></div>'+
+      '<div class="dash-footer"><div class="tip-card"><span style="font-size:27px">✦</span><div><strong>Chaque petite révision compte.</strong><div class="dash-sub">La régularité est la clé de la maîtrise.</div></div></div><div class="weekly-card"><span>▦　Objectif de progression</span><b>'+mastered+' / '+THEMES.length+' thèmes au niveau Or ou Platine</b></div></div>';
+    $("v-play").innerHTML=h;
+    $("side-profile").innerHTML='<b>♙　'+esc(S.pseudo||'Profil actif')+'</b><small>Niveau '+lvl+' · '+points.toLocaleString('fr-FR')+' XP</small><div class="mini-track"><i style="width:'+(within/10)+'%"></i></div><small>'+within+' / 1 000 XP vers le niveau suivant</small>';
   }
 
   /* ---------- Tous les quiz ---------- */
@@ -1867,7 +1780,7 @@ nav.tabs .tab[aria-current="page"] svg { color:#f4bd4f; }
       '<div class="sect"><div class="sect-head"><h3>À revoir en priorité</h3><span>3 thèmes</span></div>' +
       (low.length ? "" : '<p class="note">Rien à afficher pour l’instant. Jouez un premier quiz.</p>') + low.map(function (t) { var p = pct(t.id); return '<button class="row" type="button" data-theme-id="' + t.id + '"><div><div class="name">' + esc(t.name) + '</div></div><div class="pct"><b>' + r(p) + "<small> %</small></b><em class=\"" + level(p) + '">' + levelLabel(p) + '</em></div><div class="bar ' + level(p) + '"><span style="width:' + r(p) + '%"></span></div></button>'; }).join("") + "</div>" +
       '<div class="sect"><div class="sect-head"><h3>Mon identifiant</h3></div><div class="field"><label for="pseudo">Pseudo</label><input id="pseudo" type="text" maxlength="20" autocomplete="off" value="' + esc(S.pseudo) + '"></div>' +
-      '<p class="note">Code personnel : <span class="code">' + esc(S.code) + '</span>. Votre progression est enregistrée sur ce téléphone. Votre profil et votre progression sont enregistrés uniquement dans le navigateur de cet appareil. Le code personnel ne permet pas, à lui seul, de transférer les résultats sur un autre appareil.</p>' + '<p class="note">Service : ' + esc(S.service || "non renseigné") + '</p><div class="actions"><button class="btn ghost" type="button" id="switch">Changer de profil</button></div></div>';
+      '<p class="note">Code personnel : <span class="code">' + esc(S.code) + '</span>. Votre progression est enregistrée sur ce téléphone. Le code servira à la retrouver ailleurs quand la sauvegarde en ligne sera en place.</p>' + '<p class="note">Service : ' + esc(S.service || "non renseigné") + '</p><div class="actions"><button class="btn ghost" type="button" id="switch">Changer de profil</button></div></div>';
     $("v-me").innerHTML = h;
     $("pseudo").addEventListener("input", function (e) { S.pseudo = e.target.value.trim() || "Anonyme"; save(); });
     $("switch").addEventListener("click", function () { save(); S = clone(FRESH); save(); show("welcome"); });
@@ -2051,20 +1964,24 @@ nav.tabs .tab[aria-current="page"] svg { color:#f4bd4f; }
     tab = name;
     ["play", "lib", "me", "team", "quiz", "welcome"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
     $("tabs").hidden = name === "quiz" || name === "welcome";
+    $("sidebar").style.display = (name === "quiz" || name === "welcome") ? "none" : "flex";
+    $("shell").style.gridTemplateColumns = (name === "quiz" || name === "welcome") ? "1fr" : "280px minmax(0,1fr)";
     if (name === "welcome") renderWelcome();
     if (name === "play") renderPlay();
     if (name === "lib") renderLib();
     if (name === "me") renderMe();
     if (name === "team") renderTeam();
     Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (b) {
-      if (b.getAttribute("data-tab") === name) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+      if (b.getAttribute("data-tab") === name && !b.hasAttribute("data-action")) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
     });
     if (name !== "quiz") window.scrollTo(0, 0);
   }
   document.addEventListener("click", function (e) {
-    var t = e.target.closest ? e.target.closest("[data-tab],[data-theme-id],[data-switch],[data-quiz],#go-defi") : null;
+    var t = e.target.closest ? e.target.closest("[data-tab],[data-theme-id],[data-switch],[data-quiz],[data-action],#go-defi") : null;
     if (!t) return;
     if (t.hasAttribute("data-switch")) { switchProfile(); return; }
+    if (t.getAttribute("data-action") === "challenge") { startQuiz("defi"); return; }
+    if (t.getAttribute("data-action") === "badges") { var b = $("badge-system"); if (tab !== "play") show("play"); setTimeout(function(){var el=$("badge-system");if(el)el.scrollIntoView({behavior:"smooth",block:"start"});},40); return; }
     if (t.hasAttribute("data-quiz")) { startQuiz(t.getAttribute("data-quiz")); return; }
     if (t.hasAttribute("data-tab")) { show(t.getAttribute("data-tab")); return; }
     if (t.id === "go-defi") { startQuiz("defi"); return; }
@@ -2073,9 +1990,9 @@ nav.tabs .tab[aria-current="page"] svg { color:#f4bd4f; }
     else toast("Quiz à venir pour ce thème.");
   });
 
+  var themeBtn = $("theme-toggle");
+  if (themeBtn) themeBtn.addEventListener("click", function(){document.body.classList.toggle("light-ui");themeBtn.querySelector("span").textContent=document.body.classList.contains("light-ui")?"Passer en mode sombre":"Passer en mode clair";});
   var start = { jouer: "play", quiz: "lib", score: "me", equipe: "team" }[(location.hash || "").replace("#", "")] || "play";
   show(S.onboarded ? start : "welcome");
 })();
 </script>
-</body>
-</html>
