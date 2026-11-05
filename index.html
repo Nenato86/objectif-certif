@@ -1737,12 +1737,15 @@ button.chip:hover { border-color: var(--ink); }
       '<p class="lede">Des quiz de trois minutes, un thème à la fois, pour arriver prêt le jour de la visite. Créez votre profil pour suivre votre progression.</p>' +
       plist + '<form id="wf" class="wform"><div class="field"><label for="wp">Choisissez un pseudo</label><input id="wp" maxlength="20" autocomplete="off" required placeholder="Ex. : Cyclope42"></div>' +
       '<div class="field"><label for="ws">Votre service</label><select id="ws">' + sv + '</select></div>' +
-      '<p class="note">Ni nom ni matricule. Ne saisissez aucune donnée de patient. Votre profil reste enregistré sur ce téléphone.</p>' +
+      '<p class="note">Ni nom ni matricule. Ne saisissez aucune donnée de patient. Votre profil reste enregistré sur cet appareil. Si ce pseudo existe déjà ici, vous retrouvez votre progression.</p>' +
       '<div class="actions"><button class="btn" type="submit">Commencer</button></div></form>';
 
     $("wf").addEventListener("submit", function (e) {
       e.preventDefault();
       var p = $("wp").value.trim(); if (!p) return;
+      var P = profiles(), want = p.toLowerCase(), best = null;
+      Object.keys(P).forEach(function (k) { if ((P[k].pseudo || "").toLowerCase() === want && (!best || (P[k].points || 0) > (best.points || 0))) best = P[k]; });
+      if (best) { S = clone(best); save(); show("play"); toast("Profil retrouvé : " + S.pseudo); return; }
       S = clone(FRESH); S.pseudo = p; S.service = $("ws").value; S.code = genCode(); S.onboarded = true; save(); show("play");
     });
     Array.prototype.forEach.call($("v-welcome").querySelectorAll("[data-resume]"), function (b) {
