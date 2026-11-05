@@ -1453,6 +1453,50 @@ button.chip:hover { border-color: var(--ink); }
           opts: ["Sous 1 mois", "À la fin de l’année", "Il n’y a pas de document à adresser", "Sous 24 heures, à la Direction du Personnel"], ok: 3,
           why: "Le certificat initial est remis par le médecin des urgences, la déclaration d’accident de travail par le cadre du service.", src: "Affiche AES : les bons réflexes (HSV-EPRI-AUT-0692, juillet 2024)" }
       ]
+    },
+    ident2: {
+      th: "identito", title: "Le quiz identitovigilance du DIM",
+      questions: [
+        { theme: "identito", q: "Qu’est-ce que l’identitovigilance ?",
+          opts: ["La vérification annuelle des cartes vitales", "L’organisation qui fiabilise l’identification d’un usager à toutes les étapes de sa prise en charge", "La seule création du dossier administratif", "Un contrôle réalisé uniquement par le service des admissions"], ok: 1,
+          why: "Elle comprend l’identitovigilance primaire (attribution d’une identité propre à la création du dossier) et secondaire (vérification tout au long de la prise en charge), ainsi que la surveillance et le signalement des erreurs.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q1" },
+        { theme: "identito", q: "Qu’est-ce que l’identitovigilance secondaire ?",
+          opts: ["La fusion des doublons par le DIM", "La demande de la carte vitale", "La vérification de la bonne identité du patient avant tout acte, tout au long de sa prise en charge, par tous les professionnels", "La création de l’identité à l’admission"], ok: 2,
+          why: "Elle s’applique à toutes les spécialités, quel que soit le métier.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q1" },
+        { theme: "identito", q: "La vérification de l’identité du patient est…",
+          opts: ["Réservée aux infirmiers", "Réservée à l’accueil administratif", "Facultative si le patient est connu du service", "Le premier acte de soin, à réaliser par tous les professionnels quel que soit leur métier"], ok: 3,
+          why: "Il s’agit de vérifier que le patient qui bénéficie de l’acte (soin, radio, transfert…) est celui pour lequel il a été prescrit.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q2" },
+        { theme: "identito", q: "Dans quelles situations vérifie-t-on l’identité d’un patient ?",
+          opts: ["Dans toutes : à chaque étape de la prise en charge, par chaque professionnel", "Uniquement à l’admission", "Uniquement avant un geste invasif", "Uniquement la nuit"], ok: 0,
+          why: "L’identité doit être vérifiée à chaque soin, chaque examen, chaque transfert.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q3" },
+        { theme: "identito", q: "Pourquoi éviter la question fermée « Vous êtes bien Monsieur Martin ? » ?",
+          opts: ["Elle est interdite par la loi en pédiatrie", "Elle expose à une erreur : le patient peut acquiescer à tort", "Elle est trop longue", "Elle est réservée aux médecins"], ok: 1,
+          why: "On pose une question ouverte : « Pouvez-vous me donner vos nom, prénom et date de naissance ? ».", src: "Quiz identitovigilance DIM (22 mai 2025) · Q4" },
+        { theme: "identito", q: "Un patient confus, inconscient ou ne parlant pas français : comment vérifie-t-on son identité ?",
+          opts: ["On demande à un voisin de chambre", "On se fie au numéro de chambre", "À l’aide du bracelet ou de tout autre moyen disponible", "On ne vérifie pas"], ok: 2,
+          why: "Le bracelet permet de pallier les difficultés de communication.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q4" },
+        { theme: "identito", q: "Un collègue a déjà vérifié l’identité du patient. Faut-il la vérifier à nouveau ?",
+          opts: ["Non, c’est inutile", "Seulement la nuit", "Seulement si le patient est agité", "Oui : chaque vérification permet de récupérer d’éventuelles erreurs faites en amont"], ok: 3,
+          why: "Attention au faux sentiment de sécurité apporté par les vérifications faites avant ou après votre intervention : la récupération des erreurs évite les accidents.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q5" },
+        { theme: "identito", q: "Deux patients du service ont le même nom de naissance. Que faites-vous ?",
+          opts: ["Je mets tout en œuvre pour éviter l’erreur de patient", "Rien : c’est le rôle de l’accueil", "Je ne vérifie que le prénom", "J’inverse les chambres"], ok: 0,
+          why: "Réponse retenue par le quiz du DIM : vigilance maximale à chaque vérification d’identité.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q7" },
+        { theme: "identito", q: "Que signifie INS et à quoi sert-elle ?",
+          opts: ["Information Nominative Sécurisée, valable un an", "Identité Nationale de Santé : un identifiant unique et pérenne, utilisé par tous les acteurs de santé qui prennent en charge le patient", "Indice National de Soins, utilisé pour la facturation", "Identifiant Numérique du Séjour, propre à chaque établissement"], ok: 1,
+          why: "Le référentiel national d’identitovigilance (RNIV) définit les exigences et recommandations de bonnes pratiques.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q9" },
+        { theme: "identito", q: "Quel élément ne figure PAS dans l’INS ?",
+          opts: ["Le premier prénom de naissance", "Le lieu de naissance", "Le nom d’usage (nom usuel)", "Le nom de naissance"], ok: 2,
+          why: "L’INS comprend le matricule INS, les 5 traits stricts (date de naissance, genre, nom de naissance, premier prénom de naissance, lieu de naissance) et l’identifiant de la structure (OID). Le nom usuel peut changer (mariage, divorce…).", src: "Quiz identitovigilance DIM (22 mai 2025) · Q10" },
+        { theme: "identito", q: "Qu’est-ce qui permet d’intégrer les données de santé d’un patient dans le DMP ?",
+          opts: ["Le numéro de chambre", "L’identifiant de séjour", "Le numéro de téléphone du patient", "Une INS qualifiée, après vérification d’une pièce d’identité à haut niveau de confiance"], ok: 3,
+          why: "Il faut aussi s’assurer de la cohérence entre les traits INS renvoyés par le téléservice et ceux de la personne prise en charge.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q11" },
+        { theme: "identito", q: "Qu’est-ce qu’un doublon d’identités ?",
+          opts: ["Une même personne enregistrée sous deux IPP différents (ou plus)", "Deux personnes différentes enregistrées sous le même IPP", "Deux patients homonymes dans le même service", "Un patient qui change de service"], ok: 0,
+          why: "Le patient a alors plusieurs dossiers qui ne communiquent pas entre eux : des informations utiles à la décision médicale peuvent manquer.", src: "Quiz identitovigilance DIM (22 mai 2025) · Q15" },
+        { theme: "identito", q: "Qu’est-ce qu’une collision d’identités et quel est son risque ?",
+          opts: ["Une erreur de facturation sans conséquence", "L’attribution d’un même IPP à deux personnes différentes : on peut décider au regard des données de santé d’une autre personne", "Une même personne sous deux IPP : un dossier incomplet", "Un patient qui refuse son bracelet"], ok: 1,
+          why: "Origines possibles : erreur d’identification primaire (erreur de saisie à l’admission, fiche pompier erronée) ou secondaire (mauvais choix de l’IPP à la création de la venue).", src: "Quiz identitovigilance DIM (22 mai 2025) · Q15" }
+      ]
     }
   };
 
