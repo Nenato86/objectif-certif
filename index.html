@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Objectif CertiF</title>
-<meta name="objectif-certif-version" content="beta-mobile-d-2026-11-09">
+<meta name="objectif-certif-version" content="beta-equipe-2026-11-09">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
@@ -216,6 +216,23 @@ body{margin:0;background:#07172d;color:#edf4ff;font-family:Inter,"Segoe UI",Aria
 body.light-ui .award-card,body.light-ui .award-summary{background:#fff;color:#172b45;border-color:#d3dfec}body.light-ui .award-section h3,body.light-ui .award-copy b{color:#172b45}body.light-ui .award-copy small{color:#5e7187}
 
 
+
+/* Partie en équipe */
+.seg{display:flex;flex-wrap:wrap;gap:8px}.seg-b{min-height:44px;padding:8px 16px;border:1px solid #3a5877;border-radius:11px;background:#173454;color:#edf4ff;font-weight:700}.seg-b.on{border-color:#f3b847;background:#3a2f1a;color:#ffd879}
+.party-input{width:100%;min-height:46px;padding:10px 14px;border:1px solid #3a5877;border-radius:11px;background:#0e2542;color:#edf4ff;font:inherit}.party-link{margin-top:12px;font-size:13px}
+.party-opt{margin:14px 0 8px;color:#b9cbe0;font-weight:600}.party-sum{margin:16px 0 6px;color:#edf4ff}.party-warn{margin:8px 0;color:#ffd9a0;font-weight:600}.party-create{margin-top:12px}.party-create[disabled]{opacity:.45;cursor:not-allowed}
+.party-ch{margin:14px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#9fb5ce}.party-quick{margin:8px 0}
+.pcheck{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:8px 12px;margin:0 0 6px;border:1px solid #294563;border-radius:10px;background:#0e2542;color:#edf4ff;text-align:left;font-weight:600}.pcheck small{margin-left:auto;color:#9fb5ce}.pcheck.on{border-color:#3fbf8f;background:#12392f}.pbox{display:inline-grid;place-items:center;flex:0 0 24px;height:24px;border:2px solid #70cfff;border-radius:6px;font-weight:900;color:#9ff0cc}
+.party-result{margin-top:22px}.party-qr{display:grid;place-items:center;margin:14px 0}.party-qr .qr{border-radius:12px;max-width:100%;height:auto}.party-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.party-actions .btn{min-height:46px}
+.party-facts{margin:12px 0 18px;padding-left:20px;line-height:1.7;color:#d8e5f3}
+.tower-option.p-ok{border-color:#3fbf8f;background:#12392f;color:#d6fbe9}.tower-option.p-ko{border-color:#e06a6a;background:#3a1b22;color:#ffd1d1}.tower-option:disabled{cursor:default;opacity:1}
+.party-rev{padding:14px 0;border-top:1px solid #294563}.party-rev p{margin:6px 0}.party-rev-q{font-weight:700;color:#fff}.party-rev-q span{color:#f3b847}.party-rev-why{color:#b9cbe0}.party-rev small{color:#8da4bd}.pr-ok{color:#8ff0c4}.pr-ko{color:#ffb4b4}
+.anim{min-height:100vh;padding:22px 4vw 40px;display:grid;align-content:start;gap:20px;color:#fff}.anim-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:#b9cbe0;font-size:16px;font-weight:700}.anim h2{font-size:clamp(30px,4.4vw,60px);line-height:1.15;margin:0}.anim-q{font-size:clamp(26px,3.6vw,50px)!important;line-height:1.25}.anim-sub{font-size:clamp(18px,2vw,28px);color:#d8e5f3;margin:10px 0}.anim-link{font-size:14px;color:#8da4bd;word-break:break-all;max-width:60ch}
+.anim-start{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6vw;align-items:center;margin-top:4vh}.anim-qr .qr{width:min(34vw,420px);height:auto;border-radius:16px}.anim-go{font-size:clamp(18px,1.8vw,26px);padding:16px 30px;margin-top:20px}
+.anim-opts{display:grid;grid-template-columns:1fr 1fr;gap:16px}.anim-opt{display:flex;gap:16px;align-items:center;padding:clamp(14px,2vw,26px);border:2px solid #3a5877;border-radius:16px;background:#173454;font-size:clamp(20px,2.5vw,36px);line-height:1.3;font-weight:600}.anim-opt b{display:grid;place-items:center;flex:0 0 clamp(40px,4vw,62px);height:clamp(40px,4vw,62px);border-radius:50%;background:#294563;color:#ffd879}.anim-opt.ok{border-color:#3fbf8f;background:#12392f}.anim-opt.ok b{background:#3fbf8f;color:#062b1f}.anim-opt.dim{opacity:.38}
+.anim-why{padding:clamp(14px,2vw,24px);border-radius:14px;background:#0b203a;border:1px solid #294563;font-size:clamp(17px,2vw,28px);line-height:1.45;color:#e3edf8}.anim-why small{display:block;margin-top:10px;font-size:15px;color:#8da4bd}.anim-next{display:flex;align-items:center;gap:20px}.anim-hint{color:#8da4bd;font-size:14px}.anim-recap{max-width:1100px}
+body.light-ui .seg-b,body.light-ui .pcheck,body.light-ui .party-input{background:#f2f6fb;color:#172b45;border-color:#d3dfec}body.light-ui .seg-b.on{background:#fff4d8;color:#7a5410;border-color:#c99b45}body.light-ui .pcheck.on{background:#dff5ec;border-color:#3fbf8f}body.light-ui .party-sum,body.light-ui .party-rev-q,body.light-ui .anim,body.light-ui .party-facts{color:#172b45}body.light-ui .party-opt,body.light-ui .party-rev-why,body.light-ui .anim-bar,body.light-ui .anim-sub{color:#526b84}body.light-ui .anim-opt{background:#f2f6fb;border-color:#d3dfec;color:#172b45}body.light-ui .anim-opt b{background:#dce6f1;color:#7a5410}body.light-ui .anim-opt.ok{background:#dff5ec}body.light-ui .anim-why{background:#f3f6fa;border-color:#d3dfec;color:#34506d}body.light-ui .party-rev{border-color:#d3dfec}body.light-ui .tower-option.p-ok{background:#dff5ec;color:#14664b}body.light-ui .tower-option.p-ko{background:#fde7ea;color:#8a2a35}
+@media(max-width:720px){.anim-start{grid-template-columns:1fr}.anim-opts{grid-template-columns:1fr}.anim-qr .qr{width:70vw}}
 /* Accueil plus court sur téléphone */
 @media(max-width:520px){.backup-reminder{padding:11px 13px!important;margin:0 0 12px!important;font-size:14px;line-height:1.4}.backup-reminder .backup-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px!important}.backup-reminder .btn{min-height:44px;padding:8px 10px;font-size:14px}#v-play .theme-cards>*:nth-child(n+3){display:none}#v-play .theme-card{padding-top:12px;padding-bottom:12px}.dash-section-title{margin:16px 0 9px}.dash-section-title h2{font-size:15px}.dash-section-title .linkbtn{white-space:nowrap;font-size:13px}.recent-trophies .dash-section-title{margin-top:0}.home-defi{padding:16px}}
 /* Trophées repliables + compacts sur téléphone */
@@ -312,6 +329,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       <button class="tab" data-action="challenge"><span>◎</span>Défis du jour</button>
       <button class="tab" data-tab="tower"><span>♜</span>La Tour des Questions</button>
       <button class="tab" data-tab="biblio"><span>▤</span>La Bibliothèque retrouvée</button>
+      <button class="tab" data-tab="party"><span>⚑</span>Partie en équipe</button>
       <button class="tab" data-tab="me"><span>▥</span>Résultats & profil</button>
       <button class="tab" data-action="errors"><span>⟳</span>Rejouer mes erreurs<b class="nav-count" id="nav-errors" hidden></b></button>
       <button class="tab" data-tab="badges"><span>✦</span>Trophées</button>
@@ -328,6 +346,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     <section id="v-badges" aria-label="Collection des trophées" hidden></section>
     <section id="v-tower" aria-label="La Tour des Questions" hidden></section>
     <section id="v-biblio" aria-label="La Bibliothèque retrouvée" hidden></section>
+    <section id="v-party" aria-label="Partie en équipe" hidden></section>
     <section id="v-quiz" class="quiz" aria-label="Quiz" hidden></section>
     <section id="v-welcome" aria-label="Bienvenue" hidden></section>
   </main>
@@ -2073,6 +2092,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
 
     var quick = '';
     if (nErr) quick += '<button class="quick-card" type="button" data-action="errors"><span class="quick-ico">⟳</span><span><b>Rejouer mes erreurs</b><small>'+nErr+' question'+(nErr > 1 ? 's' : '')+' à revoir · jusqu’à 5 par partie</small></span></button>';
+    quick += '<button class="quick-card" type="button" data-tab="party"><span class="quick-ico">👥</span><span><b>Partie en équipe</b><small>Même questions pour tous · hors score</small></span></button>';
     quick += '<button class="quick-card" type="button" data-tab="biblio"><span class="quick-ico">📚</span><span><b>La Bibliothèque retrouvée</b><small>'+libDoneCount()+' / '+BIB.length+' manuscrits restaurés</small></span></button>';
     quick += '<button class="quick-card" type="button" data-tab="tower"><span class="quick-ico">🏰</span><span><b>La Tour des Questions</b><small>Record : '+towerRecord+' / '+towerTotal+'</small></span></button>';
 
@@ -2418,6 +2438,368 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       '<p style="margin-top:16px"><button class="tower-start" type="button" data-action="bib-start">Restaurer 5 autres manuscrits</button> <button class="tower-quit" type="button" data-tab="biblio">Retour à la bibliothèque</button></p></div></div>';
     window.scrollTo(0, 0);
   }
+  /* ---------- Générateur de QR code (hors ligne, mode octets, niveaux L et M) ---------- */
+  var QR = (function () {
+    var ECC_PER_BLOCK = [
+      [-1, 7,10,15,20,26,18,20,24,30,18,20,24,26,30,22,24,28,30,28,28,28,28,30,30,26,28,30,30,30,30,30,30,30,30,30,30,30,30,30,30],
+      [-1,10,16,26,18,24,16,18,22,22,26,30,22,22,24,24,28,28,26,26,26,26,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28]];
+    var NUM_BLOCKS = [
+      [-1,1,1,1,1,1,2,2,2,2,4,4,4,4,4,6,6,6,6,7,8,8,9,9,10,12,12,12,13,14,15,16,17,18,19,19,20,21,22,24,25],
+      [-1,1,1,1,2,2,4,4,4,5,5,5,8,9,9,10,10,11,13,14,16,17,17,18,20,21,23,25,26,28,29,31,33,35,37,38,40,43,45,47,49]];
+    var FMT = [1, 0];
+    function rawModules(v) {
+      var r = (16 * v + 128) * v + 64;
+      if (v >= 2) { var n = Math.floor(v / 7) + 2; r -= (25 * n - 10) * n - 55; if (v >= 7) r -= 36; }
+      return r;
+    }
+    function gmul(x, y) { var z = 0; for (var i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; } return z; }
+    function divisor(deg) {
+      var r = [], i, j; for (i = 0; i < deg - 1; i++) r.push(0); r.push(1);
+      var root = 1;
+      for (i = 0; i < deg; i++) { for (j = 0; j < r.length; j++) { r[j] = gmul(r[j], root); if (j + 1 < r.length) r[j] ^= r[j + 1]; } root = gmul(root, 2); }
+      return r;
+    }
+    function remainder(data, div) {
+      var r = div.map(function () { return 0; });
+      data.forEach(function (b) { var f = b ^ r.shift(); r.push(0); div.forEach(function (c, i) { r[i] ^= gmul(c, f); }); });
+      return r;
+    }
+    function utf8(s) { var u = unescape(encodeURIComponent(s)), a = []; for (var i = 0; i < u.length; i++) a.push(u.charCodeAt(i)); return a; }
+    function encode(text, ecl) {
+      var bytes = utf8(text), v, cap;
+      for (v = 1; v <= 40; v++) {
+        cap = Math.floor(rawModules(v) / 8) - ECC_PER_BLOCK[ecl][v] * NUM_BLOCKS[ecl][v];
+        if (4 + (v < 10 ? 8 : 16) + 8 * bytes.length <= cap * 8) break;
+      }
+      if (v > 40) return null;
+      var bits = [];
+      function put(val, len) { for (var i = len - 1; i >= 0; i--) bits.push((val >>> i) & 1); }
+      put(4, 4); put(bytes.length, v < 10 ? 8 : 16); bytes.forEach(function (b) { put(b, 8); });
+      put(0, Math.min(4, cap * 8 - bits.length)); put(0, (8 - bits.length % 8) % 8);
+      for (var pad = 0xEC; bits.length < cap * 8; pad ^= 0xEC ^ 0x11) put(pad, 8);
+      var data = []; for (var i = 0; i < bits.length; i += 8) { var b = 0; for (var k = 0; k < 8; k++) b = (b << 1) | bits[i + k]; data.push(b); }
+      var nb = NUM_BLOCKS[ecl][v], eccLen = ECC_PER_BLOCK[ecl][v], raw = Math.floor(rawModules(v) / 8);
+      var nShort = nb - raw % nb, shortLen = Math.floor(raw / nb), blocks = [], div = divisor(eccLen), pos = 0;
+      for (i = 0; i < nb; i++) {
+        var dl = shortLen - eccLen + (i < nShort ? 0 : 1), dat = data.slice(pos, pos + dl); pos += dl;
+        var ecc = remainder(dat, div); if (i < nShort) dat.push(0); blocks.push(dat.concat(ecc));
+      }
+      var all = [];
+      for (i = 0; i < blocks[0].length; i++) blocks.forEach(function (bl, j) { if (i !== shortLen - eccLen || j >= nShort) all.push(bl[i]); });
+      var size = v * 4 + 17, m = [], fn = [], y, x;
+      for (y = 0; y < size; y++) { m.push(new Array(size).fill(false)); fn.push(new Array(size).fill(false)); }
+      function set(x, y, c) { m[y][x] = c; fn[y][x] = true; }
+      for (i = 0; i < size; i++) { set(6, i, i % 2 === 0); set(i, 6, i % 2 === 0); }
+      function finder(cx, cy) { for (var dy = -4; dy <= 4; dy++) for (var dx = -4; dx <= 4; dx++) { var d = Math.max(Math.abs(dx), Math.abs(dy)), xx = cx + dx, yy = cy + dy; if (xx >= 0 && xx < size && yy >= 0 && yy < size) set(xx, yy, d !== 2 && d !== 4); } }
+      finder(3, 3); finder(size - 4, 3); finder(3, size - 4);
+      var al = []; if (v > 1) { var na = Math.floor(v / 7) + 2, step = v === 32 ? 26 : Math.ceil((v * 4 + 4) / (na * 2 - 2)) * 2; al = [6]; for (var p = size - 7; al.length < na; p -= step) al.splice(1, 0, p); }
+      al.forEach(function (ax, ia) { al.forEach(function (ay, ja) {
+        if ((ia === 0 && ja === 0) || (ia === 0 && ja === al.length - 1) || (ia === al.length - 1 && ja === 0)) return;
+        for (var dy = -2; dy <= 2; dy++) for (var dx = -2; dx <= 2; dx++) set(ax + dx, ay + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1);
+      }); });
+      function fmtBits(mask) {
+        var d = (FMT[ecl] << 3) | mask, rem = d, i;
+        for (i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
+        var b = ((d << 10) | rem) ^ 0x5412, g = function (k) { return ((b >>> k) & 1) !== 0; };
+        for (i = 0; i <= 5; i++) set(8, i, g(i)); set(8, 7, g(6)); set(8, 8, g(7)); set(7, 8, g(8));
+        for (i = 9; i < 15; i++) set(14 - i, 8, g(i));
+        for (i = 0; i < 8; i++) set(size - 1 - i, 8, g(i));
+        for (i = 8; i < 15; i++) set(8, size - 15 + i, g(i));
+        set(8, size - 8, true);
+      }
+      fmtBits(0);
+      if (v >= 7) { var rm = v; for (i = 0; i < 12; i++) rm = (rm << 1) ^ ((rm >>> 11) * 0x1F25); var vb = (v << 12) | rm; for (i = 0; i < 18; i++) { var c = ((vb >>> i) & 1) !== 0, a = size - 11 + i % 3, bb = Math.floor(i / 3); set(a, bb, c); set(bb, a, c); } }
+      var idx = 0;
+      for (var right = size - 1; right >= 1; right -= 2) {
+        if (right === 6) right = 5;
+        for (var vert = 0; vert < size; vert++) for (var j = 0; j < 2; j++) {
+          x = right - j; y = (((right + 1) & 2) === 0) ? size - 1 - vert : vert;
+          if (!fn[y][x] && idx < all.length * 8) { m[y][x] = ((all[idx >>> 3] >>> (7 - (idx & 7))) & 1) !== 0; idx++; }
+        }
+      }
+      function maskFn(k, x, y) {
+        switch (k) { case 0: return (x + y) % 2 === 0; case 1: return y % 2 === 0; case 2: return x % 3 === 0; case 3: return (x + y) % 3 === 0;
+          case 4: return (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0; case 5: return x * y % 2 + x * y % 3 === 0;
+          case 6: return (x * y % 2 + x * y % 3) % 2 === 0; default: return ((x + y) % 2 + x * y % 3) % 2 === 0; }
+      }
+      function apply(k) { for (var yy = 0; yy < size; yy++) for (var xx = 0; xx < size; xx++) if (!fn[yy][xx] && maskFn(k, xx, yy)) m[yy][xx] = !m[yy][xx]; }
+      function penalty() {
+        var s = 0, yy, xx, run, dark = 0;
+        for (yy = 0; yy < size; yy++) { run = 1; for (xx = 1; xx < size; xx++) { if (m[yy][xx] === m[yy][xx - 1]) { run++; if (run === 5) s += 3; else if (run > 5) s++; } else run = 1; } }
+        for (xx = 0; xx < size; xx++) { run = 1; for (yy = 1; yy < size; yy++) { if (m[yy][xx] === m[yy - 1][xx]) { run++; if (run === 5) s += 3; else if (run > 5) s++; } else run = 1; } }
+        for (yy = 0; yy < size - 1; yy++) for (xx = 0; xx < size - 1; xx++) if (m[yy][xx] === m[yy][xx + 1] && m[yy][xx] === m[yy + 1][xx] && m[yy][xx] === m[yy + 1][xx + 1]) s += 3;
+        for (yy = 0; yy < size; yy++) for (xx = 0; xx < size; xx++) if (m[yy][xx]) dark++;
+        s += Math.floor(Math.abs(dark * 20 - size * size * 10) / (size * size)) * 10;
+        return s;
+      }
+      var best = 0, bestP = 1e9;
+      for (var k = 0; k < 8; k++) { apply(k); fmtBits(k); var pp = penalty(); if (pp < bestP) { bestP = pp; best = k; } apply(k); }
+      apply(best); fmtBits(best);
+      return m;
+    }
+    function svg(text, px) {
+      var m = encode(text, 1) || encode(text, 0); if (!m) return "";
+      var n = m.length, q = 4, d = "";
+      for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) if (m[y][x]) d += "M" + (x + q) + " " + (y + q) + "h1v1h-1z";
+      return '<svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + (n + 2 * q) + " " + (n + 2 * q) + '" width="' + (px || 240) + '" height="' + (px || 240) + '" role="img" aria-label="QR code de la partie" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="' + d + '" fill="#000"/></svg>';
+    }
+    return { encode: encode, svg: svg };
+  })();
+
+  /* ---------- Partie en équipe ----------
+     Même tirage pour tous : thèmes, nombre, numéro de tirage et options sont dans le lien (#partie?...).
+     Hors score : rien n’est enregistré dans le profil. Aucun serveur. */
+  var partyDraft = { l: "Point qualité", n: 10, mode: "all", t: [], x: 1, c: 0, s: 0 };
+  var partyRun = null, partyAnim = null, partyTimer = null;
+  function bankSig() {
+    var ids = [];
+    THEMES.forEach(function (t) { poolOf(t.id).forEach(function (q) { ids.push(q.id || questionKey(q)); }); });
+    ids.sort(); var str = ids.join("|"), h = 7;
+    for (var i = 0; i < str.length; i++) h = (Math.imul(h, 31) + str.charCodeAt(i)) >>> 0;
+    return h.toString(36);
+  }
+  function strHash(s) { var h = 5; for (var i = 0; i < s.length; i++) h = (Math.imul(h, 33) + s.charCodeAt(i)) >>> 0; return h; }
+  function prng(seed) {
+    var a = seed >>> 0;
+    return function () { a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+  function seededShuffle(arr, rnd) {
+    var o = arr.slice();
+    for (var i = o.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), t = o[i]; o[i] = o[j]; o[j] = t; }
+    return o;
+  }
+  function partyPool(themeIds) {
+    var seen = {}, out = [];
+    (themeIds && themeIds.length ? themeIds : THEMES.map(function (t) { return t.id; })).forEach(function (id) {
+      poolOf(id).forEach(function (q) { var k = q.id || questionKey(q); if (!seen[k]) { seen[k] = true; out.push(q); } });
+    });
+    out.sort(function (a, b) { return (a.id || "") < (b.id || "") ? -1 : 1; });
+    return out;
+  }
+  function partyDeal(cfg) {
+    var pool = partyPool(cfg.t), picked = seededShuffle(pool, prng(cfg.s)).slice(0, Math.min(cfg.n, pool.length));
+    return picked.map(function (q) {
+      var idx = seededShuffle(q.opts.map(function (_, i) { return i; }), prng(cfg.s ^ strHash(q.id || questionKey(q))));
+      return { id: q.id, theme: q.theme, q: q.q, opts: idx.map(function (i) { return q.opts[i]; }), ok: idx.indexOf(q.ok), why: q.why, src: q.src };
+    });
+  }
+  function partyLink(cfg) {
+    var p = ["n=" + cfg.n, "s=" + cfg.s];
+    if (cfg.t.length) p.push("t=" + cfg.t.join("."));
+    p.push("x=" + (cfg.x ? 1 : 0)); if (cfg.c) p.push("c=" + cfg.c);
+    p.push("b=" + bankSig());
+    if (cfg.l) p.push("l=" + encodeURIComponent(cfg.l));
+    return location.href.split("#")[0] + "#partie?" + p.join("&");
+  }
+  function partyFromHash() {
+    var h = location.hash || "";
+    if (h.indexOf("#partie?") !== 0) return null;
+    var q; try { q = new URLSearchParams(h.slice(8)); } catch (e) { return null; }
+    var n = Number(q.get("n")), s = parseInt(q.get("s"), 10);
+    if ([5, 10, 15].indexOf(n) < 0 || !isFinite(s)) return null;
+    var valid = {}; THEMES.forEach(function (t) { valid[t.id] = true; });
+    var t = (q.get("t") || "").split(".").filter(function (id) { return valid[id]; });
+    var c = Number(q.get("c")); if ([30, 60].indexOf(c) < 0) c = 0;
+    return { n: n, s: s, t: t, x: q.get("x") === "0" ? 0 : 1, c: c, b: q.get("b") || "", l: (q.get("l") || "").replace(/[\u0000-\u001f]/g, "").slice(0, 40) };
+  }
+  function partyThemesLabel(cfg) {
+    if (!cfg.t.length) return "tirage au sort parmi tous les thèmes";
+    return cfg.t.map(function (id) { return BYID[id] ? BYID[id].name : id; }).join(" · ");
+  }
+  function partyEffectiveN(cfg) { return Math.min(cfg.n, partyPool(cfg.t).length); }
+
+  /* --- création --- */
+  function renderParty() {
+    var d = partyDraft, h = '<div class="head2"><h2>Partie en équipe</h2>' + chipHtml() + '</div>' +
+      '<p class="lede">Créez une partie à jouer à plusieurs, par exemple en réunion. Tous les agents qui scannent le QR code reçoivent exactement les mêmes questions, dans le même ordre. Les parties en équipe ne comptent pas dans les scores.</p>';
+    h += '<div class="sect party-sect"><div class="sect-head"><h3>Nom de la partie</h3></div><input id="party-title" class="party-input" type="text" maxlength="40" value="' + esc(d.l) + '" placeholder="Ex. Point qualité du jeudi" aria-label="Nom de la partie"></div>';
+    h += '<div class="sect party-sect"><div class="sect-head"><h3>Nombre de questions</h3></div><div class="seg">' + [5, 10, 15].map(function (n) { return '<button type="button" class="seg-b' + (d.n === n ? ' on' : '') + '" data-pa="n" data-pv="' + n + '">' + n + '</button>'; }).join("") + '</div></div>';
+    h += '<div class="sect party-sect"><div class="sect-head"><h3>Thèmes</h3></div><div class="seg"><button type="button" class="seg-b' + (d.mode === "all" ? ' on' : '') + '" data-pa="mode" data-pv="all">Tirage au sort (16 thèmes)</button><button type="button" class="seg-b' + (d.mode === "pick" ? ' on' : '') + '" data-pa="mode" data-pv="pick">Je choisis</button></div>';
+    if (d.mode === "pick") {
+      h += '<p class="note party-quick"><button type="button" class="linkbtn" data-pa="allth">Tout cocher</button> · <button type="button" class="linkbtn" data-pa="nonth">Tout décocher</button></p>';
+      [1, 2, 3].forEach(function (c) {
+        h += '<p class="party-ch">Chapitre ' + c + ' · ' + esc(CHAPTERS[c]) + '</p>';
+        THEMES.filter(function (t) { return t.ch === c; }).forEach(function (t) {
+          var on = d.t.indexOf(t.id) >= 0, np = poolOf(t.id).length;
+          h += '<button type="button" class="pcheck' + (on ? ' on' : '') + '" data-pa="th" data-pv="' + t.id + '" aria-pressed="' + on + '"><span class="pbox">' + (on ? '✓' : '') + '</span><span>' + esc(t.name) + '</span><small>' + np + '</small></button>';
+        });
+      });
+    }
+    h += '</div>';
+    h += '<div class="sect party-sect"><div class="sect-head"><h3>Options</h3></div>' +
+      '<p class="party-opt">Explication après chaque réponse (sur les téléphones)</p><div class="seg"><button type="button" class="seg-b' + (d.x ? ' on' : '') + '" data-pa="x" data-pv="1">Oui</button><button type="button" class="seg-b' + (!d.x ? ' on' : '') + '" data-pa="x" data-pv="0">Non, seulement à la fin</button></div>' +
+      '<p class="party-opt">Chronomètre par question</p><div class="seg">' + [[0, "Aucun"], [30, "30 s"], [60, "60 s"]].map(function (o) { return '<button type="button" class="seg-b' + (d.c === o[0] ? ' on' : '') + '" data-pa="c" data-pv="' + o[0] + '">' + o[1] + '</button>'; }).join("") + '</div></div>';
+    var cfg = partyCfgFromDraft(), eff = partyEffectiveN(cfg), warn = "";
+    if (d.mode === "pick" && !d.t.length) warn = "Cochez au moins un thème.";
+    else if (eff < d.n) warn = "Les thèmes choisis ne contiennent que " + eff + " questions : la partie en aura " + eff + ".";
+    h += '<p class="party-sum"><b>' + eff + ' question' + (eff > 1 ? 's' : '') + '</b> · ' + esc(partyThemesLabel(cfg)) + (d.c ? ' · ' + d.c + ' s par question' : '') + '</p>' + (warn ? '<p class="party-warn">' + warn + '</p>' : '');
+    h += '<button class="tower-start party-create" type="button" data-pa="create"' + (d.mode === "pick" && !d.t.length ? ' disabled' : '') + '>' + (d.created ? 'Mettre à jour la partie' : 'Créer la partie') + '</button>';
+    if (d.created) {
+      var link = partyLink(d.created);
+      h += '<div class="sect party-result"><div class="sect-head"><h3>Partie prête</h3><span>tirage n° ' + d.created.s + '</span></div><div class="party-qr">' + QR.svg(link, 260) + '</div>' +
+        '<p class="note">Les agents scannent ce QR code ou ouvrent le lien. Ils retrouveront tous les mêmes ' + partyEffectiveN(d.created) + ' questions.</p>' + (location.protocol === "file:" ? '<p class="party-warn">Cette page est ouverte depuis un fichier sur votre ordinateur : le QR code ne fonctionnera pas chez les autres. Ouvrez le site depuis son adresse en ligne pour créer la partie.</p>' : '') +
+        '<input class="party-input party-link" type="text" readonly value="' + esc(link) + '" aria-label="Lien de la partie" onclick="this.select()">' +
+        '<div class="party-actions"><button class="btn" type="button" data-pa="copy">Copier le lien</button><button class="btn" type="button" data-pa="anim">Écran animateur</button><button class="btn ghost" type="button" data-pa="self">Jouer moi-même</button><button class="btn ghost" type="button" data-pa="reseed">Nouveau tirage</button></div></div>';
+    }
+    $("v-party").innerHTML = h;
+  }
+  function partyCfgFromDraft(seed) {
+    var d = partyDraft, themes = d.mode === "pick" ? d.t.slice() : [];
+    if (themes.length === THEMES.length) themes = [];
+    return { n: d.n, s: seed || (d.created ? d.created.s : 0), t: themes, x: d.x, c: d.c, b: bankSig(), l: (d.l || "").trim().slice(0, 40) };
+  }
+  function partyCreate(reseed) {
+    var seed = reseed || !partyDraft.created ? Math.floor(Math.random() * 900000) + 100000 : partyDraft.created.s;
+    partyDraft.created = partyCfgFromDraft(seed);
+    renderParty();
+    var r = document.querySelector(".party-result"); if (r && r.scrollIntoView) r.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  /* --- joueur --- */
+  function openParty(cfg) {
+    clearInterval(partyTimer);
+    partyRun = { cfg: cfg, qs: partyDeal(cfg), i: 0, ans: [], locked: false, left: 0 };
+    partyAnim = null;
+    show("quiz"); renderPartyJoin();
+  }
+  function partyExit() {
+    clearInterval(partyTimer); partyRun = null; partyAnim = null;
+    try { if (location.hash.indexOf("#partie") === 0) history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    show(S.onboarded ? "play" : "welcome");
+  }
+  function renderPartyJoin() {
+    var r = partyRun, cfg = r.cfg, mism = cfg.b && cfg.b !== bankSig();
+    $("v-quiz").innerHTML = '<div class="tower-game"><div class="tower-game-card party-join"><p class="eyebrow">Partie en équipe</p><h2>' + esc(cfg.l || "Partie en équipe") + '</h2>' +
+      '<p class="party-sum"><b>' + r.qs.length + ' questions</b> · ' + esc(partyThemesLabel(cfg)) + '</p>' +
+      '<ul class="party-facts"><li>Tous les participants ont les mêmes questions.</li><li>' + (cfg.x ? 'L’explication s’affiche après chaque réponse.' : 'Les corrections sont données à la fin.') + '</li>' + (cfg.c ? '<li>Chronomètre : ' + cfg.c + ' secondes par question.</li>' : '') + '<li><b>Cette partie ne compte pas dans vos scores.</b></li></ul>' +
+      (mism ? '<p class="party-warn">Votre page n’a pas la même version des questions que celle de l’animateur. Rechargez la page pour retrouver les mêmes questions.</p>' : '') +
+      (r.qs.length ? '<button class="tower-start" type="button" data-pa="start">Commencer</button>' : '<p class="party-warn">Aucune question disponible pour cette partie.</p>') +
+      ' <button class="tower-quit" type="button" data-pa="exit">Quitter</button></div></div>';
+    window.scrollTo(0, 0);
+  }
+  function renderPartyQuestion() {
+    var r = partyRun, q = r.qs[r.i], cfg = r.cfg; r.locked = false;
+    var opts = q.opts.map(function (o, i) { return '<button class="tower-option" type="button" data-pa="ans" data-pv="' + i + '">' + String.fromCharCode(65 + i) + '. ' + esc(o) + '</button>'; }).join("");
+    $("v-quiz").innerHTML = '<div class="tower-game"><div class="tower-game-top"><div><p class="eyebrow">' + esc(cfg.l || "Partie en équipe") + '</p><div class="tower-floor"><strong>Question ' + (r.i + 1) + ' / ' + r.qs.length + '</strong>' + (cfg.c ? '<span id="party-clock">⏱ ' + cfg.c + ' s</span>' : '<span>hors score</span>') + '</div></div><button class="tower-quit" type="button" data-pa="exit">Quitter</button></div>' +
+      '<div class="tower-game-card"><span class="tower-question-theme">' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + '</span><h2 class="tower-question">' + esc(q.q) + '</h2><div class="tower-options">' + opts + '</div></div></div>';
+    window.scrollTo(0, 0);
+    clearInterval(partyTimer);
+    if (cfg.c) {
+      r.left = cfg.c;
+      partyTimer = setInterval(function () {
+        r.left--; var el = $("party-clock"); if (el) el.textContent = "⏱ " + Math.max(r.left, 0) + " s";
+        if (r.left <= 0) { clearInterval(partyTimer); partyAnswer(-1); }
+      }, 1000);
+    }
+  }
+  function partyAnswer(i) {
+    var r = partyRun; if (!r || r.locked) return; r.locked = true; clearInterval(partyTimer);
+    var q = r.qs[r.i], cfg = r.cfg, last = r.i >= r.qs.length - 1; r.ans[r.i] = i;
+    var opts = q.opts.map(function (o, k) {
+      var cls = "tower-option";
+      if (cfg.x) cls += k === q.ok ? " p-ok" : (k === i ? " p-ko" : "");
+      else if (k === i) cls += " bib-picked";
+      return '<button class="' + cls + '" type="button" disabled>' + String.fromCharCode(65 + k) + '. ' + esc(o) + '</button>';
+    }).join("");
+    var fb = cfg.x
+      ? '<div class="tower-explain-box"><p><b>' + (i === q.ok ? '✓ Bonne réponse.' : (i < 0 ? '⏱ Temps écoulé.' : '✗ Pas tout à fait.')) + '</b> ' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>'
+      : '<p class="party-sum">' + (i < 0 ? 'Temps écoulé.' : 'Réponse enregistrée.') + ' La correction sera donnée à la fin.</p>';
+    $("v-quiz").innerHTML = '<div class="tower-game"><div class="tower-game-top"><div><p class="eyebrow">' + esc(cfg.l || "Partie en équipe") + '</p><div class="tower-floor"><strong>Question ' + (r.i + 1) + ' / ' + r.qs.length + '</strong><span>hors score</span></div></div></div>' +
+      '<div class="tower-game-card"><span class="tower-question-theme">' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + '</span><h2 class="tower-question">' + esc(q.q) + '</h2><div class="tower-options">' + opts + '</div>' + fb +
+      '<button class="tower-start" type="button" data-pa="next">' + (last ? 'Voir le bilan' : 'Question suivante') + '</button></div></div>';
+    window.scrollTo(0, 0);
+  }
+  function partyNext() {
+    var r = partyRun; if (!r) return;
+    if (r.i >= r.qs.length - 1) { partyFinish(); return; }
+    r.i++; renderPartyQuestion();
+  }
+  function partyReview(qs, ans) {
+    return qs.map(function (q, k) {
+      var a = ans ? ans[k] : undefined, st = ans ? (a === q.ok ? '<b class="pr-ok">✓ Juste</b>' : (a === undefined || a < 0 ? '<b class="pr-ko">Sans réponse</b>' : '<b class="pr-ko">✗ Votre réponse : ' + esc(q.opts[a]) + '</b>')) : '';
+      return '<div class="party-rev"><p class="party-rev-q"><span>' + (k + 1) + '.</span> ' + esc(q.q) + '</p><p><b>Bonne réponse :</b> ' + esc(q.opts[q.ok]) + '</p>' + (st ? '<p>' + st + '</p>' : '') + '<p class="party-rev-why">' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>';
+    }).join("");
+  }
+  function partyFinish() {
+    var r = partyRun, good = r.qs.filter(function (q, k) { return r.ans[k] === q.ok; }).length;
+    $("v-quiz").innerHTML = '<div class="tower-game"><div class="tower-result"><div class="result-icon">👥</div><p class="eyebrow">' + esc(r.cfg.l || "Partie en équipe") + '</p><h2>' + good + ' / ' + r.qs.length + '</h2><p>Partie hors score : rien n’est enregistré dans votre profil. Comparez vos réponses avec l’équipe.</p>' +
+      '<p style="margin-top:14px"><button class="tower-start" type="button" data-pa="exit">' + (S.onboarded ? 'Retour à l’accueil' : 'Créer mon profil') + '</button></p></div>' +
+      '<div class="sect"><div class="sect-head"><h3>Revoir en équipe</h3><span>' + r.qs.length + ' questions</span></div>' + partyReview(r.qs, r.ans) + '</div></div>';
+    window.scrollTo(0, 0);
+  }
+
+  /* --- écran animateur (projecteur) --- */
+  function openAnim(cfg) {
+    clearInterval(partyTimer); partyRun = null;
+    partyAnim = { cfg: cfg, qs: partyDeal(cfg), i: -1, rev: false };
+    show("quiz"); renderAnim();
+  }
+  function renderAnim() {
+    var a = partyAnim, cfg = a.cfg, n = a.qs.length, h = "";
+    if (a.i < 0) {
+      var link = partyLink(cfg);
+      h = '<div class="anim"><div class="anim-bar"><span></span><div><button class="btn ghost" type="button" data-pa="fs">Plein écran</button> <button class="btn ghost" type="button" data-pa="aquit">Quitter</button></div></div>' +
+        '<div class="anim-start"><div><p class="eyebrow">Partie en équipe</p><h2>' + esc(cfg.l || "Partie en équipe") + '</h2><p class="anim-sub">' + n + ' questions · ' + esc(partyThemesLabel(cfg)) + '</p><p class="anim-sub">Scannez le QR code pour jouer sur votre téléphone. Partie hors score.</p><p class="anim-link">' + esc(link) + '</p><button class="tower-start anim-go" type="button" data-pa="anext">Commencer</button></div><div class="anim-qr">' + QR.svg(link, 340) + '</div></div></div>';
+    } else if (a.i >= n) {
+      h = '<div class="anim"><div class="anim-bar"><span>Partie terminée</span><div><button class="btn ghost" type="button" data-pa="aprev">← Précédent</button> <button class="btn ghost" type="button" data-pa="aquit">Quitter</button></div></div><h2>À vous la discussion</h2><p class="anim-sub">Récapitulatif des ' + n + ' questions.</p><div class="anim-recap">' + partyReview(a.qs, null) + '</div></div>';
+    } else {
+      var q = a.qs[a.i];
+      var opts = q.opts.map(function (o, k) { var c = "anim-opt" + (a.rev ? (k === q.ok ? " ok" : " dim") : ""); return '<div class="' + c + '"><b>' + String.fromCharCode(65 + k) + '</b><span>' + esc(o) + '</span></div>'; }).join("");
+      h = '<div class="anim"><div class="anim-bar"><span>Question ' + (a.i + 1) + ' / ' + n + ' · ' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + '</span><div><button class="btn ghost" type="button" data-pa="aprev">← Précédent</button> <button class="btn ghost" type="button" data-pa="fs">Plein écran</button> <button class="btn ghost" type="button" data-pa="aquit">Quitter</button></div></div>' +
+        '<h2 class="anim-q">' + esc(q.q) + '</h2><div class="anim-opts">' + opts + '</div>' +
+        (a.rev ? '<div class="anim-why"><p>' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>' : '') +
+        '<div class="anim-next"><button class="tower-start anim-go" type="button" data-pa="anext">' + (a.rev ? (a.i >= n - 1 ? 'Terminer' : 'Question suivante →') : 'Révéler la réponse') + '</button><span class="anim-hint">Espace ou → pour avancer</span></div></div>';
+    }
+    $("v-quiz").innerHTML = h; window.scrollTo(0, 0);
+  }
+  function animNext() {
+    var a = partyAnim; if (!a) return;
+    if (a.i < 0) { a.i = 0; a.rev = false; }
+    else if (a.i >= a.qs.length) return;
+    else if (!a.rev) a.rev = true;
+    else { a.i++; a.rev = false; }
+    renderAnim();
+  }
+  function animPrev() {
+    var a = partyAnim; if (!a) return;
+    if (a.i >= a.qs.length) { a.i = a.qs.length - 1; a.rev = true; }
+    else if (a.rev) a.rev = false;
+    else if (a.i > 0) { a.i--; a.rev = true; }
+    else a.i = -1;
+    renderAnim();
+  }
+  document.addEventListener("keydown", function (e) {
+    if (!partyAnim || $("v-quiz").hidden) return;
+    if (e.key === "ArrowRight" || e.key === " " || e.key === "Enter" || e.key === "PageDown") { e.preventDefault(); animNext(); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); animPrev(); }
+  });
+  document.addEventListener("input", function (e) { if (e.target && e.target.id === "party-title") partyDraft.l = e.target.value; });
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest ? e.target.closest("[data-pa]") : null; if (!t) return;
+    var a = t.getAttribute("data-pa"), v = t.getAttribute("data-pv"), d = partyDraft;
+    if (a === "n") { d.n = Number(v); renderParty(); }
+    else if (a === "mode") { d.mode = v; renderParty(); }
+    else if (a === "th") { var k = d.t.indexOf(v); if (k >= 0) d.t.splice(k, 1); else d.t.push(v); renderParty(); }
+    else if (a === "allth") { d.t = THEMES.map(function (x) { return x.id; }); renderParty(); }
+    else if (a === "nonth") { d.t = []; renderParty(); }
+    else if (a === "x") { d.x = Number(v); renderParty(); }
+    else if (a === "c") { d.c = Number(v); renderParty(); }
+    else if (a === "create") partyCreate(false);
+    else if (a === "reseed") partyCreate(true);
+    else if (a === "copy") { var inp = document.querySelector(".party-link"); try { navigator.clipboard.writeText(inp.value).then(function () { toast("Lien copié."); }, function () { inp.select(); toast("Sélectionné : copiez avec Ctrl+C."); }); } catch (err) { inp.select(); toast("Sélectionné : copiez avec Ctrl+C."); } }
+    else if (a === "anim") { if (d.created) openAnim(d.created); }
+    else if (a === "self") { if (d.created) openParty(d.created); }
+    else if (a === "start") renderPartyQuestion();
+    else if (a === "ans") partyAnswer(Number(v));
+    else if (a === "next") partyNext();
+    else if (a === "exit") partyExit();
+    else if (a === "anext") animNext();
+    else if (a === "aprev") animPrev();
+    else if (a === "aquit") { partyAnim = null; try { if (document.fullscreenElement) document.exitFullscreen(); } catch (err) {} show("party"); }
+    else if (a === "fs") { try { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); } catch (err) {} }
+  });
+  window.addEventListener("hashchange", function () { var c = partyFromHash(); if (c) openParty(c); });
+
   /* ---------- Défi du jour ----------
      Tout est calculé à partir de la date et de la banque de questions : rien à mettre à jour quand on ajoute des questions ou des thèmes.
      - DEFI_START : jour n° 0, identique pour tout le monde (les 4 questions sont les mêmes pour tous, le même jour).
@@ -2587,7 +2969,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   /* ---------- Navigation ---------- */
   function show(name) {
     tab = name;
-    ["play", "lib", "me", "team", "badges", "tower", "biblio", "quiz", "welcome"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
+    ["play", "lib", "me", "team", "badges", "tower", "biblio", "party", "quiz", "welcome"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
     $("tabs").hidden = name === "quiz" || name === "welcome";
     $("sidebar").classList.toggle("is-hidden", name === "quiz" || name === "welcome");
     $("sidebar").style.display = "";
@@ -2600,6 +2982,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     if (name === "badges") renderBadges();
     if (name === "tower") renderTower();
     if (name === "biblio") renderBiblio();
+    if (name === "party") renderParty();
     refreshErrorsBadge();
     Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (b) {
       if (b.getAttribute("data-tab") === name && !b.hasAttribute("data-action")) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
@@ -2634,7 +3017,8 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   var themeBtn = $("theme-toggle");
   if (themeBtn) themeBtn.addEventListener("click", function(){document.body.classList.toggle("light-ui");themeBtn.querySelector("span").textContent=document.body.classList.contains("light-ui")?"Passer en mode sombre":"Passer en mode clair";});
   var start = { jouer: "play", quiz: "lib", score: "me", equipe: "team" }[(location.hash || "").replace("#", "")] || "play";
-  show(S.onboarded ? start : "welcome");
+  var partyCfg = partyFromHash();
+  if (partyCfg) openParty(partyCfg); else show(S.onboarded ? start : "welcome");
 })();
 </script>
 </body>
