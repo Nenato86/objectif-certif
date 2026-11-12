@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Objectif CertiF</title>
-<meta name="objectif-certif-version" content="beta-defis-2026-11-12">
+<meta name="objectif-certif-version" content="beta-code-dgrqs-2026-11-12">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
@@ -270,6 +270,13 @@ body.light-ui .tower-hero{background:linear-gradient(120deg,#e5edf8,#d5e4f5);bor
 body.light-ui .defi-card{background:#fff;border-color:#d3dfec;color:#172b45}body.light-ui .defi-body h3{color:#172b45}body.light-ui .defi-body p{color:#5e7187}
 .guide{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(4,12,24,.78)}.guide-card{width:100%;max-width:440px;padding:26px 22px;border-radius:18px;background:#10294a;border:1px solid #3c5b82;color:#fff;text-align:center}.guide-ico{font-size:48px;line-height:1}.guide-step{margin:12px 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9fb8d6}.guide-card h2{margin:0 0 10px;font-size:22px;color:#fff}.guide-card p{color:#d0ddee;font-size:15px;line-height:1.5}.guide-dots{display:flex;gap:7px;justify-content:center;margin:16px 0}.guide-dots i{width:9px;height:9px;border-radius:50%;background:#46638a}.guide-dots i.on{background:#6ab9e8}.guide-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 body.light-ui .guide-card{background:#fff;border-color:#d3dfec;color:#172b45}body.light-ui .guide-card h2{color:#172b45}body.light-ui .guide-card p{color:#44586f}
+.pstepper{display:flex;gap:8px;margin:4px 0 14px}.pstep{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:6px 8px;border:1px solid #294563;border-radius:12px;background:#0e2542;color:#9fb5ce;font-weight:700}.pstep b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#294563;color:#fff;font-size:13px}.pstep.on{border-color:#f3b847;color:#ffd879}.pstep.on b{background:#f3b847;color:#2a1d00}.pstep.done b{background:#3fbf8f;color:#062b1f}
+.ppresets{display:grid;gap:8px}.ppreset{display:block;width:100%;text-align:left;padding:13px 14px;border:1px solid #3a5877;border-radius:12px;background:#173454;color:#edf4ff}.ppreset b{display:block;font-size:16px}.ppreset small{display:block;margin-top:2px;color:#b9cbe0}.ppreset:hover{border-color:#f3b847}
+.pfacts{margin:6px 0 10px;padding-left:20px;line-height:1.7;color:#d8e5f3}.party-lock{text-align:center}.party-lock-ico{font-size:40px}.party-lock .actions{justify-content:center;margin:12px 0}
+.party-bar{position:sticky;bottom:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px -4px 0;padding:10px 4px;background:linear-gradient(180deg,rgba(7,24,45,0),#07182d 30%)}.party-bar .btn{min-height:48px;flex:1}.party-bar .btn[disabled]{opacity:.45}
+@media(max-width:720px){.party-bar{bottom:68px}}
+.qrbig{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;background:#fff;color:#111;text-align:center}.qrbig h2{margin:0;font-size:clamp(22px,4vw,40px);color:#111}.qrbig p{margin:0;font-size:clamp(16px,2.5vw,26px);color:#333}.qrbig .qr{width:min(88vw,62vh);height:auto}.qrbig small{color:#666}
+body.light-ui .pstep,body.light-ui .ppreset{background:#f2f6fb;color:#172b45;border-color:#d3dfec}body.light-ui .pstep.on{background:#fff4d8;color:#7a5410}body.light-ui .pfacts{color:#172b45}body.light-ui .party-bar{background:linear-gradient(180deg,rgba(255,255,255,0),#fff 30%)}
 .quick-card{display:flex;align-items:center;gap:14px;text-align:left;padding:15px 16px;border:1px solid #294563;border-radius:14px;background:linear-gradient(145deg,#17395f,#102743);color:#fff;min-width:0}
 .quick-card:hover{border-color:#6ab9e8}
 .quick-card b{display:block;font-size:15px;color:#fff}
@@ -2703,7 +2710,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   /* ---------- Partie en équipe ----------
      Même tirage pour tous : thèmes, nombre, numéro de tirage et options sont dans le lien (#partie?...).
      Hors score : rien n’est enregistré dans le profil. Aucun serveur. */
-  var partyDraft = { l: "Point qualité", n: 10, mode: "all", t: [], u: [], x: 0, c: 0, s: 0, qs: [], o: 0, qf: "", qq: "" };
+  var partyDraft = { step: 1, l: "Point qualité", n: 10, mode: "all", t: [], u: [], x: 0, c: 0, s: 0, qs: [], o: 0, qf: "", qq: "" };
   var partyRun = null, partyAnim = null, partyTimer = null;
   function bankSig() {
     var ids = [];
@@ -2822,45 +2829,101 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   function refreshQRes() { var el = $("party-qres"); if (el) el.innerHTML = seanceResultsHtml(partyDraft); }
 
   /* --- création --- */
+  /* --- accès animateur (verrou léger, sans serveur) --- */
+  var ANIM_HASH = 1759762527; /* code animateur : à changer en regénérant ce nombre */
+  function animUnlocked() { try { return localStorage.getItem(KEY + "-anim") === "1"; } catch (e) { return false; } }
+  function animCheck(c) { return strHash("certif|" + String(c || "").trim().toLowerCase()) === ANIM_HASH; }
+  var PARTY_PRESETS = [
+    { id: "express", name: "Point qualité express", txt: "8 questions · 20 s par question", n: 8, c: 20 },
+    { id: "service", name: "Quiz de service", txt: "12 questions · 30 s par question", n: 12, c: 30 },
+    { id: "echange", name: "Réunion d’échange", txt: "8 questions · sans chronomètre", n: 8, c: 0 }
+  ];
+  function partyHistory() { try { var a = JSON.parse(localStorage.getItem(KEY + "-parties") || "[]"); return (a || []).filter(function (e) { return e && e.cfg && e.cfg.b === bankSig(); }); } catch (e) { return []; } }
+  function partyHistoryAdd(cfg) {
+    try {
+      var a = partyHistory().filter(function (e) { return e.cfg.s !== cfg.s; });
+      a.unshift({ at: Date.now(), cfg: cfg }); localStorage.setItem(KEY + "-parties", JSON.stringify(a.slice(0, 5)));
+    } catch (e) {}
+  }
+  function partyLoad(i) {
+    var e = partyHistory()[i]; if (!e) return; var c = e.cfg, d = partyDraft;
+    d.l = c.l || "Point qualité"; d.n = c.n; d.x = c.x ? 1 : 0; d.c = c.c || 0; d.o = c.o ? 1 : 0; d.t = (c.t || []).slice(); d.u = (c.u || []).slice(); d.qs = (c.q || []).slice();
+    d.mode = (c.q && c.q.length) ? "seance" : ((d.t.length || d.u.length) ? "pick" : "all");
+    d.created = c; d.step = 3; renderParty(); window.scrollTo(0, 0);
+  }
+  function partyStepValid() {
+    var d = partyDraft;
+    if (d.mode === "seance") return d.qs.length > 0;
+    if (d.mode === "pick") return d.t.length > 0 || d.u.length > 0;
+    return true;
+  }
+  function renderPartyLock() {
+    $("v-party").innerHTML = '<div class="head2"><h2>Partie en équipe</h2>' + chipHtml() + '</div>' +
+      '<div class="sect party-sect party-lock"><div class="party-lock-ico" aria-hidden="true">🔒</div><h3>Réservé aux animateurs</h3>' +
+      '<p class="note">La création d’une partie en équipe est réservée aux personnes qui animent les réunions. Saisissez le code animateur ; cet appareil s’en souviendra.</p>' +
+      '<form id="anim-form"><input id="anim-code" class="party-input" type="password" autocomplete="off" autocapitalize="none" placeholder="Code animateur" aria-label="Code animateur"><p class="party-warn" id="anim-err" hidden>Code incorrect.</p><div class="actions"><button class="btn" type="submit">Déverrouiller</button></div></form>' +
+      '<p class="note">Vous êtes simple participant ? Scannez le QR code affiché par l’animateur : aucun code n’est nécessaire pour jouer.</p></div>';
+  }
   function renderParty() {
-    var d = partyDraft, h = '<div class="head2"><h2>Partie en équipe</h2>' + chipHtml() + '</div>' +
-      '<p class="lede">Créez une partie à jouer à plusieurs, par exemple en réunion. Tous les agents qui scannent le QR code reçoivent exactement les mêmes questions, dans le même ordre. Les parties en équipe ne comptent pas dans les scores.</p>';
-    h += '<div class="sect party-sect"><div class="sect-head"><h3>Nom de la partie</h3></div><input id="party-title" class="party-input" type="text" maxlength="40" value="' + esc(d.l) + '" placeholder="Ex. Point qualité du jeudi" aria-label="Nom de la partie"></div>';
-    if (d.mode !== "seance") h += '<div class="sect party-sect"><div class="sect-head"><h3>Nombre de questions</h3></div><select id="party-n" class="party-input party-select" aria-label="Nombre de questions">' + (function () { var o = ""; for (var n = 4; n <= 20; n++) o += '<option value="' + n + '"' + (d.n === n ? ' selected' : '') + '>' + n + ' questions</option>'; return o; })() + '</select></div>';
-    h += '<div class="sect party-sect"><div class="sect-head"><h3>Questions</h3></div><div class="seg"><button type="button" class="seg-b' + (d.mode === "all" ? ' on' : '') + '" data-pa="mode" data-pv="all">Tirage au sort (16 thèmes)</button><button type="button" class="seg-b' + (d.mode === "pick" ? ' on' : '') + '" data-pa="mode" data-pv="pick">Je choisis des thèmes</button><button type="button" class="seg-b' + (d.mode === "seance" ? ' on' : '') + '" data-pa="mode" data-pv="seance">Séance préparée</button></div>';
-    if (d.mode === "pick") {
-      h += '<p class="note party-quick"><button type="button" class="linkbtn" data-pa="allth">Tout cocher</button> · <button type="button" class="linkbtn" data-pa="nonth">Tout décocher</button></p>';
-      [1, 2, 3].forEach(function (c) {
-        h += '<p class="party-ch">Chapitre ' + c + ' · ' + esc(CHAPTERS[c]) + '</p>';
-        THEMES.filter(function (t) { return t.ch === c; }).forEach(function (t) {
-          var on = d.t.indexOf(t.id) >= 0, np = poolOf(t.id).length;
-          h += '<button type="button" class="pcheck' + (on ? ' on' : '') + '" data-pa="th" data-pv="' + t.id + '" aria-pressed="' + on + '"><span class="pbox">' + (on ? '✓' : '') + '</span><span>' + esc(t.name) + '</span><small>' + np + '</small></button>';
-          if (!on) subsOf(t.id).forEach(function (sb) {
-            var son = d.u.indexOf(sb.id) >= 0;
-            h += '<button type="button" class="pcheck pcheck-sub' + (son ? ' on' : '') + '" data-pa="sub" data-pv="' + sb.id + '" aria-pressed="' + son + '"><span class="pbox">' + (son ? '✓' : '') + '</span><span>' + esc(sb.name) + '</span><small>' + subPool(sb.id).length + '</small></button>';
+    if (!animUnlocked()) { renderPartyLock(); return; }
+    var d = partyDraft, cfg = partyCfgFromDraft(), eff = partyEffectiveN(cfg), step = d.step || 1, h = '';
+    h += '<div class="head2"><h2>Partie en équipe</h2>' + chipHtml() + '</div>';
+    h += '<div class="pstepper" role="tablist">' + ["Contenu", "Réglages", "Lancer"].map(function (n, i) {
+      var k = i + 1; return '<button type="button" class="pstep' + (k === step ? ' on' : '') + (k < step ? ' done' : '') + '" data-pa="step" data-pv="' + k + '" aria-current="' + (k === step ? 'step' : 'false') + '"><b>' + (k < step ? '✓' : k) + '</b><span>' + n + '</span></button>';
+    }).join('') + '</div>';
+    if (step === 1) {
+      h += '<div class="sect party-sect"><div class="sect-head"><h3>Départ rapide</h3><span>1 geste</span></div><p class="note" style="margin:0 0 10px">Tirage au sort sur les 16 thèmes avec des réglages types. Vous pourrez ensuite tout modifier.</p><div class="ppresets">' +
+        PARTY_PRESETS.map(function (pr) { return '<button type="button" class="ppreset" data-pa="preset" data-pv="' + pr.id + '"><b>' + esc(pr.name) + '</b><small>' + esc(pr.txt) + '</small></button>'; }).join('') + '</div></div>';
+      var hist = partyHistory();
+      if (hist.length) h += '<div class="sect party-sect"><div class="sect-head"><h3>Dernières parties</h3><span>sur cet appareil</span></div>' + hist.map(function (e, i) {
+        var c = e.cfg, n = partyEffectiveN(c), dt = new Date(e.at).toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+        return '<button type="button" class="pcheck" data-pa="hist" data-pv="' + i + '"><span class="pbox">↺</span><span>' + esc(c.l || "Partie") + '</span><small>' + n + ' q. · ' + dt + '</small></button>';
+      }).join('') + '</div>';
+      h += '<div class="sect party-sect"><div class="sect-head"><h3>Contenu de la partie</h3></div><div class="seg"><button type="button" class="seg-b' + (d.mode === "all" ? ' on' : '') + '" data-pa="mode" data-pv="all">Tirage au sort (16 thèmes)</button><button type="button" class="seg-b' + (d.mode === "pick" ? ' on' : '') + '" data-pa="mode" data-pv="pick">Je choisis des thèmes</button><button type="button" class="seg-b' + (d.mode === "seance" ? ' on' : '') + '" data-pa="mode" data-pv="seance">Séance préparée</button></div>';
+      if (d.mode === "pick") {
+        h += '<p class="note party-quick"><button type="button" class="linkbtn" data-pa="allth">Tout cocher</button> · <button type="button" class="linkbtn" data-pa="nonth">Tout décocher</button></p>';
+        [1, 2, 3].forEach(function (c) {
+          h += '<p class="party-ch">Chapitre ' + c + ' · ' + esc(CHAPTERS[c]) + '</p>';
+          THEMES.filter(function (t) { return t.ch === c; }).forEach(function (t) {
+            var on = d.t.indexOf(t.id) >= 0, np = poolOf(t.id).length;
+            h += '<button type="button" class="pcheck' + (on ? ' on' : '') + '" data-pa="th" data-pv="' + t.id + '" aria-pressed="' + on + '"><span class="pbox">' + (on ? '✓' : '') + '</span><span>' + esc(t.name) + '</span><small>' + np + '</small></button>';
+            if (!on) subsOf(t.id).forEach(function (sb) {
+              var son = d.u.indexOf(sb.id) >= 0;
+              h += '<button type="button" class="pcheck pcheck-sub' + (son ? ' on' : '') + '" data-pa="sub" data-pv="' + sb.id + '" aria-pressed="' + son + '"><span class="pbox">' + (son ? '✓' : '') + '</span><span>' + esc(sb.name) + '</span><small>' + subPool(sb.id).length + '</small></button>';
+            });
           });
         });
-      });
+      }
+      if (d.mode === "seance") h += seanceHtml(d);
+      h += '</div>';
+    } else if (step === 2) {
+      h += '<div class="sect party-sect"><div class="sect-head"><h3>Nom de la partie</h3></div><input id="party-title" class="party-input" type="text" maxlength="40" value="' + esc(d.l) + '" placeholder="Ex. Point qualité du jeudi" aria-label="Nom de la partie"></div>';
+      if (d.mode !== "seance") h += '<div class="sect party-sect"><div class="sect-head"><h3>Nombre de questions</h3></div><select id="party-n" class="party-input party-select" aria-label="Nombre de questions">' + (function () { var o = ""; for (var n = 4; n <= 20; n++) o += '<option value="' + n + '"' + (d.n === n ? ' selected' : '') + '>' + n + ' questions</option>'; return o; })() + '</select></div>';
+      h += '<div class="sect party-sect"><div class="sect-head"><h3>Options</h3></div>' +
+        '<p class="party-opt" style="margin-top:0">Explication sur les téléphones</p><div class="seg"><button type="button" class="seg-b' + (!d.x ? ' on' : '') + '" data-pa="x" data-pv="0">À la fin</button><button type="button" class="seg-b' + (d.x ? ' on' : '') + '" data-pa="x" data-pv="1">Tout de suite</button></div>' +
+        '<p class="note" style="margin:8px 0 0">À la fin : le téléphone indique seulement « Bonne réponse » ou « Pas tout à fait ». La bonne réponse et l’explication s’affichent sur l’écran animateur, puis dans le bilan de fin. Tout de suite : à choisir sans écran animateur.</p>' +
+        '<p class="party-opt">Chronomètre par question</p><select id="party-c" class="party-input party-select" aria-label="Chronomètre par question">' + (function () { var o = '<option value="0"' + (d.c === 0 ? ' selected' : '') + '>Aucun</option>'; for (var c = 15; c <= 60; c += 5) o += '<option value="' + c + '"' + (d.c === c ? ' selected' : '') + '>' + c + ' secondes</option>'; return o; })() + '</select></div>';
+    } else {
+      h += '<div class="sect party-sect pfinal"><div class="sect-head"><h3>' + esc(d.l || "Partie en équipe") + '</h3></div><ul class="pfacts">' +
+        '<li><b>' + eff + ' question' + (eff > 1 ? 's' : '') + '</b> · ' + esc(partyThemesLabel(cfg)) + '</li>' +
+        '<li>' + (d.c ? d.c + ' secondes par question' : 'Sans chronomètre') + '</li>' +
+        '<li>Explication : ' + (d.x ? 'tout de suite sur les téléphones' : 'à la fin, sur l’écran animateur') + '</li></ul>' +
+        '<p class="note" style="margin:6px 0 0"><button type="button" class="linkbtn" data-pa="step" data-pv="1">Modifier le contenu</button> · <button type="button" class="linkbtn" data-pa="step" data-pv="2">Modifier les réglages</button></p>' +
+        (!partyStepValid() ? '<p class="party-warn">Revenez à « Contenu » : ' + (d.mode === "seance" ? 'choisissez un pack ou ajoutez au moins une question.' : 'cochez au moins un thème ou un sous-thème.') + '</p>' : (eff < d.n && d.mode !== "seance" ? '<p class="party-warn">Les thèmes choisis ne contiennent que ' + eff + ' questions : la partie en aura ' + eff + '.</p>' : '')) + '</div>';
+      if (d.created) {
+        var link = partyLink(d.created);
+        h += '<div class="sect party-result"><div class="sect-head"><h3>Partie prête</h3><span>tirage n° ' + d.created.s + '</span></div><div class="party-qr">' + QR.svg(link, 260) + '</div>' +
+          '<div class="party-actions"><button class="btn" type="button" data-pa="qrbig">Afficher le QR code en grand</button><button class="btn" type="button" data-pa="anim">Écran animateur</button></div>' +
+          '<p class="note">Les agents scannent ce QR code ou ouvrent le lien. Ils retrouveront tous les mêmes ' + partyEffectiveN(d.created) + ' questions.</p>' + (location.protocol === "file:" ? '<p class="party-warn">Cette page est ouverte depuis un fichier sur votre ordinateur : le QR code ne fonctionnera pas chez les autres. Ouvrez le site depuis son adresse en ligne pour créer la partie.</p>' : '') +
+          '<input class="party-input party-link" type="text" readonly value="' + esc(link) + '" aria-label="Lien de la partie" onclick="this.select()">' +
+          '<div class="party-actions"><button class="btn ghost" type="button" data-pa="copy">Copier le lien</button><button class="btn ghost" type="button" data-pa="self">Jouer moi-même</button><button class="btn ghost" type="button" data-pa="reseed">Nouveau tirage</button></div></div>';
+      }
+      h += '<p class="note" style="text-align:center"><button type="button" class="linkbtn" data-pa="lock">Verrouiller cet appareil</button></p>';
     }
-    if (d.mode === "seance") h += seanceHtml(d);
-    h += '</div>';
-    h += '<div class="sect party-sect"><div class="sect-head"><h3>Options</h3></div>' +
-      '<p class="party-opt">Explication sur les téléphones</p><div class="seg"><button type="button" class="seg-b' + (!d.x ? ' on' : '') + '" data-pa="x" data-pv="0">À la fin</button><button type="button" class="seg-b' + (d.x ? ' on' : '') + '" data-pa="x" data-pv="1">Tout de suite</button></div>' +
-      '<p class="note" style="margin:8px 0 0">À la fin : le téléphone indique seulement « Bonne réponse » ou « Pas tout à fait ». La bonne réponse et l’explication s’affichent sur l’écran animateur, puis dans le bilan de fin. Tout de suite : à choisir sans écran animateur.</p>' +
-      '<p class="party-opt">Chronomètre par question</p><select id="party-c" class="party-input party-select" aria-label="Chronomètre par question">' + (function () { var o = '<option value="0"' + (d.c === 0 ? ' selected' : '') + '>Aucun</option>'; for (var c = 15; c <= 60; c += 5) o += '<option value="' + c + '"' + (d.c === c ? ' selected' : '') + '>' + c + ' secondes</option>'; return o; })() + '</select></div>';
-    var cfg = partyCfgFromDraft(), eff = partyEffectiveN(cfg), warn = "";
-    if (d.mode === "seance") { if (!d.qs.length) warn = "Choisissez un pack ou ajoutez au moins une question."; }
-    else if (d.mode === "pick" && !d.t.length && !d.u.length) warn = "Cochez au moins un thème ou un sous-thème.";
-    else if (eff < d.n) warn = "Les thèmes choisis ne contiennent que " + eff + " questions : la partie en aura " + eff + ".";
-    h += '<p class="party-sum"><b>' + eff + ' question' + (eff > 1 ? 's' : '') + '</b> · ' + esc(partyThemesLabel(cfg)) + (d.c ? ' · ' + d.c + ' s par question' : '') + '</p>' + (warn ? '<p class="party-warn">' + warn + '</p>' : '');
-    h += '<button class="tower-start party-create" type="button" data-pa="create"' + ((d.mode === "pick" && !d.t.length && !d.u.length) || (d.mode === "seance" && !d.qs.length) ? ' disabled' : '') + '>' + (d.created ? 'Mettre à jour la partie' : 'Créer la partie') + '</button>';
-    if (d.created) {
-      var link = partyLink(d.created);
-      h += '<div class="sect party-result"><div class="sect-head"><h3>Partie prête</h3><span>tirage n° ' + d.created.s + '</span></div><div class="party-qr">' + QR.svg(link, 260) + '</div>' +
-        '<p class="note">Les agents scannent ce QR code ou ouvrent le lien. Ils retrouveront tous les mêmes ' + partyEffectiveN(d.created) + ' questions.</p>' + (location.protocol === "file:" ? '<p class="party-warn">Cette page est ouverte depuis un fichier sur votre ordinateur : le QR code ne fonctionnera pas chez les autres. Ouvrez le site depuis son adresse en ligne pour créer la partie.</p>' : '') +
-        '<input class="party-input party-link" type="text" readonly value="' + esc(link) + '" aria-label="Lien de la partie" onclick="this.select()">' +
-        '<div class="party-actions"><button class="btn" type="button" data-pa="copy">Copier le lien</button><button class="btn" type="button" data-pa="anim">Écran animateur</button><button class="btn ghost" type="button" data-pa="self">Jouer moi-même</button><button class="btn ghost" type="button" data-pa="reseed">Nouveau tirage</button></div></div>';
-    }
+    var bar = '<div class="party-bar">' + (step > 1 ? '<button class="btn ghost" type="button" data-pa="prev">‹ Retour</button>' : '<span></span>');
+    if (step < 3) bar += '<button class="btn party-next" type="button" data-pa="next"' + (step === 1 && !partyStepValid() ? ' disabled' : '') + '>' + (step === 1 ? 'Suivant : réglages ›' : 'Suivant : lancer ›') + '</button>';
+    else bar += '<button class="btn party-create" type="button" data-pa="create"' + (!partyStepValid() ? ' disabled' : '') + '>' + (d.created ? 'Mettre à jour la partie' : 'Créer la partie') + '</button>';
+    h += bar + '</div>';
     $("v-party").innerHTML = h;
   }
   function partyCfgFromDraft(seed) {
@@ -2872,7 +2935,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   }
   function partyCreate(reseed) {
     var seed = reseed || !partyDraft.created ? Math.floor(Math.random() * 900000) + 100000 : partyDraft.created.s;
-    partyDraft.created = partyCfgFromDraft(seed);
+    partyDraft.created = partyCfgFromDraft(seed); partyHistoryAdd(partyDraft.created);
     renderParty();
     var r = document.querySelector(".party-result"); if (r && r.scrollIntoView) r.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -3008,6 +3071,13 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     if (e.key === "ArrowRight" || e.key === " " || e.key === "Enter" || e.key === "PageDown") { e.preventDefault(); animNext(); }
     else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); animPrev(); }
   });
+  document.addEventListener("submit", function (e) {
+    if (!e.target || e.target.id !== "anim-form") return;
+    e.preventDefault();
+    var v = ($("anim-code") || {}).value;
+    if (animCheck(v)) { try { localStorage.setItem(KEY + "-anim", "1"); } catch (err) {} renderParty(); toast("Accès animateur activé."); }
+    else { var er = $("anim-err"); if (er) er.hidden = false; }
+  });
   document.addEventListener("input", function (e) {
     if (!e.target) return;
     if (e.target.id === "party-title") partyDraft.l = e.target.value;
@@ -3045,6 +3115,14 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       }
     }
     else if (a === "mval") { var r2 = partyRun; if (r2 && r2.sel && r2.sel.length) partyAnswer(r2.sel.slice().sort(numAsc)); }
+    else if (a === "step") { d.step = Number(v); renderParty(); window.scrollTo(0, 0); }
+    else if (a === "prev") { d.step = Math.max(1, (d.step || 1) - 1); renderParty(); window.scrollTo(0, 0); }
+    else if (a === "next") { if (d.step !== 1 || partyStepValid()) { d.step = Math.min(3, (d.step || 1) + 1); renderParty(); window.scrollTo(0, 0); } }
+    else if (a === "preset") { var pr = PARTY_PRESETS.filter(function (x) { return x.id === v; })[0]; if (pr) { d.mode = "all"; d.t = []; d.u = []; d.qs = []; d.n = pr.n; d.c = pr.c; d.x = 0; d.l = pr.name; d.created = null; d.step = 3; renderParty(); window.scrollTo(0, 0); } }
+    else if (a === "hist") partyLoad(Number(v));
+    else if (a === "lock") { try { localStorage.removeItem(KEY + "-anim"); } catch (err) {} renderParty(); toast("Appareil verrouillé."); }
+    else if (a === "qrbig") { if (d.created) { var qb = document.createElement("div"); qb.className = "qrbig"; qb.setAttribute("data-pa", "qrclose"); qb.innerHTML = '<h2>' + esc(d.created.l || "Partie en équipe") + '</h2><p>Scannez pour jouer</p>' + QR.svg(partyLink(d.created), 640) + '<small>Touchez l’écran pour fermer</small>'; document.body.appendChild(qb); } }
+    else if (a === "qrclose") { t.remove(); }
     else if (a === "create") partyCreate(false);
     else if (a === "reseed") partyCreate(true);
     else if (a === "copy") { var inp = document.querySelector(".party-link"); try { navigator.clipboard.writeText(inp.value).then(function () { toast("Lien copié."); }, function () { inp.select(); toast("Sélectionné : copiez avec Ctrl+C."); }); } catch (err) { inp.select(); toast("Sélectionné : copiez avec Ctrl+C."); } }
