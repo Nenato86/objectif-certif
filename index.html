@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Objectif CertiF</title>
-<meta name="objectif-certif-version" content="beta-equipe-menus-2026-11-10">
+<meta name="objectif-certif-version" content="beta-pack-cadre-2026-11-12">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
@@ -317,6 +317,18 @@ body.light-ui .rt-text small,body.light-ui .rt-date{color:#5e7187}
 body.light-ui #v-play .dash-head h1{color:#172b45}
 body.light-ui #v-play .dash-head .dash-label,body.light-ui #v-play .dash-head p{color:#5e7187}
 body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
+
+/* Questions à plusieurs bonnes réponses, notes sous la question, séance préparée */
+.opt.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.opt .l.cb{font-weight:700}
+.mhint{margin:12px 0 0;padding:9px 12px;border-left:3px solid #f3b847;font-size:14px;line-height:1.45;opacity:.9}
+.qnote{margin:8px 0 0;font-size:12.5px;font-style:italic;opacity:.8;line-height:1.4}
+.anim .qnote{font-size:clamp(13px,1.5vw,19px)}
+.mbox{display:inline-block;width:1.3em;font-weight:700}
+.pcheck em{font-style:normal;opacity:.75;font-size:12px}
+.pcheck span:nth-child(2){flex:1;min-width:0;text-align:left}
+.anim-multi{margin:0 0 12px}
+.party-mval{margin-top:16px}
 </style>
 </head>
 <body>
@@ -531,6 +543,36 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
         { id: "MED-019", theme: "medic", q: "Que doit connaître chaque professionnel de son service sur les médicaments à risque ?",
           opts: ["Rien de particulier : la gestion de ces médicaments relève de la seule pharmacie", "La liste des médicaments à risque de l’unité et les moyens de maîtrise", "Uniquement les noms des chimiothérapies utilisées dans l’établissement", "Seulement les dosages de chaque médicament, sans la liste de l’unité"], ok: 1,
           why: "La liste des médicaments à risque est adaptée à chaque domaine d’activité et connue des professionnels, qui doivent aussi être formés à la prévention du risque médicamenteux. La liste est établie collégialement et les moyens de maîtrise sont associés à chaque médicament.", src: "Fiche HAS médicament p. 10 · critère 2.2-06" }
+      ]
+    },
+    medic4: {
+      th: "medic", title: "Pratiques du service (pack cadre)",
+      questions: [
+        { id: "MED-020", theme: "medic", q: "Parmi ces propositions, lesquelles décrivent la gestion des traitements personnels d’un patient hospitalisé ?", opts: ["Ils sont retirés au patient dès son entrée et le retrait est tracé dans le DPI*","Seule la prescription faite dans le service est appliquée, même si le patient prend ce traitement habituellement","Ils sont rangés dans un casier dédié de l’armoire à pharmacie, avec l’étiquette du patient","Ils sont rendus au patient à la sortie, uniquement s’ils sont toujours prescrits","Le patient les garde dans sa table de nuit et les prend lui-même","Ils sont utilisés pour d’autres patients du service en cas de rupture de stock","Ils sont rendus à la sortie, qu’ils soient encore prescrits ou non"], ok: 0, oks: [0,1,2,3], multi: 1, why: "À l’entrée, les traitements personnels sont retirés au patient et le retrait est tracé dans le DPI*. Ils sont rangés dans un casier dédié avec l’étiquette du patient, et rendus à la sortie seulement s’ils sont toujours prescrits. À l’hôpital, seule la prescription faite dans le service est appliquée, même si le patient prend ce traitement habituellement à la demande de son médecin traitant.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament", note: "DPI* : dossier patient informatisé" },
+        { id: "MED-021", theme: "medic", q: "Un traitement nominatif est délivré pour un patient précis. Où est-il rangé et que devient-il à la sortie du patient ?", opts: ["Casier dédié avec étiquette patient, puis retour à la PUI* à la sortie","Armoire commune avec la dotation, puis réutilisé pour un autre patient","Dans la chambre du patient, puis remis au patient à sa sortie","Casier dédié avec étiquette patient, puis détruit dans le service à la sortie"], ok: 0, why: "Un traitement nominatif est rangé dans un casier dédié de l’armoire à pharmacie, avec l’étiquette du patient, puis retourné à la PUI* à la sortie du patient.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament", note: "PUI* : pharmacie à usage intérieur" },
+        { id: "MED-022", theme: "medic", q: "Lesquelles de ces propositions sont des conditions de gestion des stupéfiants ?", opts: ["Ils sont stockés dans un coffre à clé, à l’intérieur de l’armoire à pharmacie","La clé est détenue par une IDE*, et cette détention est tracée","La dotation est contrôlée deux fois par jour, par l’équipe de jour et par l’équipe de nuit","L’administration est tracée au nom du patient","Les dates de péremption sont contrôlées une fois par mois","La clé reste sur le coffre pendant le service pour gagner du temps","La dotation n’est contrôlée qu’en cas d’écart constaté","L’administration est tracée par le total de la journée, sans nom de patient"], ok: 0, oks: [0,1,2,3,4], multi: 1, why: "Les stupéfiants sont stockés dans un coffre à clé de l’armoire à pharmacie. La clé est détenue par une IDE* et cette détention est tracée. La dotation est contrôlée 2 fois par jour (équipe de jour et équipe de nuit), les dates de péremption 1 fois par mois, et chaque administration est tracée au nom du patient.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament", note: "IDE* : infirmier diplômé d’État" },
+        { id: "MED-023", theme: "medic", q: "Quelles sont les bonnes conditions de stockage des bouteilles de fluides médicaux (air, oxygène) ?", opts: ["Accrochées au mur ou placées dans un chariot dédié","Avec le robinet fermé","À la verticale","Couchées au sol pour éviter qu’elles ne tombent","Avec le robinet laissé entrouvert pour éviter un blocage","Rangées dans l’armoire à pharmacie avec les médicaments"], ok: 0, oks: [0,1,2], multi: 1, why: "Les bouteilles (obus) d’air et d’oxygène présentent un risque d’explosion. Elles sont accrochées au mur ou placées dans un chariot dédié, robinet fermé, à la verticale.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament" },
+        { id: "MED-024", theme: "medic", q: "Quelles sont les règles de gestion des piluliers ?", opts: ["Préparés pour 24 heures au maximum","Médicaments laissés dans leur blister, sans les déblistériser","Identifiés avec l’étiquette du patient","Préparés pour la semaine afin de gagner du temps","Médicaments sortis de leur blister et regroupés dans la case","Identifiés par le seul numéro de chambre"], ok: 0, oks: [0,1,2], multi: 1, why: "Un pilulier est préparé pour 24 heures au maximum, sans déblistériser les médicaments, et identifié avec l’étiquette du patient.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament" },
+        { id: "MED-025", theme: "medic", q: "Lesquels de ces médicaments ou produits sont des médicaments à risque ?", opts: ["L’insuline","Le chlorure de potassium","Les anticoagulants oraux et injectables","Les antalgiques opiacés","Les chimiothérapies injectables","Les fluides médicaux","Le paracétamol en comprimés","Les vitamines orales","Le sérum physiologique pour rinçage"], ok: 0, oks: [0,1,2,3,4,5], multi: 1, why: "Médicaments à risque cités : l’insuline, le chlorure de potassium, les anticoagulants oraux et injectables, les antalgiques opiacés, les chimiothérapies injectables et les fluides médicaux.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament" },
+        { id: "MED-026", theme: "medic", q: "Avant d’administrer un traitement, la règle des 5 B demande de vérifier cinq points. Lesquels ?", opts: ["Bon patient","Bon médicament","Bonne dose","Bonne voie d’administration","Bon moment","Bon prescripteur","Bon fabricant","Bon service"], ok: 0, oks: [0,1,2,3,4], multi: 1, why: "Les 5 B : bon patient, bon médicament, bonne dose, bonne voie d’administration, bon moment.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament" },
+        { id: "MED-027", theme: "medic", q: "J’administre à mon patient un demi-comprimé. Que fais-je de la moitié restante ?", opts: ["Je la jette","Je la remets dans le pilulier pour la prochaine prise","Je la range dans le casier du patient","Je la garde dans ma poche pour la prochaine prise"], ok: 0, why: "La moitié restante est jetée : une moitié de comprimé sortie de son blister ne se conserve pas.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament" },
+        { id: "MED-028", theme: "medic", q: "Quels médicaments peuvent être stockés dans le chariot de soins ?", opts: ["Les piluliers","Les médicaments « si besoin » nécessaires au tour d’administration (24 heures maximum)","Les stupéfiants","Les traitements nominatifs de tous les patients du service","Les médicaments à risque, comme le chlorure de potassium"], ok: 0, oks: [0,1], multi: 1, why: "Seuls les piluliers et les médicaments « si besoin » nécessaires au tour d’administration (24 heures maximum) peuvent être stockés dans le chariot de soins.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament" },
+        { id: "MED-029", theme: "medic", q: "Un médicament à risque demande une attention particulière des soignants, car il a plus de risques de causer des dommages au patient. Qu’est-ce qui peut rendre un médicament « à risque » ?", opts: ["Sa toxicité","Sa marge thérapeutique étroite","Un conditionnement similaire à un autre produit, qui peut faire confondre","Un risque d’explosion, comme pour les bouteilles d’air et d’oxygène","Son prix de vente élevé","Une date de péremption inférieure à 6 mois","Une prescription réservée aux médecins spécialistes"], ok: 0, oks: [0,1,2,3], multi: 1, why: "Un médicament à risque a plus de risques de causer des dommages au patient : toxicité, marge thérapeutique étroite, conditionnement similaire (risque de confusion), et risque d’explosion pour les fluides médicaux (bouteilles d’air et d’oxygène).", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament" },
+        { id: "MED-030", theme: "medic", q: "Une PM* conditionnelle doit être la plus précise possible. Lesquelles de ces formulations sont correctes ?", opts: ["« Si besoin »","« Si EVA* > 3 »","« Si douleur »","« Si fièvre »","« Si température > 38 °C et/ou frissons »"], ok: 1, oks: [1,4], multi: 1, why: "Une PM* conditionnelle doit contenir un critère précis et mesurable : « si EVA* > 3 » ou « si température > 38 °C et/ou frissons ». « Si besoin », « si douleur » et « si fièvre » sont trop imprécis.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament", note: "PM* : prescription médicale · EVA* : échelle visuelle analogique (évaluation de la douleur)" },
+        { id: "MED-031", theme: "medic", q: "Je n’administre pas un traitement prescrit. Quelle traçabilité dois-je effectuer ?", opts: ["Le noter dans le DPI* comme « non administré », avec un commentaire explicatif","Ne rien noter : une dose non donnée ne se trace pas","Le noter dans le DPI* comme « administré » pour ne pas décaler le tour","Le dire à l’oral à l’équipe suivante, sans l’écrire dans le DPI*"], ok: 0, why: "Il faut noter dans le DPI* « non administré », avec un commentaire explicatif.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament", note: "DPI* : dossier patient informatisé" },
+        { id: "MED-032", theme: "medic", q: "Comment doit être identifié un traitement injectable pour l’administration ?", opts: ["Avec une étiquette patient","Avec une étiquette type CHSV*","Avec le numéro de chambre écrit au feutre sur la seringue","Sans étiquette si l’administration est immédiate","Avec le nom du médicament seul, sans nom de patient"], ok: 0, oks: [0,1], multi: 1, why: "Un traitement injectable est identifié avec une étiquette patient et une étiquette type CHSV*.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament", note: "CHSV* : Centre Hospitalier Simone Veil" }
+      ]
+    },
+    urg4: {
+      th: "urgences", title: "Chariot d’urgence : rythme de vérification (pack cadre)",
+      questions: [
+        { id: "URG-036", theme: "urgences", q: "À quel rythme le chariot d’urgence doit-il être vérifié ?", opts: ["Tous les jours","Toutes les semaines","Toutes les 2 semaines","Tous les mois"], ok: 2, why: "Le chariot d’urgence est vérifié toutes les 2 semaines (2 fois par mois) : une fois par l’équipe de jour et une fois par l’équipe de nuit.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament" }
+      ]
+    },
+    trans3: {
+      th: "transfusion", title: "Poche de sang après transfusion (pack cadre)",
+      questions: [
+        { id: "TRA-040", theme: "transfusion", q: "Après une transfusion, quelle est la durée minimale pendant laquelle la poche doit être gardée dans le service ?", opts: ["30 minutes","1 heure","2 heures","4 heures"], ok: 3, why: "La poche est conservée au moins 4 heures, tubulure clampée, à température ambiante, dans le poste de soins, puis éliminée dans la filière DASRI*. La garder plus longtemps n’est pas une faute, mais c’est inutile et peu hygiénique.", src: "Questions du Pôle Gériatrie (cadre) · circuit du médicament", note: "DASRI* : déchets d’activités de soins à risque infectieux" }
       ]
     },
     atb1: {
@@ -1466,7 +1508,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
           why: "Le chariot doit rester visible et accessible, et sa localisation est signalée par un affichage.", src: "Fiche chariot d’urgence en 10 points (nov. 2024) · point 4" },
         { id: "URG-028", theme: "urgences", q: "À quelle fréquence vérifie-t-on entièrement le chariot d’urgence ?",
           opts: ["Une fois par an, lors de l’inventaire annuel du service", "Tous les 15 jours (2 fois par mois)", "Uniquement après chaque utilisation du chariot, sans contrôle régulier", "Chaque jour, avec contrôle de tous les tiroirs"], ok: 1,
-          why: "La vérification complète se fait en plus du contrôle de l’extérieur à chaque prise de service et après chaque utilisation. Elle est réalisée en binôme et tracée. Idéalement une fois par l’équipe de nuit et une fois par l’équipe de jour.", src: "Fiche chariot d’urgence en 10 points (nov. 2024) · point 5" },
+          why: "La vérification complète se fait en plus du contrôle de l’extérieur à chaque prise de service et après chaque utilisation. Elle est réalisée en binôme et tracée. Une fois par l’équipe de jour et une fois par l’équipe de nuit.", src: "Fiche chariot d’urgence en 10 points (nov. 2024) · point 5" },
         { id: "URG-029", theme: "urgences", q: "Qui réalise la vérification complète du chariot ?",
           opts: ["L’infirmier seul, qui trace ensuite sa vérification dans le classeur du chariot", "Le médecin, qui contrôle seul les péremptions et le matériel du chariot", "La pharmacie seule, qui contrôle les péremptions lors de ses passages", "Un binôme (IDE, AS, AP), notamment pour contrôler les péremptions"], ok: 3,
           why: "Il faut respecter la check-list et entretenir le chariot à chaque vérification. La vérification est aussi faite après chaque utilisation.", src: "Fiche chariot d’urgence en 10 points (nov. 2024) · points 5 à 7" },
@@ -2214,11 +2256,30 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   }
 
   /* ---------- Quiz ---------- */
+  /* ---------- Questions à plusieurs bonnes réponses ----------
+     Une question « multi » porte multi: 1 et oks: [indices des bonnes réponses] (ok = la première, pour la compatibilité).
+     Score en tout ou rien : il faut cocher toutes les bonnes réponses et aucune fausse. */
+  var MHINT = "Plusieurs réponses possibles : cochez toutes les bonnes réponses, puis validez. Il faut toutes les bonnes réponses et aucune fausse.";
+  function numAsc(a, b) { return a - b; }
+  function oksOf(q) { return q.multi ? q.oks : [q.ok]; }
+  function samePick(q, pick) {
+    if (!q.multi) return pick === q.ok;
+    if (!Array.isArray(pick)) return false;
+    var want = q.oks.slice().sort(numAsc), got = pick.slice().sort(numAsc);
+    return got.length === want.length && got.every(function (v, i) { return v === want[i]; });
+  }
+  function remapQ(q, idx) {
+    var o = { id: q.id, theme: q.theme, q: q.q, opts: idx.map(function (i) { return q.opts[i]; }), ok: idx.indexOf(q.ok), why: q.why, src: q.src };
+    if (q.note) o.note = q.note;
+    if (q.multi) { o.multi = 1; o.oks = q.oks.map(function (k) { return idx.indexOf(k); }).sort(numAsc); o.ok = o.oks[0]; }
+    return o;
+  }
+  function noteHtml(q) { return q && q.note ? '<p class="qnote">' + esc(q.note) + '</p>' : ""; }
   function mixQs(list) {
     return list.map(function (q) {
       if (q.opts.length < 3) return q;
       var idx = q.opts.map(function (_, i) { return i; }).sort(function () { return Math.random() - 0.5; });
-      return { id: q.id, theme: q.theme, q: q.q, opts: idx.map(function (i) { return q.opts[i]; }), ok: idx.indexOf(q.ok), why: q.why, src: q.src };
+      return remapQ(q, idx);
     });
   }
   var PICK = 5;
@@ -2236,8 +2297,19 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       { id: "hyg-contact", name: "Précautions contact, BMR et BHRe", ids: ["HYG-009","HYG-010","HYG-011"].concat(range("HYG-", 36, 44)) },
       { id: "hyg-gale", name: "Gale", ids: range("HYG-", 45, 64) },
       { id: "hyg-aes", name: "Accident d’exposition au sang (AES)", ids: ["HYG-008"].concat(range("HYG-", 65, 70)) }
+    ],
+    medic: [
+      { id: "med-patient", name: "Traitements du patient (personnels et nominatifs)", ids: ["MED-020", "MED-021"] },
+      { id: "med-presc", name: "Prescription, conciliation et traçabilité", ids: ["MED-001", "MED-002", "MED-003", "MED-004", "MED-005", "MED-006", "MED-012", "MED-030", "MED-031"] },
+      { id: "med-admin", name: "Préparation et administration", ids: ["MED-007", "MED-008", "MED-009", "MED-010", "MED-011", "MED-026", "MED-027", "MED-032"] },
+      { id: "med-stock", name: "Stockage et rangement", ids: ["MED-013", "MED-014", "MED-015", "MED-016", "MED-023", "MED-024", "MED-028"] },
+      { id: "med-risque", name: "Médicaments à risque et stupéfiants", ids: ["MED-019", "MED-022", "MED-025", "MED-029"] }
     ]
   };
+  /* ---------- Packs (séances préparées) : listes de questions fixées à l’avance ---------- */
+  var PACKS = [
+    { id: "cadre-medic", name: "Pack cadre – Circuit du médicament", ids: ["MED-020", "MED-021", "URG-036", "MED-022", "TRA-040", "MED-023", "MED-024", "MED-025", "MED-026", "MED-027", "MED-028", "MED-029", "MED-030", "MED-031", "MED-032"] }
+  ];
   var SUB_BY_ID = {}, SUB_OF_Q = {};
   Object.keys(SUBTHEMES).forEach(function (th) {
     SUBTHEMES[th].forEach(function (sb) { sb.th = th; SUB_BY_ID[sb.id] = sb; sb.ids.forEach(function (qid) { SUB_OF_Q[qid] = sb.id; }); });
@@ -2264,7 +2336,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     THEMES.forEach(function (t) {
       poolOf(t.id).forEach(function (q) {
         var k = questionKey(q);
-        if (!seen[k]) { seen[k] = true; out.push(q); }
+        if (!seen[k] && !q.multi) { seen[k] = true; out.push(q); }
       });
     });
     return out;
@@ -2278,7 +2350,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   }
   function towerQuestion(q) {
     var indexes = shuffleArray(q.opts.map(function (_, i) { return i; }));
-    return { id:q.id, theme:q.theme, q:q.q, opts:indexes.map(function(i){return q.opts[i];}), ok:indexes.indexOf(q.ok), why:q.why, src:q.src };
+    return remapQ(q, indexes);
   }
   function towerMilestones() {
     var total = towerPool().length;
@@ -2586,7 +2658,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   /* ---------- Partie en équipe ----------
      Même tirage pour tous : thèmes, nombre, numéro de tirage et options sont dans le lien (#partie?...).
      Hors score : rien n’est enregistré dans le profil. Aucun serveur. */
-  var partyDraft = { l: "Point qualité", n: 10, mode: "all", t: [], u: [], x: 0, c: 0, s: 0 };
+  var partyDraft = { l: "Point qualité", n: 10, mode: "all", t: [], u: [], x: 0, c: 0, s: 0, qs: [], o: 0, qf: "", qq: "" };
   var partyRun = null, partyAnim = null, partyTimer = null;
   function bankSig() {
     var ids = [];
@@ -2616,15 +2688,19 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     out.sort(function (a, b) { return (a.id || "") < (b.id || "") ? -1 : 1; });
     return out;
   }
+  function partyListQs(cfg) { var idx = questionIndex(); return (cfg.q || []).map(function (id) { return idx[id]; }).filter(Boolean); }
   function partyDeal(cfg) {
-    var pool = partyPool(cfg.t, cfg.u), picked = seededShuffle(pool, prng(cfg.s)).slice(0, Math.min(cfg.n, pool.length));
+    var picked;
+    if (cfg.q && cfg.q.length) { picked = partyListQs(cfg); if (cfg.o) picked = seededShuffle(picked, prng(cfg.s)); }
+    else { var pool = partyPool(cfg.t, cfg.u); picked = seededShuffle(pool, prng(cfg.s)).slice(0, Math.min(cfg.n, pool.length)); }
     return picked.map(function (q) {
       var idx = seededShuffle(q.opts.map(function (_, i) { return i; }), prng(cfg.s ^ strHash(q.id || questionKey(q))));
-      return { id: q.id, theme: q.theme, q: q.q, opts: idx.map(function (i) { return q.opts[i]; }), ok: idx.indexOf(q.ok), why: q.why, src: q.src };
+      return remapQ(q, idx);
     });
   }
   function partyLink(cfg) {
     var p = ["n=" + cfg.n, "s=" + cfg.s];
+    if (cfg.q && cfg.q.length) { p.push("q=" + cfg.q.join(".")); if (cfg.o) p.push("o=1"); }
     if (cfg.t.length) p.push("t=" + cfg.t.join("."));
     if (cfg.u && cfg.u.length) p.push("u=" + cfg.u.join("."));
     p.push("x=" + (cfg.x ? 1 : 0)); if (cfg.c) p.push("c=" + cfg.c);
@@ -2636,28 +2712,77 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     var h = location.hash || "";
     if (h.indexOf("#partie?") !== 0) return null;
     var q; try { q = new URLSearchParams(h.slice(8)); } catch (e) { return null; }
-    var n = Number(q.get("n")), s = parseInt(q.get("s"), 10);
-    if (!(n >= 4 && n <= 20 && n === Math.floor(n)) || !isFinite(s)) return null;
+    var n = Number(q.get("n")), s = parseInt(q.get("s"), 10), ql = null;
+    if (q.get("q")) {
+      var qidx = questionIndex();
+      ql = q.get("q").split(".").filter(function (id) { return !!qidx[id]; }).slice(0, 60);
+      if (!ql.length) return null;
+      n = ql.length;
+    } else if (!(n >= 4 && n <= 20 && n === Math.floor(n))) return null;
+    if (!isFinite(s)) return null;
     var valid = {}; THEMES.forEach(function (t) { valid[t.id] = true; });
     var t = (q.get("t") || "").split(".").filter(function (id) { return valid[id]; });
     var u = (q.get("u") || "").split(".").filter(function (id) { return !!subDef(id); });
     var c = Number(q.get("c")); if (!(c >= 5 && c <= 60 && c % 5 === 0)) c = 0;
-    return { n: n, s: s, t: t, u: u, x: q.get("x") === "0" ? 0 : 1, c: c, b: q.get("b") || "", l: (q.get("l") || "").replace(/[\u0000-\u001f]/g, "").slice(0, 40) };
+    return { n: n, s: s, t: t, u: u, q: ql, o: q.get("o") === "1" ? 1 : 0, x: q.get("x") === "0" ? 0 : 1, c: c, b: q.get("b") || "", l: (q.get("l") || "").replace(/[\u0000-\u001f]/g, "").slice(0, 40) };
   }
   function partyThemesLabel(cfg) {
+    if (cfg.q && cfg.q.length) return "séance préparée";
     var us = cfg.u || [];
     if (!cfg.t.length && !us.length) return "tirage au sort parmi tous les thèmes";
     return cfg.t.map(function (id) { return BYID[id] ? BYID[id].name : id; }).concat(us.map(function (id) { var sd = subDef(id); return sd ? BYID[sd.th].name + " : " + sd.name : id; })).join(" · ");
   }
-  function partyEffectiveN(cfg) { return Math.min(cfg.n, partyPool(cfg.t, cfg.u).length); }
+  function partyEffectiveN(cfg) { if (cfg.q && cfg.q.length) return partyListQs(cfg).length; return Math.min(cfg.n, partyPool(cfg.t, cfg.u).length); }
+
+  /* --- séance préparée : packs, liste fixe, ajout de questions --- */
+  var SEANCE_MAX = 40;
+  function qShort(q) { var t = String(q.q || ""); return t.length > 120 ? t.slice(0, 117) + "…" : t; }
+  function seanceResultsHtml(d) {
+    var have = {}, seen = {}, out = [], more = 0, needle = (d.qq || "").trim().toLowerCase();
+    d.qs.forEach(function (id) { have[id] = 1; });
+    THEMES.forEach(function (t) {
+      if (d.qf && d.qf !== t.id) return;
+      poolOf(t.id).forEach(function (q) {
+        var k = questionKey(q); if (!q.id || have[k] || seen[k]) return; seen[k] = 1;
+        if (needle && (q.q + " " + q.id).toLowerCase().indexOf(needle) < 0) return;
+        if (out.length >= 30) { more++; return; }
+        out.push('<button type="button" class="pcheck" data-pa="qadd" data-pv="' + esc(q.id) + '" aria-pressed="false"><span class="pbox"></span><span>' + esc(qShort(q)) + (q.multi ? ' <em>(plusieurs réponses)</em>' : '') + '</span><small>' + esc(q.id) + '</small></button>');
+      });
+    });
+    return out.join("") + (!out.length ? '<p class="note">Aucune question trouvée.</p>' : "") + (more ? '<p class="note">Et ' + more + ' autre' + (more > 1 ? 's' : '') + ' : précisez la recherche.</p>' : "");
+  }
+  function seanceHtml(d) {
+    var idx = questionIndex(), nq = d.qs.length;
+    var h = '<p class="note" style="margin:0 0 10px">Une séance est une liste de questions choisies à l’avance. Tous les agents qui scannent le QR code reçoivent exactement ces questions.</p>' +
+      '<p class="party-opt">Packs prêts à l’emploi</p>' +
+      PACKS.map(function (p) {
+        var on = p.ids.length === nq && p.ids.every(function (id, i) { return d.qs[i] === id; });
+        return '<button type="button" class="pcheck' + (on ? ' on' : '') + '" data-pa="pack" data-pv="' + p.id + '" aria-pressed="' + on + '"><span class="pbox">' + (on ? '✓' : '') + '</span><span>' + esc(p.name) + '</span><small>' + p.ids.length + '</small></button>';
+      }).join("");
+    h += '<p class="party-opt">Ma séance : ' + nq + ' question' + (nq > 1 ? 's' : '') + (nq ? ' · environ ' + nq + ' min' : '') + '</p>';
+    if (nq) {
+      h += '<p class="note party-quick"><button type="button" class="linkbtn" data-pa="qclear">Tout retirer</button> · Touchez une question pour la retirer</p>';
+      d.qs.forEach(function (id) {
+        var q = idx[id]; if (!q) return;
+        h += '<button type="button" class="pcheck on" data-pa="qrem" data-pv="' + esc(id) + '" aria-pressed="true"><span class="pbox">✓</span><span>' + esc(qShort(q)) + (q.multi ? ' <em>(plusieurs réponses)</em>' : '') + '</span><small>' + esc(id) + '</small></button>';
+      });
+    } else h += '<p class="note">Aucune question pour l’instant.</p>';
+    h += '<p class="party-opt">Ordre des questions</p><div class="seg"><button type="button" class="seg-b' + (!d.o ? ' on' : '') + '" data-pa="ord" data-pv="0">Dans l’ordre de la liste</button><button type="button" class="seg-b' + (d.o ? ' on' : '') + '" data-pa="ord" data-pv="1">Mélangé</button></div>';
+    h += '<p class="party-opt">Ajouter des questions</p><select id="party-qth" class="party-input party-select" aria-label="Thème des questions à ajouter"><option value="">Tous les thèmes</option>' +
+      THEMES.filter(function (t) { return poolOf(t.id).length; }).map(function (t) { return '<option value="' + t.id + '"' + (d.qf === t.id ? ' selected' : '') + '>' + esc(t.name) + '</option>'; }).join("") + '</select>' +
+      '<input id="party-qsearch" class="party-input" type="search" maxlength="40" value="' + esc(d.qq || "") + '" placeholder="Rechercher un mot (ex. stupéfiants, gale)" aria-label="Rechercher une question" style="margin-top:8px">' +
+      '<div id="party-qres" style="margin-top:8px">' + seanceResultsHtml(d) + '</div>';
+    return h;
+  }
+  function refreshQRes() { var el = $("party-qres"); if (el) el.innerHTML = seanceResultsHtml(partyDraft); }
 
   /* --- création --- */
   function renderParty() {
     var d = partyDraft, h = '<div class="head2"><h2>Partie en équipe</h2>' + chipHtml() + '</div>' +
       '<p class="lede">Créez une partie à jouer à plusieurs, par exemple en réunion. Tous les agents qui scannent le QR code reçoivent exactement les mêmes questions, dans le même ordre. Les parties en équipe ne comptent pas dans les scores.</p>';
     h += '<div class="sect party-sect"><div class="sect-head"><h3>Nom de la partie</h3></div><input id="party-title" class="party-input" type="text" maxlength="40" value="' + esc(d.l) + '" placeholder="Ex. Point qualité du jeudi" aria-label="Nom de la partie"></div>';
-    h += '<div class="sect party-sect"><div class="sect-head"><h3>Nombre de questions</h3></div><select id="party-n" class="party-input party-select" aria-label="Nombre de questions">' + (function () { var o = ""; for (var n = 4; n <= 20; n++) o += '<option value="' + n + '"' + (d.n === n ? ' selected' : '') + '>' + n + ' questions</option>'; return o; })() + '</select></div>';
-    h += '<div class="sect party-sect"><div class="sect-head"><h3>Thèmes</h3></div><div class="seg"><button type="button" class="seg-b' + (d.mode === "all" ? ' on' : '') + '" data-pa="mode" data-pv="all">Tirage au sort (16 thèmes)</button><button type="button" class="seg-b' + (d.mode === "pick" ? ' on' : '') + '" data-pa="mode" data-pv="pick">Je choisis</button></div>';
+    if (d.mode !== "seance") h += '<div class="sect party-sect"><div class="sect-head"><h3>Nombre de questions</h3></div><select id="party-n" class="party-input party-select" aria-label="Nombre de questions">' + (function () { var o = ""; for (var n = 4; n <= 20; n++) o += '<option value="' + n + '"' + (d.n === n ? ' selected' : '') + '>' + n + ' questions</option>'; return o; })() + '</select></div>';
+    h += '<div class="sect party-sect"><div class="sect-head"><h3>Questions</h3></div><div class="seg"><button type="button" class="seg-b' + (d.mode === "all" ? ' on' : '') + '" data-pa="mode" data-pv="all">Tirage au sort (16 thèmes)</button><button type="button" class="seg-b' + (d.mode === "pick" ? ' on' : '') + '" data-pa="mode" data-pv="pick">Je choisis des thèmes</button><button type="button" class="seg-b' + (d.mode === "seance" ? ' on' : '') + '" data-pa="mode" data-pv="seance">Séance préparée</button></div>';
     if (d.mode === "pick") {
       h += '<p class="note party-quick"><button type="button" class="linkbtn" data-pa="allth">Tout cocher</button> · <button type="button" class="linkbtn" data-pa="nonth">Tout décocher</button></p>';
       [1, 2, 3].forEach(function (c) {
@@ -2672,16 +2797,18 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
         });
       });
     }
+    if (d.mode === "seance") h += seanceHtml(d);
     h += '</div>';
     h += '<div class="sect party-sect"><div class="sect-head"><h3>Options</h3></div>' +
       '<p class="party-opt">Explication sur les téléphones</p><div class="seg"><button type="button" class="seg-b' + (!d.x ? ' on' : '') + '" data-pa="x" data-pv="0">À la fin</button><button type="button" class="seg-b' + (d.x ? ' on' : '') + '" data-pa="x" data-pv="1">Tout de suite</button></div>' +
       '<p class="note" style="margin:8px 0 0">À la fin : le téléphone indique seulement « Bonne réponse » ou « Pas tout à fait ». La bonne réponse et l’explication s’affichent sur l’écran animateur, puis dans le bilan de fin. Tout de suite : à choisir sans écran animateur.</p>' +
       '<p class="party-opt">Chronomètre par question</p><select id="party-c" class="party-input party-select" aria-label="Chronomètre par question">' + (function () { var o = '<option value="0"' + (d.c === 0 ? ' selected' : '') + '>Aucun</option>'; for (var c = 15; c <= 60; c += 5) o += '<option value="' + c + '"' + (d.c === c ? ' selected' : '') + '>' + c + ' secondes</option>'; return o; })() + '</select></div>';
     var cfg = partyCfgFromDraft(), eff = partyEffectiveN(cfg), warn = "";
-    if (d.mode === "pick" && !d.t.length && !d.u.length) warn = "Cochez au moins un thème ou un sous-thème.";
+    if (d.mode === "seance") { if (!d.qs.length) warn = "Choisissez un pack ou ajoutez au moins une question."; }
+    else if (d.mode === "pick" && !d.t.length && !d.u.length) warn = "Cochez au moins un thème ou un sous-thème.";
     else if (eff < d.n) warn = "Les thèmes choisis ne contiennent que " + eff + " questions : la partie en aura " + eff + ".";
     h += '<p class="party-sum"><b>' + eff + ' question' + (eff > 1 ? 's' : '') + '</b> · ' + esc(partyThemesLabel(cfg)) + (d.c ? ' · ' + d.c + ' s par question' : '') + '</p>' + (warn ? '<p class="party-warn">' + warn + '</p>' : '');
-    h += '<button class="tower-start party-create" type="button" data-pa="create"' + (d.mode === "pick" && !d.t.length && !d.u.length ? ' disabled' : '') + '>' + (d.created ? 'Mettre à jour la partie' : 'Créer la partie') + '</button>';
+    h += '<button class="tower-start party-create" type="button" data-pa="create"' + ((d.mode === "pick" && !d.t.length && !d.u.length) || (d.mode === "seance" && !d.qs.length) ? ' disabled' : '') + '>' + (d.created ? 'Mettre à jour la partie' : 'Créer la partie') + '</button>';
     if (d.created) {
       var link = partyLink(d.created);
       h += '<div class="sect party-result"><div class="sect-head"><h3>Partie prête</h3><span>tirage n° ' + d.created.s + '</span></div><div class="party-qr">' + QR.svg(link, 260) + '</div>' +
@@ -2693,6 +2820,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   }
   function partyCfgFromDraft(seed) {
     var d = partyDraft, themes = d.mode === "pick" ? d.t.slice() : [];
+    if (d.mode === "seance") return { n: d.qs.length, s: seed || (d.created ? d.created.s : 0), t: [], u: [], q: d.qs.slice(), o: d.o ? 1 : 0, x: d.x, c: d.c, b: bankSig(), l: (d.l || "").trim().slice(0, 40) };
     var subs = d.mode === "pick" ? d.u.filter(function (id) { var sd = subDef(id); return sd && themes.indexOf(sd.th) < 0; }) : [];
     if (themes.length === THEMES.length) { themes = []; subs = []; }
     return { n: d.n, s: seed || (d.created ? d.created.s : 0), t: themes, u: subs, x: d.x, c: d.c, b: bankSig(), l: (d.l || "").trim().slice(0, 40) };
@@ -2727,34 +2855,42 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     window.scrollTo(0, 0);
   }
   function renderPartyQuestion() {
-    var r = partyRun, q = r.qs[r.i], cfg = r.cfg; r.locked = false;
-    var opts = q.opts.map(function (o, i) { return '<button class="tower-option" type="button" data-pa="ans" data-pv="' + i + '">' + String.fromCharCode(65 + i) + '. ' + esc(o) + '</button>'; }).join("");
+    var r = partyRun, q = r.qs[r.i], cfg = r.cfg, multi = !!q.multi; r.locked = false; r.sel = [];
+    var opts = q.opts.map(function (o, i) {
+      return multi
+        ? '<button class="tower-option" type="button" data-pa="mtog" data-pv="' + i + '" role="checkbox" aria-checked="false"><span class="mbox">☐</span> ' + String.fromCharCode(65 + i) + '. ' + esc(o) + '</button>'
+        : '<button class="tower-option" type="button" data-pa="ans" data-pv="' + i + '">' + String.fromCharCode(65 + i) + '. ' + esc(o) + '</button>';
+    }).join("");
     $("v-quiz").innerHTML = '<div class="tower-game"><div class="tower-game-top"><div><p class="eyebrow">' + esc(cfg.l || "Partie en équipe") + '</p><div class="tower-floor"><strong>Question ' + (r.i + 1) + ' / ' + r.qs.length + '</strong>' + (cfg.c ? '<span id="party-clock">⏱ ' + cfg.c + ' s</span>' : '<span>hors score</span>') + '</div></div><button class="tower-quit" type="button" data-pa="exit">Quitter</button></div>' +
-      '<div class="tower-game-card"><span class="tower-question-theme">' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + '</span><h2 class="tower-question">' + esc(q.q) + '</h2><div class="tower-options">' + opts + '</div></div></div>';
+      '<div class="tower-game-card"><span class="tower-question-theme">' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + '</span><h2 class="tower-question">' + esc(q.q) + '</h2>' + noteHtml(q) + (multi ? '<p class="mhint">' + MHINT + '</p>' : '') + '<div class="tower-options">' + opts + '</div>' +
+      (multi ? '<button class="tower-start party-mval" id="party-mval" type="button" data-pa="mval" disabled>Valider ma réponse</button>' : '') + '</div></div>';
     window.scrollTo(0, 0);
     clearInterval(partyTimer);
     if (cfg.c) {
       r.left = cfg.c;
       partyTimer = setInterval(function () {
         r.left--; var el = $("party-clock"); if (el) el.textContent = "⏱ " + Math.max(r.left, 0) + " s";
-        if (r.left <= 0) { clearInterval(partyTimer); partyAnswer(-1); }
+        if (r.left <= 0) { clearInterval(partyTimer); partyAnswer(multi ? (r.sel.length ? r.sel.slice().sort(numAsc) : -1) : -1); }
       }, 1000);
     }
   }
   function partyAnswer(i) {
     var r = partyRun; if (!r || r.locked) return; r.locked = true; clearInterval(partyTimer);
-    var q = r.qs[r.i], cfg = r.cfg, last = r.i >= r.qs.length - 1; r.ans[r.i] = i;
+    var q = r.qs[r.i], cfg = r.cfg, last = r.i >= r.qs.length - 1, multi = !!q.multi;
+    var picks = multi ? (Array.isArray(i) ? i : []) : [i], good = samePick(q, multi ? picks : i), none = multi ? !picks.length : i < 0, oks = oksOf(q);
+    r.ans[r.i] = i;
     var opts = q.opts.map(function (o, k) {
-      var cls = "tower-option";
-      if (cfg.x) cls += k === q.ok ? " p-ok" : (k === i ? " p-ko" : "");
-      else if (k === i) cls += " bib-picked";
-      return '<button class="' + cls + '" type="button" disabled>' + String.fromCharCode(65 + k) + '. ' + esc(o) + '</button>';
+      var cls = "tower-option", chosen = picks.indexOf(k) >= 0, isOk = oks.indexOf(k) >= 0;
+      if (cfg.x) cls += isOk ? " p-ok" : (chosen ? " p-ko" : "");
+      else if (chosen) cls += " bib-picked";
+      return '<button class="' + cls + '" type="button" disabled>' + (multi ? '<span class="mbox">' + (chosen ? '☑' : '☐') + '</span> ' : '') + String.fromCharCode(65 + k) + '. ' + esc(o) + '</button>';
     }).join("");
+    var verdict = good ? '✓ Bonne réponse.' : (none ? '⏱ Temps écoulé.' : '✗ Pas tout à fait.');
     var fb = cfg.x
-      ? '<div class="tower-explain-box"><p><b>' + (i === q.ok ? '✓ Bonne réponse.' : (i < 0 ? '⏱ Temps écoulé.' : '✗ Pas tout à fait.')) + '</b> ' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>'
-      : '<div class="tower-explain-box"><p><b>' + (i === q.ok ? '✓ Bonne réponse.' : (i < 0 ? '⏱ Temps écoulé.' : '✗ Pas tout à fait.')) + '</b> L’explication sera donnée à l’écran, puis dans le bilan de fin.</p></div>';
+      ? '<div class="tower-explain-box"><p><b>' + verdict + '</b> ' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>'
+      : '<div class="tower-explain-box"><p><b>' + verdict + '</b> L’explication sera donnée à l’écran, puis dans le bilan de fin.</p></div>';
     $("v-quiz").innerHTML = '<div class="tower-game"><div class="tower-game-top"><div><p class="eyebrow">' + esc(cfg.l || "Partie en équipe") + '</p><div class="tower-floor"><strong>Question ' + (r.i + 1) + ' / ' + r.qs.length + '</strong><span>hors score</span></div></div></div>' +
-      '<div class="tower-game-card"><span class="tower-question-theme">' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + '</span><h2 class="tower-question">' + esc(q.q) + '</h2><div class="tower-options">' + opts + '</div>' + fb +
+      '<div class="tower-game-card"><span class="tower-question-theme">' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + '</span><h2 class="tower-question">' + esc(q.q) + '</h2>' + noteHtml(q) + '<div class="tower-options">' + opts + '</div>' + fb +
       '<button class="tower-start" type="button" data-pa="next">' + (last ? 'Voir le bilan' : 'Question suivante') + '</button></div></div>';
     window.scrollTo(0, 0);
   }
@@ -2765,12 +2901,17 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   }
   function partyReview(qs, ans) {
     return qs.map(function (q, k) {
-      var a = ans ? ans[k] : undefined, st = ans ? (a === q.ok ? '<b class="pr-ok">✓ Juste</b>' : (a === undefined || a < 0 ? '<b class="pr-ko">Sans réponse</b>' : '<b class="pr-ko">✗ Votre réponse : ' + esc(q.opts[a]) + '</b>')) : '';
-      return '<div class="party-rev"><p class="party-rev-q"><span>' + (k + 1) + '.</span> ' + esc(q.q) + '</p><p><b>Bonne réponse :</b> ' + esc(q.opts[q.ok]) + '</p>' + (st ? '<p>' + st + '</p>' : '') + '<p class="party-rev-why">' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>';
+      var a = ans ? ans[k] : undefined, st = "";
+      if (ans) {
+        var none = a === undefined || a === -1 || (Array.isArray(a) && !a.length);
+        st = samePick(q, a) ? '<b class="pr-ok">✓ Juste</b>' : (none ? '<b class="pr-ko">Sans réponse</b>' : '<b class="pr-ko">✗ Votre réponse : ' + (Array.isArray(a) ? a.map(function (x) { return esc(q.opts[x]); }).join(" · ") : esc(q.opts[a])) + '</b>');
+      }
+      var right = oksOf(q).map(function (x) { return esc(q.opts[x]); }).join(" · ");
+      return '<div class="party-rev"><p class="party-rev-q"><span>' + (k + 1) + '.</span> ' + esc(q.q) + '</p>' + noteHtml(q) + '<p><b>' + (q.multi ? 'Bonnes réponses :' : 'Bonne réponse :') + '</b> ' + right + '</p>' + (st ? '<p>' + st + '</p>' : '') + '<p class="party-rev-why">' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>';
     }).join("");
   }
   function partyFinish() {
-    var r = partyRun, good = r.qs.filter(function (q, k) { return r.ans[k] === q.ok; }).length;
+    var r = partyRun, good = r.qs.filter(function (q, k) { return samePick(q, r.ans[k]); }).length;
     $("v-quiz").innerHTML = '<div class="tower-game"><div class="tower-result"><div class="result-icon">👥</div><p class="eyebrow">' + esc(r.cfg.l || "Partie en équipe") + '</p><h2>' + good + ' / ' + r.qs.length + '</h2><p>Partie hors score : rien n’est enregistré dans votre profil. Comparez vos réponses avec l’équipe.</p>' +
       '<p style="margin-top:14px"><button class="tower-start" type="button" data-pa="exit">' + (S.onboarded ? 'Retour à l’accueil' : 'Créer mon profil') + '</button></p></div>' +
       '<div class="sect"><div class="sect-head"><h3>Revoir en équipe</h3><span>' + r.qs.length + ' questions</span></div>' + partyReview(r.qs, r.ans) + '</div></div>';
@@ -2793,9 +2934,9 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       h = '<div class="anim"><div class="anim-bar"><span>Partie terminée</span><div><button class="btn ghost" type="button" data-pa="aprev">← Précédent</button> <button class="btn ghost" type="button" data-pa="aquit">Quitter</button></div></div><h2>À vous la discussion</h2><p class="anim-sub">Récapitulatif des ' + n + ' questions.</p><div class="anim-recap">' + partyReview(a.qs, null) + '</div></div>';
     } else {
       var q = a.qs[a.i];
-      var opts = q.opts.map(function (o, k) { var c = "anim-opt" + (a.rev ? (k === q.ok ? " ok" : " dim") : ""); return '<div class="' + c + '"><b>' + String.fromCharCode(65 + k) + '</b><span>' + esc(o) + '</span></div>'; }).join("");
+      var opts = q.opts.map(function (o, k) { var c = "anim-opt" + (a.rev ? (oksOf(q).indexOf(k) >= 0 ? " ok" : " dim") : ""); return '<div class="' + c + '"><b>' + String.fromCharCode(65 + k) + '</b><span>' + esc(o) + '</span></div>'; }).join("");
       h = '<div class="anim"><div class="anim-bar"><span>Question ' + (a.i + 1) + ' / ' + n + ' · ' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + (subName(q) ? ' · ' + esc(subName(q)) : '') + '</span><div><button class="btn ghost" type="button" data-pa="aprev">← Précédent</button> <button class="btn ghost" type="button" data-pa="fs">Plein écran</button> <button class="btn ghost" type="button" data-pa="aquit">Quitter</button></div></div>' +
-        '<h2 class="anim-q">' + esc(q.q) + '</h2><div class="anim-opts">' + opts + '</div>' +
+        '<h2 class="anim-q">' + esc(q.q) + '</h2>' + noteHtml(q) + (q.multi ? '<p class="anim-sub anim-multi">Plusieurs bonnes réponses possibles</p>' : '') + '<div class="anim-opts">' + opts + '</div>' +
         (a.rev ? '<div class="anim-why"><p>' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>' : '') +
         '<div class="anim-next"><button class="tower-start anim-go" type="button" data-pa="anext">' + (a.rev ? (a.i >= n - 1 ? 'Terminer' : 'Question suivante →') : 'Révéler la réponse') + '</button><span class="anim-hint">Espace ou → pour avancer</span></div></div>';
     }
@@ -2822,11 +2963,16 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     if (e.key === "ArrowRight" || e.key === " " || e.key === "Enter" || e.key === "PageDown") { e.preventDefault(); animNext(); }
     else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); animPrev(); }
   });
-  document.addEventListener("input", function (e) { if (e.target && e.target.id === "party-title") partyDraft.l = e.target.value; });
+  document.addEventListener("input", function (e) {
+    if (!e.target) return;
+    if (e.target.id === "party-title") partyDraft.l = e.target.value;
+    else if (e.target.id === "party-qsearch") { partyDraft.qq = e.target.value; refreshQRes(); }
+  });
   document.addEventListener("change", function (e) {
     if (!e.target) return;
     if (e.target.id === "party-n") { partyDraft.n = Number(e.target.value); renderParty(); }
     else if (e.target.id === "party-c") { partyDraft.c = Number(e.target.value); renderParty(); }
+    else if (e.target.id === "party-qth") { partyDraft.qf = e.target.value; refreshQRes(); }
   });
   document.addEventListener("click", function (e) {
     var t = e.target.closest ? e.target.closest("[data-pa]") : null; if (!t) return;
@@ -2839,6 +2985,21 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     else if (a === "nonth") { d.t = []; d.u = []; renderParty(); }
     else if (a === "x") { d.x = Number(v); renderParty(); }
     else if (a === "c") { d.c = Number(v); renderParty(); }
+    else if (a === "pack") { var pk = PACKS.filter(function (p) { return p.id === v; })[0]; if (pk) { d.qs = pk.ids.slice(); d.l = pk.name.slice(0, 40); renderParty(); } }
+    else if (a === "qadd") { if (d.qs.indexOf(v) < 0) { if (d.qs.length >= SEANCE_MAX) toast("Une séance compte au plus " + SEANCE_MAX + " questions."); else d.qs.push(v); } renderParty(); }
+    else if (a === "qrem") { var kq = d.qs.indexOf(v); if (kq >= 0) d.qs.splice(kq, 1); renderParty(); }
+    else if (a === "qclear") { d.qs = []; renderParty(); }
+    else if (a === "ord") { d.o = Number(v); renderParty(); }
+    else if (a === "mtog") {
+      var rr = partyRun;
+      if (rr && !rr.locked) {
+        var kk = Number(v), pos = rr.sel.indexOf(kk); if (pos >= 0) rr.sel.splice(pos, 1); else rr.sel.push(kk);
+        t.classList.toggle("bib-picked", pos < 0); t.setAttribute("aria-checked", pos < 0 ? "true" : "false");
+        var bx = t.querySelector(".mbox"); if (bx) bx.textContent = pos < 0 ? "☑" : "☐";
+        var mv = $("party-mval"); if (mv) mv.disabled = !rr.sel.length;
+      }
+    }
+    else if (a === "mval") { var r2 = partyRun; if (r2 && r2.sel && r2.sel.length) partyAnswer(r2.sel.slice().sort(numAsc)); }
     else if (a === "create") partyCreate(false);
     else if (a === "reseed") partyCreate(true);
     else if (a === "copy") { var inp = document.querySelector(".party-link"); try { navigator.clipboard.writeText(inp.value).then(function () { toast("Lien copié."); }, function () { inp.select(); toast("Sélectionné : copiez avec Ctrl+C."); }); } catch (err) { inp.select(); toast("Sélectionné : copiez avec Ctrl+C."); } }
@@ -2906,9 +3067,20 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     var segs = quiz.qs.map(function (_, k) { return '<i class="' + (k < quiz.i || (k === quiz.i && quiz.picked !== null) ? "done" : k === quiz.i ? "now" : "") + '"></i>'; }).join("");
     var h = '<div class="qtop"><button class="linkbtn" type="button" id="quit">‹ Quitter</button><p class="eyebrow">' + esc(quiz.title) + " · " + (quiz.i + 1) + " / " + n + "</p></div>" +
       '<div class="segs" aria-hidden="true">' + segs + "</div>" +
-      '<p class="eyebrow qtheme">' + esc(th.name) + (subName(q) ? " · " + esc(subName(q)) : "") + "</p><p class=\"qtext\" id=\"qtext\">" + esc(q.q) + "</p><div class=\"opts\" role=\"group\" aria-labelledby=\"qtext\">";
+      '<p class="eyebrow qtheme">' + esc(th.name) + (subName(q) ? " · " + esc(subName(q)) : "") + "</p><p class=\"qtext\" id=\"qtext\">" + esc(q.q) + "</p>" + noteHtml(q) + (q.multi && quiz.picked === null ? '<p class="mhint">' + MHINT + "</p>" : "") + "<div class=\"opts\" role=\"group\" aria-labelledby=\"qtext\">";
+    if (q.multi && !quiz.sel) quiz.sel = [];
     q.opts.forEach(function (o, k) {
       var cls = "opt", tag = "";
+      if (q.multi) {
+        var isOk = q.oks.indexOf(k) >= 0, shown = quiz.picked !== null ? quiz.picked : quiz.sel, chosen = shown.indexOf(k) >= 0;
+        if (quiz.picked !== null) {
+          if (isOk && chosen) { cls += " right"; tag = '<span class="tag">Bonne réponse cochée</span>'; }
+          else if (isOk) { cls += " right missed"; tag = '<span class="tag">Bonne réponse oubliée</span>'; }
+          else if (chosen) { cls += " wrong"; tag = '<span class="tag">Cochée à tort</span>'; }
+        } else if (chosen) cls += " sel";
+        h += '<button type="button" class="' + cls + '" role="checkbox" aria-checked="' + chosen + '" data-k="' + k + '"' + (quiz.picked !== null ? " disabled" : "") + '><span class="l cb">' + (chosen ? "✓" : "") + "</span><span>" + esc(o) + tag + "</span></button>";
+        return;
+      }
       if (quiz.picked !== null) {
         if (k === q.ok) { cls += " right"; tag = '<span class="tag">Bonne réponse</span>'; }
         else if (k === quiz.picked) { cls += " wrong"; tag = '<span class="tag">Votre réponse</span>'; }
@@ -2916,8 +3088,9 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       h += '<button type="button" class="' + cls + '" data-k="' + k + '"' + (quiz.picked !== null ? " disabled" : "") + '><span class="l">' + "ABCD".charAt(k) + "</span><span>" + esc(o) + tag + "</span></button>";
     });
     h += "</div>";
+    if (q.multi && quiz.picked === null) h += '<div class="actions"><button class="btn" type="button" id="mvalid"' + (quiz.sel.length ? "" : " disabled") + '>Valider ma réponse</button></div>';
     if (quiz.picked !== null) {
-      var good = quiz.picked === q.ok, last = quiz.i === n - 1;
+      var good = samePick(q, quiz.picked), last = quiz.i === n - 1;
       h += '<div class="fb" role="status"><h3 class="' + (good ? "good" : "bad") + '">' + (good ? "Correct · +10 points" : "Pas tout à fait") + "</h3><p>" + esc(q.why) + '</p><p class="src">' + esc(q.src) + "</p>" +
         '<div class="actions"><button class="btn" type="button" id="next">' + (last ? "Voir le résultat" : "Question suivante") + "</button></div></div>";
     }
@@ -2925,16 +3098,32 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     $("quit").addEventListener("click", function () { quiz = null; show("play"); });
     Array.prototype.forEach.call($("v-quiz").querySelectorAll(".opt"), function (b) {
       b.addEventListener("click", function () {
-        var k = +b.getAttribute("data-k"); quiz.picked = k;
+        var k = +b.getAttribute("data-k");
+        if (q.multi) {
+          var pos = quiz.sel.indexOf(k); if (pos >= 0) quiz.sel.splice(pos, 1); else quiz.sel.push(k);
+          renderQuiz();
+          var again = $("v-quiz").querySelector('.opt[data-k="' + k + '"]'); if (again) again.focus();
+          return;
+        }
+        quiz.picked = k;
         var ok = k === q.ok; if (ok) quiz.ok++;
         quiz.log.push({ q: q, ok: ok });
         renderQuiz();
         var nx = $("next"); if (nx) nx.focus();
       });
     });
+    var mv = $("mvalid");
+    if (mv) mv.addEventListener("click", function () {
+      if (!quiz.sel.length) return;
+      quiz.picked = quiz.sel.slice().sort(numAsc);
+      var ok = samePick(q, quiz.picked); if (ok) quiz.ok++;
+      quiz.log.push({ q: q, ok: ok });
+      renderQuiz();
+      var nx2 = $("next"); if (nx2) nx2.focus();
+    });
     var nx = $("next");
     if (nx) nx.addEventListener("click", function () {
-      if (quiz.i < n - 1) { quiz.i++; quiz.picked = null; renderQuiz(); window.scrollTo(0, 0); }
+      if (quiz.i < n - 1) { quiz.i++; quiz.picked = null; quiz.sel = null; renderQuiz(); window.scrollTo(0, 0); }
       else finishQuiz();
     });
   }
@@ -2968,7 +3157,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
         return '<div class="row" style="cursor:default"><div class="name">' + esc(BYID[id].name) + '</div><div class="pct"><b class="delta">' + (a === null ? "" : r(a) + " → ") + r(b) + "<small> %</small></b></div></div>";
       }).join("") + "</div>" +
       '<div class="sect"><div class="sect-head"><h3>À retenir</h3></div>' +
-      (missed.length ? '<ul class="keep">' + missed.map(function (e) { return "<li><strong>" + esc(e.q.q) + "</strong><br>" + esc(e.q.why) + '<br><span class="src">' + esc(e.q.src) + "</span></li>"; }).join("") + "</ul>" : '<p class="note" style="font-size:16px;color:var(--ink)">Aucune erreur. Les ' + n + " points sont acquis.</p>") + "</div>" +
+      (missed.length ? '<ul class="keep">' + missed.map(function (e) { return "<li><strong>" + esc(e.q.q) + "</strong><br>" + esc(e.q.why) + (e.q.note ? '<br><span class="src">' + esc(e.q.note) + "</span>" : "") + '<br><span class="src">' + esc(e.q.src) + "</span></li>"; }).join("") + "</ul>" : '<p class="note" style="font-size:16px;color:var(--ink)">Aucune erreur. Les ' + n + " points sont acquis.</p>") + "</div>" +
       '<div class="actions">' + (canAgain ? '<button class="btn" type="button" id="again">Rejouer</button>' : '') + '<button class="btn ghost" type="button" id="back2">Retour aux thèmes</button></div>';
     var key = quiz.key; quiz = null;
     $("v-quiz").innerHTML = h;
