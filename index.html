@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Objectif CertiF</title>
-<meta name="objectif-certif-version" content="beta-pack-cadre-2026-11-12">
+<meta name="objectif-certif-version" content="beta-pack-decocher-2026-11-12">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
@@ -2754,7 +2754,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   function seanceHtml(d) {
     var idx = questionIndex(), nq = d.qs.length;
     var h = '<p class="note" style="margin:0 0 10px">Une séance est une liste de questions choisies à l’avance. Tous les agents qui scannent le QR code reçoivent exactement ces questions.</p>' +
-      '<p class="party-opt">Packs prêts à l’emploi</p>' +
+      '<p class="party-opt">Packs prêts à l’emploi</p><p class="note" style="margin:0 0 6px">Touchez un pack pour le choisir, touchez-le de nouveau pour le décocher.</p>' +
       PACKS.map(function (p) {
         var on = p.ids.length === nq && p.ids.every(function (id, i) { return d.qs[i] === id; });
         return '<button type="button" class="pcheck' + (on ? ' on' : '') + '" data-pa="pack" data-pv="' + p.id + '" aria-pressed="' + on + '"><span class="pbox">' + (on ? '✓' : '') + '</span><span>' + esc(p.name) + '</span><small>' + p.ids.length + '</small></button>';
@@ -2985,7 +2985,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     else if (a === "nonth") { d.t = []; d.u = []; renderParty(); }
     else if (a === "x") { d.x = Number(v); renderParty(); }
     else if (a === "c") { d.c = Number(v); renderParty(); }
-    else if (a === "pack") { var pk = PACKS.filter(function (p) { return p.id === v; })[0]; if (pk) { d.qs = pk.ids.slice(); d.l = pk.name.slice(0, 40); renderParty(); } }
+    else if (a === "pack") { var pk = PACKS.filter(function (p) { return p.id === v; })[0]; if (pk) { var onp = pk.ids.length === d.qs.length && pk.ids.every(function (id, i) { return d.qs[i] === id; }); if (onp) { d.qs = []; if (d.l === pk.name.slice(0, 40)) d.l = "Point qualité"; } else { d.qs = pk.ids.slice(); d.l = pk.name.slice(0, 40); } renderParty(); } }
     else if (a === "qadd") { if (d.qs.indexOf(v) < 0) { if (d.qs.length >= SEANCE_MAX) toast("Une séance compte au plus " + SEANCE_MAX + " questions."); else d.qs.push(v); } renderParty(); }
     else if (a === "qrem") { var kq = d.qs.indexOf(v); if (kq >= 0) d.qs.splice(kq, 1); renderParty(); }
     else if (a === "qclear") { d.qs = []; renderParty(); }
