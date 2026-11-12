@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Objectif CertiF</title>
-<meta name="objectif-certif-version" content="beta-epri-2026-11-10">
+<meta name="objectif-certif-version" content="beta-equipe-menus-2026-11-10">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
@@ -191,6 +191,8 @@ button.chip:hover { border-color: var(--ink); }
 .head2 { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .qset { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; width: 100%; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin-top: 8px; min-height: 56px; }
 .qset:hover { border-color: var(--ink); }
+.qset-sub { margin-left: 18px; width: calc(100% - 18px); min-height: 48px; padding: 9px 12px; margin-top: 6px; border-left: 4px solid var(--accent); }
+.qset-sub b { font-size: 15px; }
 .qset b { font-size: 16px; }
 .qset span { display: block; font-size: 13px; color: var(--ink-2); }
 .qset i { font-style: normal; font-weight: 700; font-size: 13px; background: var(--accent); color: var(--on-accent); padding: 4px 12px; border-radius: 999px; }
@@ -222,7 +224,7 @@ body.light-ui .award-card,body.light-ui .award-summary{background:#fff;color:#17
 .party-input{width:100%;min-height:46px;padding:10px 14px;border:1px solid #3a5877;border-radius:11px;background:#0e2542;color:#edf4ff;font:inherit}.party-link{margin-top:12px;font-size:13px}
 .party-opt{margin:14px 0 8px;color:#b9cbe0;font-weight:600}.party-sum{margin:16px 0 6px;color:#edf4ff}.party-warn{margin:8px 0;color:#ffd9a0;font-weight:600}.party-create{margin-top:12px}.party-create[disabled]{opacity:.45;cursor:not-allowed}
 .party-ch{margin:14px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#9fb5ce}.party-quick{margin:8px 0}
-.pcheck{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:8px 12px;margin:0 0 6px;border:1px solid #294563;border-radius:10px;background:#0e2542;color:#edf4ff;text-align:left;font-weight:600}.pcheck small{margin-left:auto;color:#9fb5ce}.pcheck.on{border-color:#3fbf8f;background:#12392f}.pbox{display:inline-grid;place-items:center;flex:0 0 24px;height:24px;border:2px solid #70cfff;border-radius:6px;font-weight:900;color:#9ff0cc}
+.pcheck{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:8px 12px;margin:0 0 6px;border:1px solid #294563;border-radius:10px;background:#0e2542;color:#edf4ff;text-align:left;font-weight:600}.pcheck small{margin-left:auto;color:#9fb5ce}.pcheck.on{border-color:#3fbf8f;background:#12392f}.pcheck-sub{margin-left:22px;width:calc(100% - 22px);min-height:44px;font-weight:500}.pbox{display:inline-grid;place-items:center;flex:0 0 24px;height:24px;border:2px solid #70cfff;border-radius:6px;font-weight:900;color:#9ff0cc}
 .party-result{margin-top:22px}.party-qr{display:grid;place-items:center;margin:14px 0}.party-qr .qr{border-radius:12px;max-width:100%;height:auto}.party-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.party-actions .btn{min-height:46px}
 .party-facts{margin:12px 0 18px;padding-left:20px;line-height:1.7;color:#d8e5f3}
 .tower-option.p-ok{border-color:#3fbf8f;background:#12392f;color:#d6fbe9}.tower-option.p-ko{border-color:#e06a6a;background:#3a1b22;color:#ffd1d1}.tower-option:disabled{cursor:default;opacity:1}
@@ -2128,6 +2130,10 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
         if (!ks.length) { h += '<div class="qth" id="lib-' + t.id + '"><b>' + esc(t.name) + '</b></div><p class="soon">Quiz à venir.</p>'; return; }
         var np = poolOf(t.id).length;
         h += '<button class="qset qset-theme" id="lib-' + t.id + '" type="button" data-quiz="t:' + t.id + '"><div><b>' + esc(t.name) + '</b><span>' + (p === null ? "Pas encore joué" : r(p) + " % de réussite") + ' · quiz de ' + Math.min(PICK, np) + ' questions tirées parmi ' + np + '</span></div><i>Jouer</i></button>';
+        subsOf(t.id).forEach(function (sb) {
+          var sp = subMastered(sb.id), sn = subPool(sb.id).length;
+          h += '<button class="qset qset-sub" type="button" data-quiz="s:' + sb.id + '"><div><b>' + esc(sb.name) + '</b><span>Sous-thème · ' + (sp === null || sp === 0 ? "Pas encore maîtrisé" : r(sp) + " % maîtrisé") + ' · quiz de ' + Math.min(PICK, sn) + ' questions tirées parmi ' + sn + '</span></div><i>Jouer</i></button>';
+        });
       });
       h += "</div>";
     });
@@ -2217,6 +2223,37 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   }
   var PICK = 5;
   function poolOf(id) { var a = []; setsOf(id).forEach(function (k) { a = a.concat(QUIZ[k].questions); }); return a; }
+
+  /* ---------- Sous-thèmes ----------
+     Un sous-thème regroupe des questions d'un même thème (par identifiant de question) : les questions elles-mêmes ne changent pas.
+     Pour ajouter une question à un sous-thème, ajouter son identifiant dans la liste « ids » ; une question d'un thème qui n'est dans aucune liste
+     apparaît automatiquement dans « Autres questions » (affiché seulement s'il en existe). */
+  function range(p, a, b) { var o = []; for (var i = a; i <= b; i++) o.push(p + (i < 10 ? "00" : i < 100 ? "0" : "") + i); return o; }
+  var SUBTHEMES = {
+    hygiene: [
+      { id: "hyg-base", name: "Hygiène des mains et précautions standard", ids: ["HYG-001","HYG-002","HYG-003","HYG-004","HYG-005","HYG-006","HYG-007","HYG-012","HYG-013","HYG-014","HYG-015","HYG-016"] },
+      { id: "hyg-resp", name: "Précautions respiratoires", ids: range("HYG-", 17, 35) },
+      { id: "hyg-contact", name: "Précautions contact, BMR et BHRe", ids: ["HYG-009","HYG-010","HYG-011"].concat(range("HYG-", 36, 44)) },
+      { id: "hyg-gale", name: "Gale", ids: range("HYG-", 45, 64) },
+      { id: "hyg-aes", name: "Accident d’exposition au sang (AES)", ids: ["HYG-008"].concat(range("HYG-", 65, 70)) }
+    ]
+  };
+  var SUB_BY_ID = {}, SUB_OF_Q = {};
+  Object.keys(SUBTHEMES).forEach(function (th) {
+    SUBTHEMES[th].forEach(function (sb) { sb.th = th; SUB_BY_ID[sb.id] = sb; sb.ids.forEach(function (qid) { SUB_OF_Q[qid] = sb.id; }); });
+  });
+  function subsOf(th) {
+    var list = (SUBTHEMES[th] || []).map(function (sb) { return { id: sb.id, name: sb.name, th: th }; });
+    if (!list.length) return [];
+    var rest = poolOf(th).filter(function (q) { return !SUB_OF_Q[q.id]; });
+    if (rest.length) list.push({ id: th + "-autres", name: "Autres questions", th: th });
+    return list;
+  }
+  function subIdOfQ(q) { return (q && q.id && SUB_OF_Q[q.id]) || ((q && SUBTHEMES[q.theme]) ? q.theme + "-autres" : ""); }
+  function subDef(id) { var sb = SUB_BY_ID[id]; if (sb) return sb; var m = /^(.*)-autres$/.exec(id || ""); return m && SUBTHEMES[m[1]] ? { id: id, name: "Autres questions", th: m[1] } : null; }
+  function subPool(id) { var sb = subDef(id); return sb ? poolOf(sb.th).filter(function (q) { return subIdOfQ(q) === id; }) : []; }
+  function subName(q) { var sb = subDef(subIdOfQ(q)); return sb ? sb.name : ""; }
+  function subMastered(id) { var p = subPool(id), seen = {}, n = 0, tot = 0; p.forEach(function (q) { var k = questionKey(q); if (seen[k]) return; seen[k] = true; tot++; if (S.correctDistinct[k]) n++; }); return tot ? n / tot * 100 : null; }
 
   /* ---------- La Tour des Questions ----------
      Mode indépendant : toutes les thématiques, questions distinctes, aucun doublon dans une partie.
@@ -2549,7 +2586,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   /* ---------- Partie en équipe ----------
      Même tirage pour tous : thèmes, nombre, numéro de tirage et options sont dans le lien (#partie?...).
      Hors score : rien n’est enregistré dans le profil. Aucun serveur. */
-  var partyDraft = { l: "Point qualité", n: 10, mode: "all", t: [], x: 1, c: 0, s: 0 };
+  var partyDraft = { l: "Point qualité", n: 10, mode: "all", t: [], u: [], x: 0, c: 0, s: 0 };
   var partyRun = null, partyAnim = null, partyTimer = null;
   function bankSig() {
     var ids = [];
@@ -2568,16 +2605,19 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     for (var i = o.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), t = o[i]; o[i] = o[j]; o[j] = t; }
     return o;
   }
-  function partyPool(themeIds) {
-    var seen = {}, out = [];
-    (themeIds && themeIds.length ? themeIds : THEMES.map(function (t) { return t.id; })).forEach(function (id) {
+  function partyPool(themeIds, subIds) {
+    var seen = {}, out = [], hasSub = subIds && subIds.length;
+    (themeIds && themeIds.length ? themeIds : (hasSub ? [] : THEMES.map(function (t) { return t.id; }))).forEach(function (id) {
       poolOf(id).forEach(function (q) { var k = q.id || questionKey(q); if (!seen[k]) { seen[k] = true; out.push(q); } });
+    });
+    (subIds || []).forEach(function (sid) {
+      subPool(sid).forEach(function (q) { var k = q.id || questionKey(q); if (!seen[k]) { seen[k] = true; out.push(q); } });
     });
     out.sort(function (a, b) { return (a.id || "") < (b.id || "") ? -1 : 1; });
     return out;
   }
   function partyDeal(cfg) {
-    var pool = partyPool(cfg.t), picked = seededShuffle(pool, prng(cfg.s)).slice(0, Math.min(cfg.n, pool.length));
+    var pool = partyPool(cfg.t, cfg.u), picked = seededShuffle(pool, prng(cfg.s)).slice(0, Math.min(cfg.n, pool.length));
     return picked.map(function (q) {
       var idx = seededShuffle(q.opts.map(function (_, i) { return i; }), prng(cfg.s ^ strHash(q.id || questionKey(q))));
       return { id: q.id, theme: q.theme, q: q.q, opts: idx.map(function (i) { return q.opts[i]; }), ok: idx.indexOf(q.ok), why: q.why, src: q.src };
@@ -2586,6 +2626,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   function partyLink(cfg) {
     var p = ["n=" + cfg.n, "s=" + cfg.s];
     if (cfg.t.length) p.push("t=" + cfg.t.join("."));
+    if (cfg.u && cfg.u.length) p.push("u=" + cfg.u.join("."));
     p.push("x=" + (cfg.x ? 1 : 0)); if (cfg.c) p.push("c=" + cfg.c);
     p.push("b=" + bankSig());
     if (cfg.l) p.push("l=" + encodeURIComponent(cfg.l));
@@ -2596,24 +2637,26 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     if (h.indexOf("#partie?") !== 0) return null;
     var q; try { q = new URLSearchParams(h.slice(8)); } catch (e) { return null; }
     var n = Number(q.get("n")), s = parseInt(q.get("s"), 10);
-    if ([5, 10, 15].indexOf(n) < 0 || !isFinite(s)) return null;
+    if (!(n >= 4 && n <= 20 && n === Math.floor(n)) || !isFinite(s)) return null;
     var valid = {}; THEMES.forEach(function (t) { valid[t.id] = true; });
     var t = (q.get("t") || "").split(".").filter(function (id) { return valid[id]; });
-    var c = Number(q.get("c")); if ([30, 60].indexOf(c) < 0) c = 0;
-    return { n: n, s: s, t: t, x: q.get("x") === "0" ? 0 : 1, c: c, b: q.get("b") || "", l: (q.get("l") || "").replace(/[\u0000-\u001f]/g, "").slice(0, 40) };
+    var u = (q.get("u") || "").split(".").filter(function (id) { return !!subDef(id); });
+    var c = Number(q.get("c")); if (!(c >= 5 && c <= 60 && c % 5 === 0)) c = 0;
+    return { n: n, s: s, t: t, u: u, x: q.get("x") === "0" ? 0 : 1, c: c, b: q.get("b") || "", l: (q.get("l") || "").replace(/[\u0000-\u001f]/g, "").slice(0, 40) };
   }
   function partyThemesLabel(cfg) {
-    if (!cfg.t.length) return "tirage au sort parmi tous les thèmes";
-    return cfg.t.map(function (id) { return BYID[id] ? BYID[id].name : id; }).join(" · ");
+    var us = cfg.u || [];
+    if (!cfg.t.length && !us.length) return "tirage au sort parmi tous les thèmes";
+    return cfg.t.map(function (id) { return BYID[id] ? BYID[id].name : id; }).concat(us.map(function (id) { var sd = subDef(id); return sd ? BYID[sd.th].name + " : " + sd.name : id; })).join(" · ");
   }
-  function partyEffectiveN(cfg) { return Math.min(cfg.n, partyPool(cfg.t).length); }
+  function partyEffectiveN(cfg) { return Math.min(cfg.n, partyPool(cfg.t, cfg.u).length); }
 
   /* --- création --- */
   function renderParty() {
     var d = partyDraft, h = '<div class="head2"><h2>Partie en équipe</h2>' + chipHtml() + '</div>' +
       '<p class="lede">Créez une partie à jouer à plusieurs, par exemple en réunion. Tous les agents qui scannent le QR code reçoivent exactement les mêmes questions, dans le même ordre. Les parties en équipe ne comptent pas dans les scores.</p>';
     h += '<div class="sect party-sect"><div class="sect-head"><h3>Nom de la partie</h3></div><input id="party-title" class="party-input" type="text" maxlength="40" value="' + esc(d.l) + '" placeholder="Ex. Point qualité du jeudi" aria-label="Nom de la partie"></div>';
-    h += '<div class="sect party-sect"><div class="sect-head"><h3>Nombre de questions</h3></div><div class="seg">' + [5, 10, 15].map(function (n) { return '<button type="button" class="seg-b' + (d.n === n ? ' on' : '') + '" data-pa="n" data-pv="' + n + '">' + n + '</button>'; }).join("") + '</div></div>';
+    h += '<div class="sect party-sect"><div class="sect-head"><h3>Nombre de questions</h3></div><select id="party-n" class="party-input party-select" aria-label="Nombre de questions">' + (function () { var o = ""; for (var n = 4; n <= 20; n++) o += '<option value="' + n + '"' + (d.n === n ? ' selected' : '') + '>' + n + ' questions</option>'; return o; })() + '</select></div>';
     h += '<div class="sect party-sect"><div class="sect-head"><h3>Thèmes</h3></div><div class="seg"><button type="button" class="seg-b' + (d.mode === "all" ? ' on' : '') + '" data-pa="mode" data-pv="all">Tirage au sort (16 thèmes)</button><button type="button" class="seg-b' + (d.mode === "pick" ? ' on' : '') + '" data-pa="mode" data-pv="pick">Je choisis</button></div>';
     if (d.mode === "pick") {
       h += '<p class="note party-quick"><button type="button" class="linkbtn" data-pa="allth">Tout cocher</button> · <button type="button" class="linkbtn" data-pa="nonth">Tout décocher</button></p>';
@@ -2622,18 +2665,23 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
         THEMES.filter(function (t) { return t.ch === c; }).forEach(function (t) {
           var on = d.t.indexOf(t.id) >= 0, np = poolOf(t.id).length;
           h += '<button type="button" class="pcheck' + (on ? ' on' : '') + '" data-pa="th" data-pv="' + t.id + '" aria-pressed="' + on + '"><span class="pbox">' + (on ? '✓' : '') + '</span><span>' + esc(t.name) + '</span><small>' + np + '</small></button>';
+          if (!on) subsOf(t.id).forEach(function (sb) {
+            var son = d.u.indexOf(sb.id) >= 0;
+            h += '<button type="button" class="pcheck pcheck-sub' + (son ? ' on' : '') + '" data-pa="sub" data-pv="' + sb.id + '" aria-pressed="' + son + '"><span class="pbox">' + (son ? '✓' : '') + '</span><span>' + esc(sb.name) + '</span><small>' + subPool(sb.id).length + '</small></button>';
+          });
         });
       });
     }
     h += '</div>';
     h += '<div class="sect party-sect"><div class="sect-head"><h3>Options</h3></div>' +
-      '<p class="party-opt">Explication après chaque réponse (sur les téléphones)</p><div class="seg"><button type="button" class="seg-b' + (d.x ? ' on' : '') + '" data-pa="x" data-pv="1">Oui</button><button type="button" class="seg-b' + (!d.x ? ' on' : '') + '" data-pa="x" data-pv="0">Non, seulement à la fin</button></div>' +
-      '<p class="party-opt">Chronomètre par question</p><div class="seg">' + [[0, "Aucun"], [30, "30 s"], [60, "60 s"]].map(function (o) { return '<button type="button" class="seg-b' + (d.c === o[0] ? ' on' : '') + '" data-pa="c" data-pv="' + o[0] + '">' + o[1] + '</button>'; }).join("") + '</div></div>';
+      '<p class="party-opt">Explication sur les téléphones</p><div class="seg"><button type="button" class="seg-b' + (!d.x ? ' on' : '') + '" data-pa="x" data-pv="0">À la fin</button><button type="button" class="seg-b' + (d.x ? ' on' : '') + '" data-pa="x" data-pv="1">Tout de suite</button></div>' +
+      '<p class="note" style="margin:8px 0 0">À la fin : le téléphone indique seulement « Bonne réponse » ou « Pas tout à fait ». La bonne réponse et l’explication s’affichent sur l’écran animateur, puis dans le bilan de fin. Tout de suite : à choisir sans écran animateur.</p>' +
+      '<p class="party-opt">Chronomètre par question</p><select id="party-c" class="party-input party-select" aria-label="Chronomètre par question">' + (function () { var o = '<option value="0"' + (d.c === 0 ? ' selected' : '') + '>Aucun</option>'; for (var c = 15; c <= 60; c += 5) o += '<option value="' + c + '"' + (d.c === c ? ' selected' : '') + '>' + c + ' secondes</option>'; return o; })() + '</select></div>';
     var cfg = partyCfgFromDraft(), eff = partyEffectiveN(cfg), warn = "";
-    if (d.mode === "pick" && !d.t.length) warn = "Cochez au moins un thème.";
+    if (d.mode === "pick" && !d.t.length && !d.u.length) warn = "Cochez au moins un thème ou un sous-thème.";
     else if (eff < d.n) warn = "Les thèmes choisis ne contiennent que " + eff + " questions : la partie en aura " + eff + ".";
     h += '<p class="party-sum"><b>' + eff + ' question' + (eff > 1 ? 's' : '') + '</b> · ' + esc(partyThemesLabel(cfg)) + (d.c ? ' · ' + d.c + ' s par question' : '') + '</p>' + (warn ? '<p class="party-warn">' + warn + '</p>' : '');
-    h += '<button class="tower-start party-create" type="button" data-pa="create"' + (d.mode === "pick" && !d.t.length ? ' disabled' : '') + '>' + (d.created ? 'Mettre à jour la partie' : 'Créer la partie') + '</button>';
+    h += '<button class="tower-start party-create" type="button" data-pa="create"' + (d.mode === "pick" && !d.t.length && !d.u.length ? ' disabled' : '') + '>' + (d.created ? 'Mettre à jour la partie' : 'Créer la partie') + '</button>';
     if (d.created) {
       var link = partyLink(d.created);
       h += '<div class="sect party-result"><div class="sect-head"><h3>Partie prête</h3><span>tirage n° ' + d.created.s + '</span></div><div class="party-qr">' + QR.svg(link, 260) + '</div>' +
@@ -2645,8 +2693,9 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   }
   function partyCfgFromDraft(seed) {
     var d = partyDraft, themes = d.mode === "pick" ? d.t.slice() : [];
-    if (themes.length === THEMES.length) themes = [];
-    return { n: d.n, s: seed || (d.created ? d.created.s : 0), t: themes, x: d.x, c: d.c, b: bankSig(), l: (d.l || "").trim().slice(0, 40) };
+    var subs = d.mode === "pick" ? d.u.filter(function (id) { var sd = subDef(id); return sd && themes.indexOf(sd.th) < 0; }) : [];
+    if (themes.length === THEMES.length) { themes = []; subs = []; }
+    return { n: d.n, s: seed || (d.created ? d.created.s : 0), t: themes, u: subs, x: d.x, c: d.c, b: bankSig(), l: (d.l || "").trim().slice(0, 40) };
   }
   function partyCreate(reseed) {
     var seed = reseed || !partyDraft.created ? Math.floor(Math.random() * 900000) + 100000 : partyDraft.created.s;
@@ -2671,7 +2720,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     var r = partyRun, cfg = r.cfg, mism = cfg.b && cfg.b !== bankSig();
     $("v-quiz").innerHTML = '<div class="tower-game"><div class="tower-game-card party-join"><p class="eyebrow">Partie en équipe</p><h2>' + esc(cfg.l || "Partie en équipe") + '</h2>' +
       '<p class="party-sum"><b>' + r.qs.length + ' questions</b> · ' + esc(partyThemesLabel(cfg)) + '</p>' +
-      '<ul class="party-facts"><li>Tous les participants ont les mêmes questions.</li><li>' + (cfg.x ? 'L’explication s’affiche après chaque réponse.' : 'Les corrections sont données à la fin.') + '</li>' + (cfg.c ? '<li>Chronomètre : ' + cfg.c + ' secondes par question.</li>' : '') + '<li><b>Cette partie ne compte pas dans vos scores.</b></li></ul>' +
+      '<ul class="party-facts"><li>Tous les participants ont les mêmes questions.</li><li>' + (cfg.x ? 'L’explication s’affiche après chaque réponse.' : 'Vous saurez si votre réponse est juste ; les explications sont données à l’écran, puis dans le bilan de fin.') + '</li>' + (cfg.c ? '<li>Chronomètre : ' + cfg.c + ' secondes par question.</li>' : '') + '<li><b>Cette partie ne compte pas dans vos scores.</b></li></ul>' +
       (mism ? '<p class="party-warn">Votre page n’a pas la même version des questions que celle de l’animateur. Rechargez la page pour retrouver les mêmes questions.</p>' : '') +
       (r.qs.length ? '<button class="tower-start" type="button" data-pa="start">Commencer</button>' : '<p class="party-warn">Aucune question disponible pour cette partie.</p>') +
       ' <button class="tower-quit" type="button" data-pa="exit">Quitter</button></div></div>';
@@ -2703,7 +2752,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     }).join("");
     var fb = cfg.x
       ? '<div class="tower-explain-box"><p><b>' + (i === q.ok ? '✓ Bonne réponse.' : (i < 0 ? '⏱ Temps écoulé.' : '✗ Pas tout à fait.')) + '</b> ' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>'
-      : '<p class="party-sum">' + (i < 0 ? 'Temps écoulé.' : 'Réponse enregistrée.') + ' La correction sera donnée à la fin.</p>';
+      : '<div class="tower-explain-box"><p><b>' + (i === q.ok ? '✓ Bonne réponse.' : (i < 0 ? '⏱ Temps écoulé.' : '✗ Pas tout à fait.')) + '</b> L’explication sera donnée à l’écran, puis dans le bilan de fin.</p></div>';
     $("v-quiz").innerHTML = '<div class="tower-game"><div class="tower-game-top"><div><p class="eyebrow">' + esc(cfg.l || "Partie en équipe") + '</p><div class="tower-floor"><strong>Question ' + (r.i + 1) + ' / ' + r.qs.length + '</strong><span>hors score</span></div></div></div>' +
       '<div class="tower-game-card"><span class="tower-question-theme">' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + '</span><h2 class="tower-question">' + esc(q.q) + '</h2><div class="tower-options">' + opts + '</div>' + fb +
       '<button class="tower-start" type="button" data-pa="next">' + (last ? 'Voir le bilan' : 'Question suivante') + '</button></div></div>';
@@ -2745,7 +2794,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     } else {
       var q = a.qs[a.i];
       var opts = q.opts.map(function (o, k) { var c = "anim-opt" + (a.rev ? (k === q.ok ? " ok" : " dim") : ""); return '<div class="' + c + '"><b>' + String.fromCharCode(65 + k) + '</b><span>' + esc(o) + '</span></div>'; }).join("");
-      h = '<div class="anim"><div class="anim-bar"><span>Question ' + (a.i + 1) + ' / ' + n + ' · ' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + '</span><div><button class="btn ghost" type="button" data-pa="aprev">← Précédent</button> <button class="btn ghost" type="button" data-pa="fs">Plein écran</button> <button class="btn ghost" type="button" data-pa="aquit">Quitter</button></div></div>' +
+      h = '<div class="anim"><div class="anim-bar"><span>Question ' + (a.i + 1) + ' / ' + n + ' · ' + esc(BYID[q.theme] ? BYID[q.theme].name : "") + (subName(q) ? ' · ' + esc(subName(q)) : '') + '</span><div><button class="btn ghost" type="button" data-pa="aprev">← Précédent</button> <button class="btn ghost" type="button" data-pa="fs">Plein écran</button> <button class="btn ghost" type="button" data-pa="aquit">Quitter</button></div></div>' +
         '<h2 class="anim-q">' + esc(q.q) + '</h2><div class="anim-opts">' + opts + '</div>' +
         (a.rev ? '<div class="anim-why"><p>' + esc(q.why) + '</p><small>' + esc(q.src) + '</small></div>' : '') +
         '<div class="anim-next"><button class="tower-start anim-go" type="button" data-pa="anext">' + (a.rev ? (a.i >= n - 1 ? 'Terminer' : 'Question suivante →') : 'Révéler la réponse') + '</button><span class="anim-hint">Espace ou → pour avancer</span></div></div>';
@@ -2774,14 +2823,20 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); animPrev(); }
   });
   document.addEventListener("input", function (e) { if (e.target && e.target.id === "party-title") partyDraft.l = e.target.value; });
+  document.addEventListener("change", function (e) {
+    if (!e.target) return;
+    if (e.target.id === "party-n") { partyDraft.n = Number(e.target.value); renderParty(); }
+    else if (e.target.id === "party-c") { partyDraft.c = Number(e.target.value); renderParty(); }
+  });
   document.addEventListener("click", function (e) {
     var t = e.target.closest ? e.target.closest("[data-pa]") : null; if (!t) return;
     var a = t.getAttribute("data-pa"), v = t.getAttribute("data-pv"), d = partyDraft;
     if (a === "n") { d.n = Number(v); renderParty(); }
     else if (a === "mode") { d.mode = v; renderParty(); }
-    else if (a === "th") { var k = d.t.indexOf(v); if (k >= 0) d.t.splice(k, 1); else d.t.push(v); renderParty(); }
-    else if (a === "allth") { d.t = THEMES.map(function (x) { return x.id; }); renderParty(); }
-    else if (a === "nonth") { d.t = []; renderParty(); }
+    else if (a === "th") { var k = d.t.indexOf(v); if (k >= 0) d.t.splice(k, 1); else { d.t.push(v); d.u = d.u.filter(function (id) { var sd = subDef(id); return !sd || sd.th !== v; }); } renderParty(); }
+    else if (a === "sub") { var ku = d.u.indexOf(v); if (ku >= 0) d.u.splice(ku, 1); else d.u.push(v); renderParty(); }
+    else if (a === "allth") { d.t = THEMES.map(function (x) { return x.id; }); d.u = []; renderParty(); }
+    else if (a === "nonth") { d.t = []; d.u = []; renderParty(); }
     else if (a === "x") { d.x = Number(v); renderParty(); }
     else if (a === "c") { d.c = Number(v); renderParty(); }
     else if (a === "create") partyCreate(false);
@@ -2831,6 +2886,10 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     if (key.indexOf("t:") === 0) {
       var id = key.slice(2), pool = poolOf(id).slice().sort(function () { return Math.random() - 0.5; });
       list = pool.slice(0, PICK); title = BYID[id].name;
+    } else if (key.indexOf("s:") === 0) {
+      var sd = subDef(key.slice(2));
+      if (!sd) { toast("Sous-thème introuvable."); return; }
+      list = subPool(sd.id).slice().sort(function () { return Math.random() - 0.5; }).slice(0, PICK); title = BYID[sd.th].name + " · " + sd.name;
     } else if (key === "defi") { list = dailyDefi(); title = "Défi du jour"; }
     else if (key === "errors") {
       var mk = missedKeys();
@@ -2847,7 +2906,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     var segs = quiz.qs.map(function (_, k) { return '<i class="' + (k < quiz.i || (k === quiz.i && quiz.picked !== null) ? "done" : k === quiz.i ? "now" : "") + '"></i>'; }).join("");
     var h = '<div class="qtop"><button class="linkbtn" type="button" id="quit">‹ Quitter</button><p class="eyebrow">' + esc(quiz.title) + " · " + (quiz.i + 1) + " / " + n + "</p></div>" +
       '<div class="segs" aria-hidden="true">' + segs + "</div>" +
-      '<p class="eyebrow qtheme">' + esc(th.name) + "</p><p class=\"qtext\" id=\"qtext\">" + esc(q.q) + "</p><div class=\"opts\" role=\"group\" aria-labelledby=\"qtext\">";
+      '<p class="eyebrow qtheme">' + esc(th.name) + (subName(q) ? " · " + esc(subName(q)) : "") + "</p><p class=\"qtext\" id=\"qtext\">" + esc(q.q) + "</p><div class=\"opts\" role=\"group\" aria-labelledby=\"qtext\">";
     q.opts.forEach(function (o, k) {
       var cls = "opt", tag = "";
       if (quiz.picked !== null) {
