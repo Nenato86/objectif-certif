@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Objectif CertiF</title>
-<meta name="objectif-certif-version" content="beta-pack-decocher-2026-11-12">
+<meta name="objectif-certif-version" content="beta-defis-2026-11-12">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
@@ -245,7 +245,7 @@ body.light-ui .seg-b,body.light-ui .pcheck,body.light-ui .party-input{background
 @media(max-width:520px){.award-summary{max-width:none}}
 body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#d3dfec;--track:#dfe7f0;--accent:#e6ad45;--on-accent:#172b45;--good:#25845e;--warn:#a56a18;--bad:#b84a45;background:#eef3f9;color:#172b45}body.light-ui .shell{background:#edf3fa}body.light-ui .sidebar{background:#fff;border-color:#d5e0ed}body.light-ui .brand,body.light-ui .side-nav .tab{color:#172b45}body.light-ui .side-nav .tab{color:#34506d}body.light-ui .side-nav .tab:hover,body.light-ui .side-nav .tab[aria-current=page]{background:#e8f1fb;color:#164d83}body.light-ui .side-profile,body.light-ui .dash-card,body.light-ui .theme-card,body.light-ui .theme-trophy,body.light-ui .tip-card,body.light-ui .weekly-card{background:#fff;color:#172b45;border-color:#d3dfec}body.light-ui .dash-head h1,body.light-ui .dash-value,body.light-ui .dash-section-title h2,body.light-ui .theme-card b,body.light-ui .theme-trophy b,body.light-ui .tip-card strong{color:#172b45}body.light-ui .dash-label,body.light-ui .dash-sub,body.light-ui .dash-head p,body.light-ui .theme-card small{color:#5e7187}body.light-ui .challenge-card{background:linear-gradient(120deg,#e9e1fb,#dce8fb);color:#172b45}body.light-ui .challenge-card h2,body.light-ui .challenge-card p{color:#172b45}
 @media(max-width:1100px){.shell{grid-template-columns:235px minmax(0,1fr)}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-row{grid-template-columns:1fr}.right-stack{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:720px){.shell{display:block}.sidebar{display:none}.app{padding:20px 14px 92px}.mobile-tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));position:fixed;bottom:0;left:0;right:0;background:#081c35;border-top:1px solid #294563;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:20}.mobile-tabs .tab{border:0;background:transparent;color:#b9cbe0;display:grid;justify-items:center;gap:2px;font-size:11px;padding:5px 1px;min-height:52px;white-space:nowrap}.mobile-tabs .tab span{font-size:20px}.mobile-tabs .tab[aria-current=page]{color:#ffd16e}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.dash-card{padding:13px}.dash-value{font-size:24px}.progress-ring{width:78px;height:78px}.progress-ring strong{font-size:21px}.dash-row{display:block}.right-stack{display:grid;grid-template-columns:1fr;margin-top:12px}.theme-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.dash-footer{grid-template-columns:1fr}.challenge-card{min-height:190px;padding:16px}.challenge-art{font-size:48px}#v-play .dash-head h1{font-size:26px}#v-play .dash-user{display:none}}
+@media(max-width:720px){.shell{display:block}.sidebar{display:none}.app{padding:20px 14px 92px}.mobile-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;bottom:0;left:0;right:0;background:#081c35;border-top:1px solid #294563;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:20}.mobile-tabs .tab{border:0;background:transparent;color:#b9cbe0;display:grid;justify-items:center;gap:2px;font-size:11px;padding:5px 1px;min-height:52px;white-space:nowrap}.mobile-tabs .tab span{font-size:20px}.mobile-tabs .tab[aria-current=page]{color:#ffd16e}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.dash-card{padding:13px}.dash-value{font-size:24px}.progress-ring{width:78px;height:78px}.progress-ring strong{font-size:21px}.dash-row{display:block}.right-stack{display:grid;grid-template-columns:1fr;margin-top:12px}.theme-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.dash-footer{grid-template-columns:1fr}.challenge-card{min-height:190px;padding:16px}.challenge-art{font-size:48px}#v-play .dash-head h1{font-size:26px}#v-play .dash-user{display:none}}
 @media(max-width:390px){.badge-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-strip{grid-template-columns:repeat(4,minmax(0,1fr))}.theme-trophy{padding:8px 4px}}
 
 
@@ -266,6 +266,10 @@ body.light-ui .tower-hero{background:linear-gradient(120deg,#e5edf8,#d5e4f5);bor
 .home-defi{min-height:0;margin-bottom:14px}
 .quick-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px}
 .quick-row.single{grid-template-columns:1fr}.quick-row .quick-card:last-child:nth-child(odd){grid-column:1/-1}
+.defi-list{display:grid;gap:14px;margin-top:6px}.defi-card{display:flex;gap:16px;align-items:flex-start;padding:18px;border:1px solid #294563;border-radius:16px;background:linear-gradient(145deg,#17395f,#102743);color:#fff}.defi-ico{font-size:34px;line-height:1;min-width:44px;text-align:center}.defi-body h3{margin:0 0 6px;font-size:18px;color:#fff}.defi-body p{margin:0 0 12px;color:#c4d4e8;font-size:14px;line-height:1.45}
+body.light-ui .defi-card{background:#fff;border-color:#d3dfec;color:#172b45}body.light-ui .defi-body h3{color:#172b45}body.light-ui .defi-body p{color:#5e7187}
+.guide{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(4,12,24,.78)}.guide-card{width:100%;max-width:440px;padding:26px 22px;border-radius:18px;background:#10294a;border:1px solid #3c5b82;color:#fff;text-align:center}.guide-ico{font-size:48px;line-height:1}.guide-step{margin:12px 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9fb8d6}.guide-card h2{margin:0 0 10px;font-size:22px;color:#fff}.guide-card p{color:#d0ddee;font-size:15px;line-height:1.5}.guide-dots{display:flex;gap:7px;justify-content:center;margin:16px 0}.guide-dots i{width:9px;height:9px;border-radius:50%;background:#46638a}.guide-dots i.on{background:#6ab9e8}.guide-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+body.light-ui .guide-card{background:#fff;border-color:#d3dfec;color:#172b45}body.light-ui .guide-card h2{color:#172b45}body.light-ui .guide-card p{color:#44586f}
 .quick-card{display:flex;align-items:center;gap:14px;text-align:left;padding:15px 16px;border:1px solid #294563;border-radius:14px;background:linear-gradient(145deg,#17395f,#102743);color:#fff;min-width:0}
 .quick-card:hover{border-color:#6ab9e8}
 .quick-card b{display:block;font-size:15px;color:#fff}
@@ -340,13 +344,11 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     <nav class="side-nav">
       <button class="tab" data-tab="play"><span>⌂</span>Tableau de bord</button>
       <button class="tab" data-tab="lib"><span>▣</span>Mes formations</button>
-      <button class="tab" data-action="challenge"><span>◎</span>Défis du jour</button>
-      <button class="tab" data-tab="tower"><span>♜</span>La Tour des Questions</button>
-      <button class="tab" data-tab="biblio"><span>▤</span>La Bibliothèque retrouvée</button>
+      <button class="tab" data-tab="defis"><span>◎</span>Défis</button>
       <button class="tab" data-tab="party"><span>⚑</span>Partie en équipe</button>
-      <button class="tab" data-tab="me"><span>▥</span>Résultats & profil</button>
-      <button class="tab" data-action="errors"><span>⟳</span>Rejouer mes erreurs<b class="nav-count" id="nav-errors" hidden></b></button>
       <button class="tab" data-tab="badges"><span>✦</span>Trophées</button>
+      <button class="tab" data-action="errors"><span>⟳</span>Rejouer mes erreurs<b class="nav-count" id="nav-errors" hidden></b></button>
+      <button class="tab" data-tab="me"><span>▥</span>Mon compte</button>
       <button class="tab" data-tab="team"><span>♧</span>Espace équipe</button>
     </nav>
     <div class="side-profile" id="side-profile"></div>
@@ -358,6 +360,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     <section id="v-me" aria-label="Mes résultats" hidden></section>
     <section id="v-team" aria-label="Équipe" hidden></section>
     <section id="v-badges" aria-label="Collection des trophées" hidden></section>
+    <section id="v-defis" aria-label="Défis" hidden></section>
     <section id="v-tower" aria-label="La Tour des Questions" hidden></section>
     <section id="v-biblio" aria-label="La Bibliothèque retrouvée" hidden></section>
     <section id="v-party" aria-label="Partie en équipe" hidden></section>
@@ -368,10 +371,9 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
 <nav class="mobile-tabs" id="tabs" aria-label="Navigation mobile">
   <button class="tab" data-tab="play"><span>⌂</span>Accueil</button>
   <button class="tab" data-tab="lib"><span>▣</span>Formations</button>
-  <button class="tab" data-tab="tower"><span>♜</span>La Tour</button>
+  <button class="tab" data-tab="defis"><span>◎</span>Défis</button>
   <button class="tab" data-tab="badges"><span>✦</span>Trophées</button>
-  <button class="tab" data-tab="me"><span>▥</span>Résultats</button>
-  <button class="tab" data-tab="biblio"><span>▤</span>Biblio</button>
+  <button class="tab" data-tab="me"><span>▥</span>Mon compte</button>
 </nav>
 <div id="toast" class="toast" role="status" hidden></div>
 
@@ -2207,7 +2209,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   function renderMe() {
     var g = globalScore();
     var low = THEMES.filter(function (t) { return pct(t.id) !== null; }).sort(function (a, b) { return pct(a.id) - pct(b.id); }).slice(0, 3);
-    var h = '<div class="head2"><h2>Mon score</h2>' + chipHtml() + '</div><p class="lede">Votre progression reste attachée à un pseudo. Aucun nom ni matricule n’est demandé.</p>' +
+    var h = '<div class="head2"><h2>Mon compte</h2>' + chipHtml() + '</div><p class="lede">Vos résultats, votre identifiant et la sauvegarde de votre progression. Aucun nom ni matricule n’est demandé.</p>' +
       '<div class="stats"><div class="stat"><b>' + S.points.toLocaleString("fr-FR") + "</b><span>points</span></div>" +
       '<div class="stat"><b>' + answered() + "</b><span>réponses données</span></div>" +
       '<div class="stat"><b>' + S.streak + "</b><span>jours de suite</span></div></div>" +
@@ -2215,11 +2217,54 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       '<div class="sect"><div class="sect-head"><h3>À revoir en priorité</h3><span>3 thèmes</span></div>' +
       (low.length ? "" : '<p class="note">Rien à afficher pour l’instant. Jouez un premier quiz.</p>') + low.map(function (t) { var p = pct(t.id); return '<button class="row" type="button" data-theme-id="' + t.id + '"><div><div class="name">' + esc(t.name) + '</div></div><div class="pct"><b>' + r(p) + "<small> %</small></b><em class=\"" + level(p) + '">' + levelLabel(p) + '</em></div><div class="bar ' + level(p) + '"><span style="width:' + r(p) + '%"></span></div></button>'; }).join("") + "</div>" +
       '<div class="sect"><div class="sect-head"><h3>Mon identifiant</h3></div><div class="field"><label for="pseudo">Pseudo</label><input id="pseudo" type="text" maxlength="20" autocomplete="off" value="' + esc(S.pseudo) + '"></div>' +
-      '<p class="note">Code personnel : <span class="code">' + esc(S.code) + '</span>. Votre progression est enregistrée dans le navigateur de cet appareil. Pour la transférer sur un autre appareil, utilisez le fichier de sauvegarde exportable.</p>' + '<p class="note">Service : ' + esc(S.service || "non renseigné") + '</p><div class="actions"><button class="btn ghost" type="button" id="switch">Changer de profil</button></div></div>' + backupPanelHtml();
+      '<p class="note">Code personnel : <span class="code">' + esc(S.code) + '</span>. Votre progression est enregistrée dans le navigateur de cet appareil. Pour la transférer sur un autre appareil, utilisez le fichier de sauvegarde exportable.</p>' + '<p class="note">Service : ' + esc(S.service || "non renseigné") + '</p><div class="actions"><button class="btn ghost" type="button" id="switch">Changer de profil</button></div></div>' + backupPanelHtml() +
+      '<div class="sect"><div class="sect-head"><h3>Aide</h3></div><p class="note">Revoir la présentation de l’application en trois écrans.</p><div class="actions"><button class="btn ghost" type="button" id="guide-again">Revoir la présentation</button></div></div>';
     $("v-me").innerHTML = h + versionTag();
+    $("guide-again").addEventListener("click", openGuide);
     bindBackupControls($("v-me"));
     $("pseudo").addEventListener("input", function (e) { S.pseudo = e.target.value.trim() || "Anonyme"; save(); });
     $("switch").addEventListener("click", function () { save(); S = clone(FRESH); save(); show("welcome"); });
+  }
+
+  /* ---------- Défis (page qui regroupe les modes) ---------- */
+  function renderDefis() {
+    function card(ico, title, txt, btn, attr) {
+      return '<article class="defi-card"><div class="defi-ico" aria-hidden="true">' + ico + '</div><div class="defi-body"><h3>' + title + '</h3><p>' + txt + '</p><button class="btn" type="button" ' + attr + '>' + btn + '</button></div></article>';
+    }
+    var towerTotal = towerPool().length, rec = Math.min(S.tower.record || 0, towerTotal);
+    $("v-defis").innerHTML = '<div class="head2"><h2>Défis</h2>' + chipHtml() + '</div>' +
+      '<p class="lede">Trois façons de réviser autrement que thème par thème. Choisissez selon le temps dont vous disposez.</p>' +
+      '<div class="defi-list">' +
+      card('◎', 'Le défi du jour', '4 questions de 4 thèmes différents, environ 3 minutes. Une habitude rapide pour réviser un peu chaque jour et faire grimper votre série.', 'Lancer le défi du jour', 'data-action="challenge"') +
+      card('🏰', 'La Tour des Questions', 'Enchaînez les bonnes réponses sans vous tromper : une seule erreur met fin à l’ascension. Votre record : ' + rec + ' / ' + towerTotal + '.', 'Voir la Tour', 'data-tab="tower"') +
+      card('📚', 'La Bibliothèque retrouvée', 'Restaurez des manuscrits en complétant les phrases avec les bons mots. Pour retenir le vocabulaire et les formulations. ' + libDoneCount() + ' / ' + BIB.length + ' restaurés.', 'Entrer dans la Bibliothèque', 'data-tab="biblio"') +
+      '</div>';
+  }
+
+  /* ---------- Présentation guidée (3 écrans, facultative) ---------- */
+  var GUIDE_KEY = KEY + "-guide";
+  function guideSeen() { try { return !!localStorage.getItem(GUIDE_KEY); } catch (e) { return false; } }
+  function guideMark() { try { localStorage.setItem(GUIDE_KEY, "1"); } catch (e) {} }
+  function openGuide() {
+    var steps = [
+      ["👋", "Bienvenue dans Objectif CertiF", "Des quiz courts, environ trois minutes, pour se préparer à la visite de certification. Rendez-vous dans « Mes formations » pour choisir un thème, ou lancez-vous depuis le tableau de bord."],
+      ["◎", "Les défis pour varier", "L’onglet « Défis » regroupe le défi du jour, la Tour des Questions et la Bibliothèque retrouvée. Vos points et vos trophées s’y accumulent."],
+      ["⚑", "En équipe, et votre compte", "« Partie en équipe » permet de jouer ensemble en réunion. « Mon compte » contient vos résultats et la sauvegarde de votre progression, à exporter pour la retrouver sur un autre appareil."]
+    ];
+    var i = 0, old = document.getElementById("guide"); if (old) old.remove();
+    var box = document.createElement("div"); box.id = "guide"; box.className = "guide"; box.setAttribute("role", "dialog"); box.setAttribute("aria-modal", "true"); box.setAttribute("aria-label", "Présentation");
+    document.body.appendChild(box);
+    function close() { guideMark(); box.remove(); }
+    function draw() {
+      var st = steps[i], last = i === steps.length - 1, dots = "";
+      for (var k = 0; k < steps.length; k++) dots += '<i' + (k === i ? ' class="on"' : '') + '></i>';
+      box.innerHTML = '<div class="guide-card"><div class="guide-ico" aria-hidden="true">' + st[0] + '</div><p class="guide-step">Écran ' + (i + 1) + ' sur ' + steps.length + '</p><h2>' + st[1] + '</h2><p>' + st[2] + '</p><div class="guide-dots" aria-hidden="true">' + dots + '</div>' +
+        '<div class="guide-actions"><button class="btn ghost" type="button" id="g-skip">' + (last ? 'Fermer' : 'Passer la présentation') + '</button><button class="btn" type="button" id="g-next">' + (last ? 'Terminer' : 'Suivant') + '</button></div></div>';
+      document.getElementById("g-skip").addEventListener("click", close);
+      document.getElementById("g-next").addEventListener("click", function () { if (last) close(); else { i++; draw(); } });
+      document.getElementById("g-next").focus();
+    }
+    draw();
   }
 
   /* ---------- Collection des trophées ---------- */
@@ -3192,7 +3237,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       var P = profiles(), want = p.toLowerCase(), best = null;
       Object.keys(P).forEach(function (k) { if ((P[k].pseudo || "").toLowerCase() === want && (!best || (P[k].points || 0) > (best.points || 0))) best = P[k]; });
       if (best) { S = normalizeProfile(clone(best)); save(); show("play"); toast("Profil retrouvé : " + S.pseudo); return; }
-      S = clone(FRESH); S.pseudo = p; S.service = $("ws").value; S.code = genCode(); S.onboarded = true; save(); show("play");
+      S = clone(FRESH); S.pseudo = p; S.service = $("ws").value; S.code = genCode(); S.onboarded = true; save(); show("play"); if (!guideSeen()) openGuide();
     });
     Array.prototype.forEach.call($("v-welcome").querySelectorAll("[data-resume]"), function (b) {
       b.addEventListener("click", function () { var p = profiles()[b.getAttribute("data-resume")]; if (p) { S = normalizeProfile(clone(p)); save(); show("play"); } });
@@ -3217,7 +3262,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   /* ---------- Navigation ---------- */
   function show(name) {
     tab = name;
-    ["play", "lib", "me", "team", "badges", "tower", "biblio", "party", "quiz", "welcome"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
+    ["play", "lib", "me", "team", "badges", "defis", "tower", "biblio", "party", "quiz", "welcome"].forEach(function (v) { $("v-" + v).hidden = v !== name; });
     $("tabs").hidden = name === "quiz" || name === "welcome";
     $("sidebar").classList.toggle("is-hidden", name === "quiz" || name === "welcome");
     $("sidebar").style.display = "";
@@ -3228,12 +3273,14 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     if (name === "me") renderMe();
     if (name === "team") renderTeam();
     if (name === "badges") renderBadges();
+    if (name === "defis") renderDefis();
     if (name === "tower") renderTower();
     if (name === "biblio") renderBiblio();
     if (name === "party") renderParty();
     refreshErrorsBadge();
     Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (b) {
-      if (b.getAttribute("data-tab") === name && !b.hasAttribute("data-action")) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+      var hub = (name === "tower" || name === "biblio") ? "defis" : name;
+      if (b.getAttribute("data-tab") === hub && !b.hasAttribute("data-action")) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
     });
     if (name !== "quiz") window.scrollTo(0, 0);
   }
