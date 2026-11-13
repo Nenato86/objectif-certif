@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Objectif CertiF</title>
-<meta name="objectif-certif-version" content="beta-decisions-b-2026-11-13">
+<meta name="objectif-certif-version" content="beta-code-profil-2026-11-13">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
@@ -2820,7 +2820,9 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   /* --- création --- */
   /* --- accès animateur (verrou léger, sans serveur) --- */
   var ANIM_HASH = 1759762527; /* code animateur : à changer en regénérant ce nombre */
-  function animUnlocked() { try { return localStorage.getItem(KEY + "-anim") === "1"; } catch (e) { return false; } }
+  /* le déverrouillage vaut pour le profil actif : tout changement de profil reverrouille */
+  function animLock() { try { localStorage.removeItem(KEY + "-anim"); } catch (e) {} }
+  function animUnlocked() { try { var v = localStorage.getItem(KEY + "-anim"); if (v && v === (S.code || "")) return true; if (v) animLock(); return false; } catch (e) { return false; } }
   function animCheck(c) { return strHash("certif|" + String(c || "").trim().toLowerCase()) === ANIM_HASH; }
   var PARTY_PRESETS = [
     { id: "express", name: "Point qualité express", txt: "5 questions · sans chronomètre", n: 5, c: 0 },
@@ -3064,7 +3066,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     if (!e.target || e.target.id !== "anim-form") return;
     e.preventDefault();
     var v = ($("anim-code") || {}).value;
-    if (animCheck(v)) { try { localStorage.setItem(KEY + "-anim", "1"); } catch (err) {} renderParty(); toast("Accès animateur activé."); }
+    if (animCheck(v)) { try { localStorage.setItem(KEY + "-anim", S.code || ""); } catch (err) {} renderParty(); toast("Accès animateur activé."); }
     else { var er = $("anim-err"); if (er) er.hidden = false; }
   });
   document.addEventListener("input", function (e) {
@@ -3284,6 +3286,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   /* ---------- Bienvenue ---------- */
   function genCode() { var a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = ""; for (var i = 0; i < 6; i++) { s += a.charAt(Math.floor(Math.random() * a.length)); if (i === 2) s += "-"; } return s; }
   function renderWelcome() {
+    animLock();
     var P = profiles(), ks = Object.keys(P);
     var seen = {}, dups = 0;
     ks.forEach(function (k) { var n = (P[k].pseudo || "").toLowerCase(); if (seen[n]) dups++; seen[n] = 1; });
