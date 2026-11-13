@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Objectif CertiF</title>
-<meta name="objectif-certif-version" content="beta-trophees-2026-11-13">
+<meta name="objectif-certif-version" content="beta-tour-pourcent-2026-11-13">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
@@ -2080,7 +2080,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     var sess = S.sessionsCompleted || 0;
     function cnt(min) { return THEMES.filter(function (t) { return pct(t.id) >= min; }).length; }
     var map = { first_quiz: sess / 1, explorer_4: explored / 4, explorer_8: explored / 8, explorer_16: explored / 16, sessions_10: sess / 10, sessions_25: sess / 25,
-      streak_10: (S.consecutiveCorrect || 0) / 10, expert_8: cnt(75) / 8, cartographer: cnt(25) / THEMES.length, absolute: cnt(100) / THEMES.length };
+      streak_10: (S.consecutiveCorrect || 0) / 10, expert_8: cnt(100) / 8, cartographer: cnt(25) / THEMES.length, absolute: cnt(100) / THEMES.length };
     if (id in map) return Math.min(1, map[id]);
     var tw = towerMilestones().filter(function (x) { return x.key === id; })[0];
     if (tw) return Math.min(1, (S.tower.record || 0) / tw.floor);
@@ -2143,7 +2143,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       if (before !== null && before !== undefined && before < 50 && after >= 100) badgeEarn('phoenix');
       S.themeLastScore[id] = after;
     });
-    if(THEMES.filter(function(t){return pct(t.id)>=75;}).length>=8)badgeEarn('expert_8');
+    if(THEMES.filter(function(t){return pct(t.id)>=100;}).length>=8)badgeEarn('expert_8');
     if(THEMES.every(function(t){return pct(t.id)>=25;}))badgeEarn('cartographer');
     if(THEMES.every(function(t){return pct(t.id)>=100;}))badgeEarn('absolute');
   }
@@ -2464,15 +2464,15 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     var total = towerPool().length;
     var a = [
       {pct:1,key:"floor_5",title:"Première marche",xp:20,icon:"➤"},
-      {pct:3,key:"floor_10",title:"Aspirant de la Tour",xp:40,icon:"🗝️"},
-      {pct:5,key:"floor_20",title:"Grimpeur déterminé",xp:80,icon:"🧗"},
-      {pct:8,key:"floor_30",title:"Explorateur des hauteurs",xp:120,icon:"🧭"},
-      {pct:13,key:"floor_50",title:"Maître des escaliers",xp:200,icon:"🛡️"},
-      {pct:19,key:"floor_75",title:"Gardien des étages",xp:300,icon:"🔑"},
-      {pct:26,key:"floor_100",title:"Conquérant des hauteurs",xp:400,icon:"⚔️"},
-      {pct:39,key:"floor_150",title:"Héros de la Tour",xp:500,icon:"🏅"},
-      {pct:52,key:"floor_200",title:"Seigneur des sommets",xp:600,icon:"👑"},
-      {pct:78,key:"floor_300",title:"Légende de la Tour",xp:800,icon:"🌟"},
+      {pct:5,key:"floor_10",title:"Aspirant de la Tour",xp:40,icon:"🗝️"},
+      {pct:10,key:"floor_20",title:"Grimpeur déterminé",xp:80,icon:"🧗"},
+      {pct:15,key:"floor_30",title:"Explorateur des hauteurs",xp:120,icon:"🧭"},
+      {pct:20,key:"floor_50",title:"Maître des escaliers",xp:200,icon:"🛡️"},
+      {pct:30,key:"floor_75",title:"Gardien des étages",xp:300,icon:"🔑"},
+      {pct:40,key:"floor_100",title:"Conquérant des hauteurs",xp:400,icon:"⚔️"},
+      {pct:50,key:"floor_150",title:"Héros de la Tour",xp:500,icon:"🏅"},
+      {pct:60,key:"floor_200",title:"Seigneur des sommets",xp:600,icon:"👑"},
+      {pct:80,key:"floor_300",title:"Légende de la Tour",xp:800,icon:"🌟"},
       {pct:100,key:"grand_conquerant",title:"Grand Conquérant de la Tour",xp:1500,icon:"🏰",final:true}
     ];
     if (!total) return [];
