@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Objectif CertiF</title>
-<meta name="objectif-certif-version" content="beta-code-dgrqs-2026-11-12">
+<meta name="objectif-certif-version" content="beta-defi-chrono-2026-11-12">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: une colonne, trois onglets (Jouer, Mon score, Équipe). Les thèmes sont des lignes notées, groupées par chapitre HAS, avec la cible à 100 %. Le quiz prend tout l’écran. */
@@ -117,7 +117,7 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
 .chart .end { fill: var(--ink); stroke: var(--accent); stroke-width: 3; }
 .chart .endlbl { fill: var(--ink); font-size: 12px; font-weight: 500; }
 .tbl { width: 100%; border-collapse: collapse; font-size: 15px; }
-.tbl th { text-align: left; font-family: var(--f-mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); padding: 8px 8px 8px 0; border-bottom: 1px solid var(--ink); }
+.tbl th { text-align: left; font-family: var(--f-mono); font-weight: 500; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); padding: 8px 8px 8px 0; border-bottom: 1px solid var(--ink); }
 .tbl td { padding: 10px 8px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 .tbl td.n, .tbl th.n { text-align: right; font-variant-numeric: tabular-nums; padding-right: 0; }
 .scroll { overflow-x: auto; }
@@ -145,7 +145,7 @@ nav.tabs .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
 .opt:disabled { cursor: default; }
 .opt.right { border-color: var(--good); background: var(--good-bg); }
 .opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
-.opt .tag { display: block; font-family: var(--f-mono); font-weight: 500; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
+.opt .tag { display: block; font-family: var(--f-mono); font-weight: 500; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
 .opt.right .tag { color: var(--good); } .opt.wrong .tag { color: var(--bad); }
 .fb { margin-top: 20px; border-top: 2px solid var(--ink); padding-top: 14px; }
 .fb h3 { font-size: 24px; }
@@ -245,7 +245,7 @@ body.light-ui .seg-b,body.light-ui .pcheck,body.light-ui .party-input{background
 @media(max-width:520px){.award-summary{max-width:none}}
 body.light-ui{--bg:#eef3f9;--surface:#fff;--ink:#172b45;--ink-2:#5e7187;--line:#d3dfec;--track:#dfe7f0;--accent:#e6ad45;--on-accent:#172b45;--good:#25845e;--warn:#a56a18;--bad:#b84a45;background:#eef3f9;color:#172b45}body.light-ui .shell{background:#edf3fa}body.light-ui .sidebar{background:#fff;border-color:#d5e0ed}body.light-ui .brand,body.light-ui .side-nav .tab{color:#172b45}body.light-ui .side-nav .tab{color:#34506d}body.light-ui .side-nav .tab:hover,body.light-ui .side-nav .tab[aria-current=page]{background:#e8f1fb;color:#164d83}body.light-ui .side-profile,body.light-ui .dash-card,body.light-ui .theme-card,body.light-ui .theme-trophy,body.light-ui .tip-card,body.light-ui .weekly-card{background:#fff;color:#172b45;border-color:#d3dfec}body.light-ui .dash-head h1,body.light-ui .dash-value,body.light-ui .dash-section-title h2,body.light-ui .theme-card b,body.light-ui .theme-trophy b,body.light-ui .tip-card strong{color:#172b45}body.light-ui .dash-label,body.light-ui .dash-sub,body.light-ui .dash-head p,body.light-ui .theme-card small{color:#5e7187}body.light-ui .challenge-card{background:linear-gradient(120deg,#e9e1fb,#dce8fb);color:#172b45}body.light-ui .challenge-card h2,body.light-ui .challenge-card p{color:#172b45}
 @media(max-width:1100px){.shell{grid-template-columns:235px minmax(0,1fr)}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-row{grid-template-columns:1fr}.right-stack{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:720px){.shell{display:block}.sidebar{display:none}.app{padding:20px 14px 92px}.mobile-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;bottom:0;left:0;right:0;background:#081c35;border-top:1px solid #294563;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:20}.mobile-tabs .tab{border:0;background:transparent;color:#b9cbe0;display:grid;justify-items:center;gap:2px;font-size:11px;padding:5px 1px;min-height:52px;white-space:nowrap}.mobile-tabs .tab span{font-size:20px}.mobile-tabs .tab[aria-current=page]{color:#ffd16e}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.dash-card{padding:13px}.dash-value{font-size:24px}.progress-ring{width:78px;height:78px}.progress-ring strong{font-size:21px}.dash-row{display:block}.right-stack{display:grid;grid-template-columns:1fr;margin-top:12px}.theme-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.dash-footer{grid-template-columns:1fr}.challenge-card{min-height:190px;padding:16px}.challenge-art{font-size:48px}#v-play .dash-head h1{font-size:26px}#v-play .dash-user{display:none}}
+@media(max-width:720px){.shell{display:block}.sidebar{display:none}.app{padding:20px 14px 92px}.mobile-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;bottom:0;left:0;right:0;background:#081c35;border-top:1px solid #294563;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:20}.mobile-tabs .tab{border:0;background:transparent;color:#b9cbe0;display:grid;justify-items:center;gap:2px;font-size:12px;padding:5px 1px;min-height:52px;white-space:nowrap}.mobile-tabs .tab span{font-size:20px}.mobile-tabs .tab[aria-current=page]{color:#ffd16e}.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.dash-card{padding:13px}.dash-value{font-size:24px}.progress-ring{width:78px;height:78px}.progress-ring strong{font-size:21px}.dash-row{display:block}.right-stack{display:grid;grid-template-columns:1fr;margin-top:12px}.theme-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.dash-footer{grid-template-columns:1fr}.challenge-card{min-height:190px;padding:16px}.challenge-art{font-size:48px}#v-play .dash-head h1{font-size:26px}#v-play .dash-user{display:none}}
 @media(max-width:390px){.badge-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.badge-strip{grid-template-columns:repeat(4,minmax(0,1fr))}.theme-trophy{padding:8px 4px}}
 
 
@@ -293,7 +293,7 @@ body.light-ui .pstep,body.light-ui .ppreset{background:#f2f6fb;color:#172b45;bor
 .home-more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:13px;margin-top:14px}
 .nav-count{margin-left:auto;min-width:22px;padding:2px 7px;border-radius:999px;background:var(--gold);color:#07172d;font-size:12px;font-weight:800;text-align:center}
 .nav-count[hidden]{display:none}
-.sidebar.is-hidden{display:none!important}
+.sidebar.is-hidden{display:none!important}.mobile-tabs[hidden]{display:none!important}
 body.light-ui .quick-card,body.light-ui .home-more summary{background:#fff;border-color:#d3dfec;color:#172b45}
 body.light-ui .quick-card b{color:#172b45}
 body.light-ui .quick-card small{color:#5e7187}
@@ -488,7 +488,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
         { id: "MED-001", theme: "medic", q: "À l’entrée d’un patient, que doit faire le médecin de son traitement habituel ?",
           opts: ["Le recopier tel quel", "L’analyser systématiquement : le poursuivre, le modifier ou l’arrêter", "L’ignorer et prescrire un traitement neuf quel que soit celui que le patient prend", "Laisser l’infirmier décider"], ok: 1,
           why: "Le traitement habituel est intégré à la prescription après analyse systématique par le médecin : poursuivre, modifier ou arrêter.", src: "Fiche HAS médicament p. 3 · critère 2.2-02" },
-        { id: "MED-002", theme: "medic", q: "Une prescription conditionnelle (« si douleur », « si nausées ») doit comporter :",
+        { id: "MED-002", theme: "medic", q: "Une prescription conditionnelle (traitement à donner seulement dans certaines situations : douleur, nausées…) doit comporter :",
           opts: ["Rien de plus que le médicament et la dose : c’est l’infirmier qui juge du moment et de la durée du traitement", "Une condition explicite, un maximum par 24 h, l’intervalle entre prises et la durée maximale", "Seulement le nom du médicament", "L’accord oral de la famille"], ok: 1,
           why: "La condition est explicite (valeur seuil ou signe clinique) et la prescription précise le maximum par 24 h, l’intervalle entre 2 prises et la durée maximale du traitement.", src: "Fiche HAS médicament p. 3 · critère 2.2-02" },
         { id: "MED-003", theme: "medic", q: "Dans quel cas accepte-t-on une prescription orale ?",
@@ -636,9 +636,9 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
         { id: "URG-008", theme: "urgences", q: "Que doit être le numéro d’appel pour une urgence vitale dans l’établissement ?",
           opts: ["Un numéro unique et dédié, joignable 24 h sur 24", "Le standard de l’établissement, aux heures ouvrables seulement", "Le téléphone portable du médecin de garde, noté sur un papier", "Un numéro différent selon l’infirmier présent"], ok: 0,
           why: "Un numéro et non une référence (« appeler le réanimateur de garde »). Le médecin qui répond sait tout de suite qu’il s’agit d’une urgence vitale. Chaque professionnel doit connaître ce numéro : posez-vous la question maintenant. Il est affiché dans tous les postes de soins.", src: "Fiche HAS urgences vitales p. 3 · critère 2.2-12" },
-        { id: "URG-009", theme: "urgences", q: "À quelle fréquence minimale vérifie-t-on le chariot ou le sac d’urgence ?",
+        { id: "URG-009", theme: "urgences", q: "Selon la fiche HAS, à quelle fréquence minimale vérifie-t-on le chariot ou le sac d’urgence ?",
           opts: ["Une fois par an, lors de l’inventaire du secteur", "Au minimum une fois par mois, selon les risques du secteur", "Seulement après utilisation, sans vérification régulière", "Une fois tous les 3 ans, selon les risques du secteur"], ok: 1,
-          why: "Vérification régulière, au minimum mensuelle. La traçabilité précise la date, le nom du vérificateur, les dates de péremption et l’intégrité des emballages.", src: "Fiche HAS urgences vitales pp. 3-4 · critère 2.2-12" },
+          why: "Vérification régulière, au minimum mensuelle. La traçabilité précise la date, le nom du vérificateur, les dates de péremption et l’intégrité des emballages. Dans notre établissement, la règle est plus stricte : vérification complète toutes les 2 semaines.", src: "Fiche HAS urgences vitales pp. 3-4 · critère 2.2-12" },
         { id: "URG-010", theme: "urgences", q: "Que doit-on faire après chaque utilisation du chariot d’urgence ?",
           opts: ["Rien, le chariot reste ouvert pour le prochain besoin", "Le vérifier, le compléter et le sceller", "Le remettre sans vérifier, faute de temps", "Le ranger à la pharmacie sans contrôle"], ok: 1,
           why: "Après utilisation, le chariot ou le sac d’urgence est vérifié, complété et scellé. Il est aussi scellé après chaque vérification périodique.", src: "Fiche HAS urgences vitales p. 4 · critère 2.2-12" },
@@ -728,10 +728,10 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
           why: "Les dangers connus sont recensés (cartographie), priorisés par gravité et probabilité, et chaque risque est associé à des mesures préventives (barrières) et à des actions réactives si l’événement survient.", src: "Fiche HAS management p. 4 · critère 3.1-01" },
         { id: "EIQ-020", theme: "ei", q: "Quelle vigilance concerne les dispositifs médicaux ?",
           opts: ["La pharmacovigilance, relative aux médicaments", "La matériovigilance", "L’hémovigilance, relative aux produits sanguins labiles", "L’infectiovigilance, relative aux infections nosocomiales"], ok: 1,
-          why: "Pharmacovigilance pour les médicaments, hémovigilance pour les produits sanguins labiles, matériovigilance pour les dispositifs médicaux, infectiovigilance pour les infections nosocomiales.", src: "Fiche HAS management p. 5 · critère 3.1-04" },
+          why: "Pharmacovigilance pour les médicaments, hémovigilance pour les produits sanguins labiles, matériovigilance pour les dispositifs médicaux, infectiovigilance pour les infections nosocomiales.", src: "Fiche HAS management p. 5 · critère 3.1-02" },
         { id: "EIQ-021", theme: "ei", q: "Que mesure un audit clinique ?",
           opts: ["La satisfaction des patients à l’égard de leur prise en charge", "L’écart entre la pratique réelle observée et la pratique attendue ou recommandée", "Le nombre d’événements indésirables survenus dans l’unité sur la période", "Le budget de l’unité et son évolution"], ok: 1,
-          why: "Exemples de critères : hygiène des mains, traçabilité de la douleur, administration des médicaments. Les audits sont une des méthodes d’évaluation des pratiques professionnelles (EPP).", src: "Fiche HAS management p. 6 · critère 2.4-06" },
+          why: "Exemples de critères : hygiène des mains, traçabilité de la douleur, administration des médicaments. Les audits sont une des méthodes d’évaluation des pratiques professionnelles (EPP).", src: "Fiche HAS management p. 6 · critère 2.4-01" },
         { id: "EIQ-022", theme: "ei", q: "Quelle est la différence entre PREMs et PROMs ?",
           opts: ["Ce sont deux noms différents pour un même questionnaire de satisfaction proposé aux patients", "Les PREMs mesurent l’expérience, les PROMs les résultats de soins, rapportés par les patients", "Les PREMs concernent les soignants et les PROMs les patients", "Les PREMs mesurent la satisfaction hôtelière des patients et les PROMs les coûts supportés par l’établissement"], ok: 1,
           why: "Avec les questionnaires de satisfaction, ce sont trois mesures complémentaires de la qualité rapportée par les patients. Les PREMs mesurent l’expérience des soins rapportée par les patients, les PROMs les résultats de soins rapportés par les patients.", src: "Fiche HAS management p. 6 · critère 1.4-02" }
@@ -742,10 +742,10 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       questions: [
         { id: "INF-001", theme: "info", q: "Que doit-on tracer dans le dossier de soins à propos de la personne de confiance ?",
           opts: ["Rien, c’est la famille qui le sait", "Son identité et la désignation signée par elle", "Seulement son numéro de téléphone, sans son identité", "Uniquement son lien de parenté avec le patient, sans sa désignation"], ok: 1,
-          why: "La personne de confiance est le référent de l’expression des volontés du patient. Elle peut être désignée avant l’hospitalisation : l’équipe retrouve alors l’information auprès des proches ou dans « Mon espace santé ». La désignation est signée par la personne de confiance.", src: "Fiche HAS fin de vie p. 3 · critère 1.3-02" },
+          why: "La personne de confiance est le référent de l’expression des volontés du patient. Elle peut être désignée avant l’hospitalisation : l’équipe retrouve alors l’information auprès des proches ou dans « Mon espace santé ». La désignation est signée par la personne de confiance.", src: "Fiche HAS fin de vie p. 3 · critère 1.3-11" },
         { id: "INF-002", theme: "info", q: "Quelle est la différence entre la personne de confiance et la personne à prévenir ?",
           opts: ["Aucune, c’est obligatoirement la même personne, désignée une seule fois par le patient", "Ce sont deux notions distinctes : le patient peut désigner l’une et l’autre", "La personne à prévenir remplace la personne de confiance dès l’entrée du patient", "Seule la personne à prévenir est tracée"], ok: 1,
-          why: "Le patient connaît la différence entre les deux notions. Leur identité est tracée dans le dossier et elles ont été informées de leur rôle.", src: "Fiche HAS engagement p. 5 · critère 1.3-02" },
+          why: "Le patient connaît la différence entre les deux notions. Leur identité est tracée dans le dossier et elles ont été informées de leur rôle.", src: "Fiche HAS engagement p. 5 · critères 1.2-01, 1.3-11" },
         { id: "INF-003", theme: "info", q: "À quels patients informe-t-on de l’utilité des directives anticipées ?",
           opts: ["Seulement aux patients en fin de vie", "À tous les patients, quel que soit leur profil", "Seulement aux patients de moins de 70 ans", "Seulement à ceux qui le demandent"], ok: 1,
           why: "Les équipes informent tous les patients de l’utilité des directives anticipées. Elles tracent les directives et aussi le refus d’en rédiger.", src: "Fiche HAS fin de vie p. 3 · critère 1.1-04" },
@@ -831,10 +831,10 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
           why: "Les locaux permettent aussi des échanges avec les proches dans le respect de l’intimité et de la confidentialité. La présence des proches est proposée et facilitée par l’équipe.", src: "Fiche HAS engagement p. 5 · critère 1.3-11" },
         { id: "EXP-009", theme: "experience", q: "Quelles sont les formes de recueil du point de vue du patient attendues ?",
           opts: ["Uniquement la boîte à idées placée dans le hall d’accueil de l’établissement", "Questionnaires de satisfaction, plaintes et éloges, PREMs, PROMs et groupes de travail", "Uniquement des appels téléphoniques réalisés par la direction après la sortie", "Aucun recueil n’est attendu, la gouvernance décidant seule des priorités"], ok: 1,
-          why: "La gouvernance utilise des outils variés pour recueillir le vécu, le ressenti et les idées des patients, afin d’en faire un acteur de sa prise en soin. Les formes de recueil incluent aussi les questionnaires d’expérience, les réclamations et les focus groups.", src: "Fiche HAS engagement p. 4 · critères 1.4-01, 1.4-02" },
+          why: "La gouvernance utilise des outils variés pour recueillir le vécu, le ressenti et les idées des patients, afin d’en faire un acteur de sa prise en soin. Les formes de recueil incluent aussi les questionnaires d’expérience, les réclamations et les focus groups.", src: "Fiche HAS engagement p. 4 · critère 1.4-02" },
         { id: "EXP-010", theme: "experience", q: "Un patient interpelle un soignant au sujet d’une difficulté de communication. Que doit savoir le soignant ?",
           opts: ["Ignorer la demande, la difficulté relevant du seul patient", "Comment recourir aux médiateurs de l’établissement", "Appeler directement la police pour signaler la difficulté", "Attendre la fin du séjour pour en parler à l’encadrement"], ok: 1,
-          why: "Le recours aux médiateurs médicaux et paramédicaux permet de prévenir les situations difficiles de communication. Demandez à votre encadrement comment les solliciter. Il doit aussi connaître leur rôle.", src: "Fiche HAS engagement pp. 4 et 6 · critère 1.4-01" }
+          why: "Le recours aux médiateurs médicaux et paramédicaux permet de prévenir les situations difficiles de communication. Demandez à votre encadrement comment les solliciter. Il doit aussi connaître leur rôle.", src: "Fiche HAS engagement pp. 4 et 6 · critère 1.2-06" }
       ]
     },
     age1: {
@@ -1053,7 +1053,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
           why: "Une douleur chronique persiste ou se reproduit plus de 3 mois. La douleur aiguë dure en général moins de 6 semaines chez l’adulte.", src: "Fiche HAS Douleur p. 2 · critère 1.1-05" },
         { id: "DOU-002", theme: "douleur", q: "Une douleur ne répond pas aux traitements habituels bien conduits. Que faire ?",
           opts: ["Augmenter les doses jusqu’au soulagement", "Contacter une structure spécialisée (CLUD, centre de la douleur)", "Conclure qu’elle est psychogène et arrêter les traitements antalgiques", "Attendre la fin de l’hospitalisation pour réévaluer la prise en charge"], ok: 1,
-          why: "C’est une douleur rebelle. Des solutions existent souvent, avec une prise en charge pluriprofessionnelle. Les professionnels doivent savoir qui contacter.", src: "Fiche HAS Douleur p. 2 et 4 · critères 1.1-05, 2.1-03" },
+          why: "C’est une douleur rebelle. Des solutions existent souvent, avec une prise en charge pluriprofessionnelle. Les professionnels doivent savoir qui contacter.", src: "Fiche HAS Douleur p. 2 et 4 · critère 1.1-05" },
         { id: "DOU-003", theme: "douleur", q: "Un patient ne peut pas s’exprimer verbalement. Peut-il ressentir de la douleur ?",
           opts: ["Non, sans plainte il n’y a pas de douleur", "Oui : l’incapacité à communiquer n’exclut pas la douleur", "Seulement s’il est âgé", "Seulement si un proche le confirme"], ok: 1,
           why: "La description verbale n’est qu’un des comportements d’expression de la douleur. Les équipes observent aussi les attitudes et signes algiques.", src: "Fiche HAS Douleur p. 2-3 · critère 1.1-05" },
@@ -1930,6 +1930,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     THEMES.forEach(function (t) { var ca = a.counters[t.id], cb = b.counters[t.id]; m.counters[t.id] = cb[1] > ca[1] ? cb.slice() : ca.slice(); });
     Object.keys(b.themeLastScore).forEach(function (t) { if (!(t in m.themeLastScore)) m.themeLastScore[t] = b.themeLastScore[t]; });
     m.consecutiveCorrect = Math.max(a.consecutiveCorrect, b.consecutiveCorrect);
+    if (String(b.defiDay || "") > String(m.defiDay || "")) m.defiDay = b.defiDay;
     m.missed = m.missed || {}; Object.keys(b.missed || {}).forEach(function (q) { if (b.missed[q]) m.missed[q] = true; });
     m.tower.record = Math.max(a.tower.record, b.tower.record);
     m.tower.plays = Math.max(a.tower.plays, b.tower.plays);
@@ -2145,7 +2146,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
 
     var quick = '';
     if (nErr) quick += '<button class="quick-card" type="button" data-action="errors"><span class="quick-ico">⟳</span><span><b>Rejouer mes erreurs</b><small>'+nErr+' question'+(nErr > 1 ? 's' : '')+' à revoir · jusqu’à 5 par partie</small></span></button>';
-    quick += '<button class="quick-card" type="button" data-tab="party"><span class="quick-ico">👥</span><span><b>Partie en équipe</b><small>Même questions pour tous · hors score</small></span></button>';
+    quick += '<button class="quick-card" type="button" data-tab="party"><span class="quick-ico">👥</span><span><b>Partie en équipe</b><small>Mêmes questions pour tous · hors score</small></span></button>';
     quick += '<button class="quick-card" type="button" data-tab="biblio"><span class="quick-ico">📚</span><span><b>La Bibliothèque retrouvée</b><small>'+libDoneCount()+' / '+BIB.length+' manuscrits restaurés</small></span></button>';
     quick += '<button class="quick-card" type="button" data-tab="tower"><span class="quick-ico">🏰</span><span><b>La Tour des Questions</b><small>Record : '+towerRecord+' / '+towerTotal+'</small></span></button>';
 
@@ -2834,8 +2835,8 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
   function animUnlocked() { try { return localStorage.getItem(KEY + "-anim") === "1"; } catch (e) { return false; } }
   function animCheck(c) { return strHash("certif|" + String(c || "").trim().toLowerCase()) === ANIM_HASH; }
   var PARTY_PRESETS = [
-    { id: "express", name: "Point qualité express", txt: "8 questions · 20 s par question", n: 8, c: 20 },
-    { id: "service", name: "Quiz de service", txt: "12 questions · 30 s par question", n: 12, c: 30 },
+    { id: "express", name: "Point qualité express", txt: "5 questions · sans chronomètre", n: 5, c: 0 },
+    { id: "service", name: "Quiz de service", txt: "12 questions · sans chronomètre", n: 12, c: 0 },
     { id: "echange", name: "Réunion d’échange", txt: "8 questions · sans chronomètre", n: 8, c: 0 }
   ];
   function partyHistory() { try { var a = JSON.parse(localStorage.getItem(KEY + "-parties") || "[]"); return (a || []).filter(function (e) { return e && e.cfg && e.cfg.b === bankSig(); }); } catch (e) { return []; } }
@@ -2921,7 +2922,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       h += '<p class="note" style="text-align:center"><button type="button" class="linkbtn" data-pa="lock">Verrouiller cet appareil</button></p>';
     }
     var bar = '<div class="party-bar">' + (step > 1 ? '<button class="btn ghost" type="button" data-pa="prev">‹ Retour</button>' : '<span></span>');
-    if (step < 3) bar += '<button class="btn party-next" type="button" data-pa="next"' + (step === 1 && !partyStepValid() ? ' disabled' : '') + '>' + (step === 1 ? 'Suivant : réglages ›' : 'Suivant : lancer ›') + '</button>';
+    if (step < 3) bar += '<button class="btn party-next" type="button" data-pa="wnext"' + (step === 1 && !partyStepValid() ? ' disabled' : '') + '>' + (step === 1 ? 'Suivant : réglages ›' : 'Suivant : lancer ›') + '</button>';
     else bar += '<button class="btn party-create" type="button" data-pa="create"' + (!partyStepValid() ? ' disabled' : '') + '>' + (d.created ? 'Mettre à jour la partie' : 'Créer la partie') + '</button>';
     h += bar + '</div>';
     $("v-party").innerHTML = h;
@@ -3117,7 +3118,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     else if (a === "mval") { var r2 = partyRun; if (r2 && r2.sel && r2.sel.length) partyAnswer(r2.sel.slice().sort(numAsc)); }
     else if (a === "step") { d.step = Number(v); renderParty(); window.scrollTo(0, 0); }
     else if (a === "prev") { d.step = Math.max(1, (d.step || 1) - 1); renderParty(); window.scrollTo(0, 0); }
-    else if (a === "next") { if (d.step !== 1 || partyStepValid()) { d.step = Math.min(3, (d.step || 1) + 1); renderParty(); window.scrollTo(0, 0); } }
+    else if (a === "wnext") { if (d.step !== 1 || partyStepValid()) { d.step = Math.min(3, (d.step || 1) + 1); renderParty(); window.scrollTo(0, 0); } }
     else if (a === "preset") { var pr = PARTY_PRESETS.filter(function (x) { return x.id === v; })[0]; if (pr) { d.mode = "all"; d.t = []; d.u = []; d.qs = []; d.n = pr.n; d.c = pr.c; d.x = 0; d.l = pr.name; d.created = null; d.step = 3; renderParty(); window.scrollTo(0, 0); } }
     else if (a === "hist") partyLoad(Number(v));
     else if (a === "lock") { try { localStorage.removeItem(KEY + "-anim"); } catch (err) {} renderParty(); toast("Appareil verrouillé."); }
@@ -3214,7 +3215,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     if (q.multi && quiz.picked === null) h += '<div class="actions"><button class="btn" type="button" id="mvalid"' + (quiz.sel.length ? "" : " disabled") + '>Valider ma réponse</button></div>';
     if (quiz.picked !== null) {
       var good = samePick(q, quiz.picked), last = quiz.i === n - 1;
-      h += '<div class="fb" role="status"><h3 class="' + (good ? "good" : "bad") + '">' + (good ? "Correct · +10 points" : "Pas tout à fait") + "</h3><p>" + esc(q.why) + '</p><p class="src">' + esc(q.src) + "</p>" +
+      h += '<div class="fb" role="status"><h3 class="' + (good ? "good" : "bad") + '">' + (good ? (defiNoPts() ? "Correct" : "Correct · +10 points") : "Pas tout à fait") + "</h3><p>" + esc(q.why) + '</p><p class="src">' + esc(q.src) + "</p>" +
         '<div class="actions"><button class="btn" type="button" id="next">' + (last ? "Voir le résultat" : "Question suivante") + "</button></div></div>";
     }
     $("v-quiz").innerHTML = h;
@@ -3251,6 +3252,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     });
   }
   function localDay(d) { function z(n) { return (n < 10 ? "0" : "") + n; } return d.getFullYear() + "-" + z(d.getMonth() + 1) + "-" + z(d.getDate()); }
+  function defiNoPts() { return !!quiz && quiz.key === "defi" && S.defiDay === localDay(new Date()); }
   function finishQuiz() {
     var set = QUIZ[quiz.key], n = quiz.qs.length, touched = {}, before = {};
     var sessionThemeScores = {}, sessionThemeCounts = {}, sessionThemeCorrect = {};
@@ -3265,7 +3267,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
       if(e.ok) S.consecutiveCorrect=(S.consecutiveCorrect||0)+1; else S.consecutiveCorrect=0;
     });
     Object.keys(sessionThemeCounts).forEach(function(id){sessionThemeScores[id]=sessionThemeCorrect[id] ? sessionThemeCorrect[id]/sessionThemeCounts[id]*100 : 0;});
-    var pts = quiz.ok * 10; S.points += pts; S.sessionsCompleted=(S.sessionsCompleted||0)+1; (S.hist = S.hist || []).push(r(globalScore()));
+    var noPts = defiNoPts(); var pts = noPts ? 0 : quiz.ok * 10; S.points += pts; if (quiz.key === "defi") S.defiDay = localDay(new Date()); S.sessionsCompleted=(S.sessionsCompleted||0)+1; (S.hist = S.hist || []).push(r(globalScore()));
     evaluateBadges(before,sessionThemeScores,quiz.ok===n);
     var d = new Date(), today = localDay(d), yday = localDay(new Date(d.getFullYear(), d.getMonth(), d.getDate() - 1));
     if (S.last !== today) { S.streak = S.last === yday ? (S.streak || 0) + 1 : 1; S.last = today; }
@@ -3273,7 +3275,7 @@ body.light-ui .theme-toggle{color:#172b45;border-color:#c5d3e3}
     var canAgain = !(quiz.key === "errors" && !missedCount());
     var missed = quiz.log.filter(function (e) { return !e.ok; });
     var h = '<div class="qtop"><button class="linkbtn" type="button" id="back">‹ Retour aux thèmes</button><p class="eyebrow">' + esc(quiz.title) + "</p></div>" +
-      '<div class="res"><div class="big">' + quiz.ok + "<small>/" + n + "</small></div><p class=\"cap\" style=\"margin:0\">" + pts + " points gagnés</p></div>" +
+      '<div class="res"><div class="big">' + quiz.ok + "<small>/" + n + "</small></div><p class=\"cap\" style=\"margin:0\">" + (noPts ? "Défi déjà joué aujourd’hui : pas de nouveaux points" : pts + " points gagnés") + "</p></div>" +
       '<div class="sect"><div class="sect-head"><h3>Effet sur vos thèmes</h3></div>' +
       Object.keys(touched).map(function (id) {
         var a = before[id], b = pct(id);
